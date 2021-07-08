@@ -1,0 +1,12 @@
+.hotSearch {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-sizing: content-box;
+    font-size: 40px;
+    font-weight: bold;
+    border-width: 0ch;
+    font-family: '宋体';
+    text-align: center;
+}
