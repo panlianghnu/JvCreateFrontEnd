@@ -3,10 +3,11 @@
 /* eslint-disable jsx-quotes */
 import Taro from '@tarojs/taro'
 import { Component } from 'react'
-import { View } from '@tarojs/components'
+import { View, Image } from '@tarojs/components'
 import { AtList, AtListItem, AtDivider } from 'taro-ui'
 import axios from 'taro-axios'
 import { SearchComponent } from '../../components/searchComponent'
+import logo from '../../static/logo/logo.png'
 
 import './index.css'
 
@@ -42,6 +43,7 @@ export default class Index extends Component {
                     companies: response.data,
                     loadingHotSearch: false, // 加载时显示圈圈(或不显示)
                     fengeString: '热门搜索',
+                    searchValue: '',
                 })
             })
             .catch(err => {
@@ -83,7 +85,6 @@ export default class Index extends Component {
 
     onClickCompany(id) {
         // 跳转到公司详情页面，需要路由
-        console.log('即将跳转到公司详情页。公司id为：', id)
         Taro.navigateTo({
             url: '/pages/companyDetail/companyDetail?id=' + JSON.stringify(id),
         })
@@ -110,6 +111,19 @@ export default class Index extends Component {
 
         return (
             <View>
+                <View className="at-row at-row__justify--center">
+                    <Image
+                        src={logo}
+                        mode="aspectFit"
+                        style="height:30px;text-align:center"
+                    ></Image>
+                    {/* <View className="at-col at-col-5">
+                        <Text style="text-align:center">
+                            {'企业战略态势\n感知平台'}
+                        </Text>
+                    </View> */}
+                </View>
+
                 <SearchComponent
                     searchValue={this.state.searchValue}
                     onClick={this.onClickSearch.bind(this)}

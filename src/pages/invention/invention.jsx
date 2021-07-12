@@ -42,7 +42,7 @@ export default class Ivention extends Component {
         const status = item.status
         if (status == '已授权') return 'color:green'
         if (status == '实质审查') return 'color:purple'
-        if (status == '公开') return 'color:orange'
+        if (status == '公开') return 'color:#fe5d25'
         return 'color:red'
     }
 

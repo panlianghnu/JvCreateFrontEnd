@@ -28,6 +28,7 @@ class SearchComponent extends Component {
                     onChange={value => this.props.onChange(value)}
                     actionName="搜索"
                     onActionClick={this.props.onClick}
+                    placeholder="请输入细分行业、公司名称等关键字"
                 />
             </View>
         )

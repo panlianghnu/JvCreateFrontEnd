@@ -59,7 +59,7 @@ export default class Stock extends Component {
                         <View className="at-col-4">
                             <View className="at-article__p">
                                 <Text>持股比例</Text>
-                                <Text style="color:orange">
+                                <Text style="color:#fe5d25">
                                     {'\n' + item.percent}%
                                 </Text>
                             </View>

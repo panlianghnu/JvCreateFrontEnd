@@ -58,7 +58,6 @@ export default class CompanyDetail extends Component {
     componentDidHide() {}
 
     handleClickGrid(item, index) {
-        console.log('item: ', item)
         switch (index) {
             case 0: {
                 Taro.navigateTo({
@@ -117,7 +116,7 @@ export default class CompanyDetail extends Component {
                         <View className="at-row" style="text-align:center">
                             <View className="at-col-4">
                                 <Text>细分领域</Text>
-                                <Text style="color:orange">
+                                <Text style="color:#fe5d25">
                                     {'\n' + this.state.major}
                                 </Text>
                             </View>
@@ -128,7 +127,7 @@ export default class CompanyDetail extends Component {
                             </View>
                             <View className="at-col-4">
                                 <Text>发明评级</Text>
-                                <Text style="color:orange">
+                                <Text style="color:#fe5d25">
                                     {'\n' + this.state.level}
                                 </Text>
                             </View>
@@ -156,42 +155,42 @@ export default class CompanyDetail extends Component {
                             data={[
                                 {
                                     image:
-                                        'https://wx1.sinaimg.cn/mw2000/006pJOFhgy1gs65nfdr5vj305k05kdfv.jpg',
+                                        'https://wx2.sinaimg.cn/orj360/006pJOFhgy1gse3ki2jrcj305k05kjrd.jpg',
                                     value: '发明专利',
                                 },
                                 {
                                     image:
-                                        'https://wx1.sinaimg.cn/mw2000/006pJOFhgy1gs65nf3p4yj305k05kt8r.jpg',
+                                        'https://wx1.sinaimg.cn/orj360/006pJOFhgy1gse3kjcf3kj305k05kmx5.jpg',
                                     value: '团队信息',
                                 },
                                 {
                                     image:
-                                        'https://wx1.sinaimg.cn/orj360/006pJOFhgy1gs65neoo6gj305k05k0so.jpg',
+                                        'https://wx1.sinaimg.cn/orj360/006pJOFhgy1gse3kj2jb9j305k05k0so.jpg',
                                     value: '股权&融资',
                                 },
                                 {
                                     image:
-                                        'https://wx1.sinaimg.cn/mw2000/006pJOFhgy1gs65nedjgqj305k05kmx4.jpg',
+                                        'https://wx1.sinaimg.cn/orj360/006pJOFhgy1gse3kiw6e1j305k05kjrb.jpg',
                                     value: '产品&服务',
                                 },
                                 {
                                     image:
-                                        'https://wx1.sinaimg.cn/orj360/006pJOFhgy1gs65nez51hj305k05kweh.jpg',
+                                        'https://wx1.sinaimg.cn/orj360/006pJOFhgy1gse3khtlecj305k05k3yh.jpg',
                                     value: '主要客户',
                                 },
                                 {
                                     image:
-                                        'https://wx1.sinaimg.cn/orj360/006pJOFhgy1gs65netb5aj305k05kwea.jpg',
+                                        'https://wx1.sinaimg.cn/orj360/006pJOFhgy1gse3kiqwsoj305k05kwea.jpg',
                                     value: '经营状况',
                                 },
                                 {
                                     image:
-                                        'https://wx1.sinaimg.cn/orj360/006pJOFhgy1gs65neiym7j305k05kmx5.jpg',
+                                        'https://wx1.sinaimg.cn/orj360/006pJOFhgy1gse3kibhklj305k05k0sq.jpg',
                                     value: '法律事务',
                                 },
                                 {
                                     image:
-                                        'https://wx1.sinaimg.cn/orj360/006pJOFhgy1gs65nf8zpij305k05kq2u.jpg',
+                                        'https://wx1.sinaimg.cn/orj360/006pJOFhgy1gse3kijbw3j305k05kmx3.jpg',
                                     value: '细分市场',
                                 },
                             ]}

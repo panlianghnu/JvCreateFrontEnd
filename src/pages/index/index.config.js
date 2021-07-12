@@ -1,4 +1,4 @@
 export default {
-    navigationBarTitleText: '首页',
+    navigationBarTitleText: '聚创造',
     enablePullDownRefresh: true,
 }
