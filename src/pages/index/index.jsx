@@ -4,13 +4,12 @@
 import Taro from '@tarojs/taro'
 import { Component } from 'react'
 import { View, Image } from '@tarojs/components'
-import { AtList, AtListItem, AtDivider } from 'taro-ui'
+import { AtList, AtIcon, AtDivider } from 'taro-ui'
 import axios from 'taro-axios'
 import { SearchComponent } from '../../components/searchComponent'
-import { AtIcon } from 'taro-ui'
 
 import logo from '../../static/logo/logo.jpg'
-
+import logo1 from '../../static/logo/logo1.png'
 
 import './index.css'
 
@@ -24,11 +23,11 @@ export default class Index extends Component {
                     companyName: ' ',
                     legalPerson: ' ',
                     registeredCapital: 0,
-                    field:' ',
-                    inventionCount:0,
-                    inventionRating:' ',
-                    financing:' ',
-                    searchCount:0
+                    field: ' ',
+                    inventionCount: 0,
+                    inventionRating: ' ',
+                    financing: ' ',
+                    searchCount: 0,
                 },
             ],
             loadingHotSearch: true,
@@ -113,7 +112,7 @@ export default class Index extends Component {
         this.logoSize()
         const resultList = this.state.companies.map(item => {
             return (
-                <View className='companyList'>
+                <View className="companyList" key={item.id}>
                     {/* <AtListItem
                         className='listItem'
                         key={item.id}
@@ -130,24 +129,40 @@ export default class Index extends Component {
                         onClick={this.onClickCompany.bind(this, item.id)}>
                         <View>asdzz</View>
                     </AtListItem> */}
-                    <View className='listItem' onClick={this.onClickCompany.bind(this, item.id)}>
-                        <View className='left'>
-                            <View className='companyLogo'>
-                                <Image src={logo} mode='scaleToFill' className='img'></Image>
+                    <View
+                        className="listItem"
+                        onClick={this.onClickCompany.bind(this, item.id)}
+                    >
+                        <View className="left">
+                            <View className="companyLogo">
+                                <Image
+                                    src={logo1}
+                                    mode="scaleToFill"
+                                    className="img"
+                                ></Image>
                             </View>
-                            <View className='searchCount'>66666666</View>
+                            <View className="searchCount">66666666</View>
                         </View>
-                        <View className='right'>
-                            <View className='companyName'>{item.companyName}</View>
-                            <View className='note'>细分领域：区块链、联盟链</View>
-                            <View className='note'>发明总数：26</View>
-                            <View className='note'>发明评级：B+</View>
-                            <View className='note' style="margin-bottom:5px">融资情况：A轮</View>
+                        <View className="right">
+                            <View className="companyName">
+                                {item.companyName}
+                            </View>
+                            <View className="note">
+                                细分领域：区块链、联盟链
+                            </View>
+                            <View className="note">发明总数：26</View>
+                            <View className="note">发明评级：B+</View>
+                            <View className="note" style="margin-bottom:5px">
+                                融资情况：A轮
+                            </View>
                         </View>
-                        <AtIcon value='chevron-right' size='20' style="align-self:center" className='icon'/>
-                        
+                        <AtIcon
+                            value="chevron-right"
+                            size="20"
+                            style="align-self:center"
+                            className="icon"
+                        />
                     </View>
-                    
                 </View>
             )
         })
