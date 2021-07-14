@@ -7,7 +7,7 @@ import { View, Image } from '@tarojs/components'
 import { AtList, AtListItem, AtDivider } from 'taro-ui'
 import axios from 'taro-axios'
 import { SearchComponent } from '../../components/searchComponent'
-import logo from '../../static/logo/logo.png'
+import logo from '../../static/logo/logo.jpg'
 
 import './index.css'
 
@@ -89,7 +89,20 @@ export default class Index extends Component {
             url: '/pages/companyDetail/companyDetail?id=' + JSON.stringify(id),
         })
     }
+
+    logoSize() {
+        var logo_width_height = parseInt(699 / 285)
+        const maxWidth = Taro.getSystemInfoSync().windowWidth
+        var logoWidth = parseInt((60 / 100) * maxWidth)
+        var logoHeight = parseInt(logoWidth / logo_width_height)
+        console.log('屏幕最大 width 为：', maxWidth)
+        console.log('logo width 为：', logoWidth)
+        console.log('logo height 为：', logoHeight)
+        return 'width:' + logoWidth + 'px;height:' + logoHeight + 'px;'
+    }
+
     render() {
+        this.logoSize()
         const resultList = this.state.companies.map(item => {
             return (
                 <AtListItem
@@ -111,19 +124,14 @@ export default class Index extends Component {
 
         return (
             <View>
-                <View className="at-row at-row__justify--center">
-                    <Image
-                        src={logo}
-                        mode="aspectFit"
-                        style="height:30px;text-align:center"
-                    ></Image>
-                    {/* <View className="at-col at-col-5">
-                        <Text style="text-align:center">
-                            {'企业战略态势\n感知平台'}
-                        </Text>
-                    </View> */}
+                <View className="at-row">
+                    <View
+                        className="at-col at-col-12"
+                        style="text-align:center"
+                    >
+                        <Image src={logo} style={this.logoSize()}></Image>
+                    </View>
                 </View>
-
                 <SearchComponent
                     searchValue={this.state.searchValue}
                     onClick={this.onClickSearch.bind(this)}
