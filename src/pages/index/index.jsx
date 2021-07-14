@@ -8,6 +8,7 @@ import { AtList, AtListItem, AtDivider } from 'taro-ui'
 import axios from 'taro-axios'
 import { SearchComponent } from '../../components/searchComponent'
 import logo from '../../static/logo/logo.png'
+import { AtIcon } from 'taro-ui'
 
 import './index.css'
 
@@ -21,6 +22,11 @@ export default class Index extends Component {
                     companyName: ' ',
                     legalPerson: ' ',
                     registeredCapital: 0,
+                    field:' ',
+                    inventionCount:0,
+                    inventionRating:' ',
+                    financing:' ',
+                    searchCount:0
                 },
             ],
             loadingHotSearch: true,
@@ -92,20 +98,42 @@ export default class Index extends Component {
     render() {
         const resultList = this.state.companies.map(item => {
             return (
-                <AtListItem
-                    key={item.id}
-                    title={item.companyName}
-                    note={
-                        '法人：' +
-                        item.legalPerson +
-                        '    注册资本：' +
-                        (item.registeredCapital % 10000) +
-                        '万元'
-                    }
-                    extraText="详细信息"
-                    arrow="right"
-                    onClick={this.onClickCompany.bind(this, item.id)}
-                />
+                <View className='companyList'>
+                    {/* <AtListItem
+                        className='listItem'
+                        key={item.id}
+                        title={item.companyName}
+                        note={
+                            '细分领域：' + item.field + '\n' +
+                            '发明总数：' + item.inventionCount + '\n' + 
+                            '发明评级：' + item.inventionRating + '\n' + 
+                            '融资情况：' + item.financing
+                        }
+                        extraText="详细信息"
+                        arrow="right"
+                        hasBorder='false'
+                        onClick={this.onClickCompany.bind(this, item.id)}>
+                        <View>asdzz</View>
+                    </AtListItem> */}
+                    <View className='listItem' onClick={this.onClickCompany.bind(this, item.id)}>
+                        <View className='left'>
+                            <View className='companyLogo'>
+                                <Image src={logo} mode='scaleToFill' className='img'></Image>
+                            </View>
+                            <View className='searchCount'>66666666</View>
+                        </View>
+                        <View className='right'>
+                            <View className='companyName'>{item.companyName}</View>
+                            <View className='note'>细分领域：区块链、联盟链</View>
+                            <View className='note'>发明总数：26</View>
+                            <View className='note'>发明评级：B+</View>
+                            <View className='note' style="margin-bottom:5px">融资情况：A轮</View>
+                        </View>
+                        <AtIcon value='chevron-right' size='20' style="align-self:center" className='icon'/>
+                        
+                    </View>
+                    
+                </View>
             )
         })
 

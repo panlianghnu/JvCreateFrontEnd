@@ -2,11 +2,70 @@
     display: block;
     width: 100%;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     box-sizing: content-box;
     font-size: 40px;
     font-weight: bold;
-    border-width: 0ch;
+    /*border-width: 0ch;*/
     font-family: '宋体';
     text-align: center;
+}
+.companyList{
+    /* position: absolute; */
+    /*避免子元素margin 影响外层元素 overflow和position都可以*/   
+     display: flex;
+    justify-content: center;
+	align-items: center;
+    flex-direction: column; 
+    margin-top: 10px;
+    /* flex弹性布局 居中（水平、垂直） */
+}
+
+.listItem{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    /*transition: 0.3s;*/
+    width: 90%;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    
+}
+.left{
+    float: left;
+    width: 25%;
+    /*display: table-cell;
+    text-align:center;
+    vertical-align: middle;*/
+}
+.right{
+    float: right;
+    width: 70%;
+}
+.companyLogo{
+    width: 150px;
+    height: 150px;
+    
+}
+.img{
+    width: 140px;
+    height: 140px;
+    margin-left: 13px;
+    margin-top: 10px;
+}
+.searchCount{
+    font-size: small;
+    text-align: center;
+}
+.companyName{
+    font-size: 35px;
+    font-weight: bold;
+}
+.note{
+    font-size: 25px;
+}
+
+.icon{
+    float: right;
 }
