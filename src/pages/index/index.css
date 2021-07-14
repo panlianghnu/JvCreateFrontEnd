@@ -10,6 +10,7 @@
     font-family: '宋体';
     text-align: center;
 }
+<<<<<<< HEAD
 .companyList{
     /* position: absolute; */
     /*避免子元素margin 影响外层元素 overflow和position都可以*/   
@@ -69,3 +70,11 @@
 .icon{
     float: right;
 }
+=======
+
+.logo-text {
+    font-family: 'Microsoft YaHei', 微软雅黑, 'Microsoft JhengHei', 华文细黑,
+        STHeiti, MingLiu;
+    text-align: center;
+}
+>>>>>>> 7d499508a3fa745888a44a1947e37afc0d48e140
