@@ -7,3 +7,4 @@ node_modules/
 .edi*
 .eslin*
 package-lock.json
+project.config.json

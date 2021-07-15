@@ -4,10 +4,10 @@
 import Taro from '@tarojs/taro'
 import { Component } from 'react'
 import { View, Image } from '@tarojs/components'
-import { AtList, AtIcon, AtDivider } from 'taro-ui'
+import { AtIcon } from 'taro-ui'
 import axios from 'taro-axios'
 import { SearchComponent } from '../../components/searchComponent'
-
+import { Divider } from '../../components/Divider'
 import logo from '../../static/logo/logo.jpg'
 import logo1 from '../../static/logo/logo1.png'
 
@@ -100,7 +100,7 @@ export default class Index extends Component {
     logoSize() {
         var logo_width_height = parseInt(699 / 285)
         const maxWidth = Taro.getSystemInfoSync().windowWidth
-        var logoWidth = parseInt((60 / 100) * maxWidth)
+        var logoWidth = parseInt((50 / 100) * maxWidth)
         var logoHeight = parseInt(logoWidth / logo_width_height)
         console.log('屏幕最大 width 为：', maxWidth)
         console.log('logo width 为：', logoWidth)
@@ -113,34 +113,16 @@ export default class Index extends Component {
         const resultList = this.state.companies.map(item => {
             return (
                 <View className="companyList" key={item.id}>
-                    {/* <AtListItem
-                        className='listItem'
-                        key={item.id}
-                        title={item.companyName}
-                        note={
-                            '细分领域：' + item.field + '\n' +
-                            '发明总数：' + item.inventionCount + '\n' + 
-                            '发明评级：' + item.inventionRating + '\n' + 
-                            '融资情况：' + item.financing
-                        }
-                        extraText="详细信息"
-                        arrow="right"
-                        hasBorder='false'
-                        onClick={this.onClickCompany.bind(this, item.id)}>
-                        <View>asdzz</View>
-                    </AtListItem> */}
                     <View
                         className="listItem"
                         onClick={this.onClickCompany.bind(this, item.id)}
                     >
                         <View className="left">
-                            <View className="companyLogo">
-                                <Image
-                                    src={logo1}
-                                    mode="scaleToFill"
-                                    className="img"
-                                ></Image>
-                            </View>
+                            <Image
+                                src={logo1}
+                                mode="scaleToFill"
+                                className="companyLogo"
+                            ></Image>
                             <View className="searchCount">66666666</View>
                         </View>
                         <View className="right">
@@ -182,8 +164,8 @@ export default class Index extends Component {
                     onClick={this.onClickSearch.bind(this)}
                     onChange={this.onChangeSearch.bind(this)}
                 />
-                <AtDivider content={this.state.fengeString} fontSize="32" />
-                {!this.state.loadingHotSearch && <AtList>{resultList}</AtList>}
+                <Divider content={this.state.fengeString}></Divider>
+                {!this.state.loadingHotSearch && <View>{resultList}</View>}
             </View>
         )
     }
