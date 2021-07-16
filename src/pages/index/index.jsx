@@ -40,13 +40,13 @@ export default class Index extends Component {
     componentWillMount() {}
 
     componentDidMount() {
-        console.log('Axios')
+        // console.log('Axios')
         // 请求一波数据
         axios
             .get('/home')
             .then(response => {
-                console.log('response:')
-                console.log(response.data)
+                // console.log('response:')
+                // console.log(response.data)
                 this.setState({
                     companies: response.data,
                     loadingHotSearch: false, // 加载时显示圈圈(或不显示)
@@ -66,14 +66,14 @@ export default class Index extends Component {
     componentDidHide() {}
 
     onPullDownRefresh() {
-        console.log('触发下拉')
+        // console.log('触发下拉')
         // 重新载入页面
         this.componentDidMount()
         Taro.stopPullDownRefresh()
     }
 
     onClickSearch() {
-        console.log('搜索：', this.state.searchValue)
+        // console.log('搜索：', this.state.searchValue)
         axios
             .get('/home') // change later
             .then(response => {
@@ -103,9 +103,6 @@ export default class Index extends Component {
         const maxWidth = Taro.getSystemInfoSync().windowWidth
         var logoWidth = parseInt((50 / 100) * maxWidth)
         var logoHeight = parseInt(logoWidth / logo_width_height)
-        console.log('屏幕最大 width 为：', maxWidth)
-        console.log('logo width 为：', logoWidth)
-        console.log('logo height 为：', logoHeight)
         return 'width:' + logoWidth + 'px;height:' + logoHeight + 'px;'
     }
 
@@ -117,6 +114,7 @@ export default class Index extends Component {
                     <View
                         className="listItem"
                         onClick={this.onClickCompany.bind(this, item.id)}
+                        hoverClass="hoverList"
                     >
                         <View className="at-row at-row__align--center">
                             <View className="at-col at-col__offset-1 at-col-1 at-col--auto">

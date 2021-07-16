@@ -1,0 +1,135 @@
+/* eslint-disable react/jsx-indent-props */
+/* eslint-disable jsx-quotes */
+import { Component } from 'react'
+import { View, Text, Image } from '@tarojs/components'
+import Taro from '@tarojs/taro'
+import { AtIcon } from 'taro-ui'
+import logo from '../../static/logo/logo.png'
+import './contact.css'
+
+export default class extends Component {
+    logoSize() {
+        var logo_width_height = parseInt(621 / 248)
+        const maxWidth = Taro.getSystemInfoSync().windowWidth
+        var logoWidth = parseInt((40 / 100) * maxWidth)
+        var logoHeight = parseInt(logoWidth / logo_width_height)
+        return 'width:' + logoWidth + 'px;height:' + logoHeight + 'px;'
+    }
+
+    render() {
+        return (
+            <View>
+                <View style="margin-top:40px"></View>
+                <View className="at-row at-row__justify--center">
+                    <Image src={logo} style={this.logoSize()}></Image>
+                </View>
+                <View style="margin-top:10px"></View>
+                <View className="at-row at-row__justify--center">
+                    <Text className="logo-text">
+                        企业战略态势感知平台：V1.0.0
+                    </Text>
+                </View>
+                <View style="margin-top:40px"></View>
+                <View className="contact-list">
+                    <View
+                        className="contact-list-first-item"
+                        onClick={() =>
+                            Taro.makePhoneCall({
+                                phoneNumber: '073185570895',
+                            })
+                        }
+                    >
+                        <View className="at-row at-row__align--center">
+                            <View
+                                className="at-col at-col-1"
+                                style="text-align:center"
+                            >
+                                <AtIcon value="phone" size="20"></AtIcon>
+                            </View>
+                            <View className="at-col at-col-1 at-col--auto">
+                                客服电话：
+                            </View>
+                            <View className="at-col">
+                                <Text className="phone">0731-8557-0895</Text>
+                            </View>
+                            <View className="at-row__justify--end">
+                                <View
+                                    className="at-col"
+                                    style="padding-right:10px"
+                                >
+                                    拨打
+                                    <AtIcon value="chevron-right" size="20" />
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                    <View className="contact-list-item">
+                        <View className="at-row at-row__align--center">
+                            <View
+                                className="at-col at-col-1"
+                                style="text-align:center"
+                            >
+                                <AtIcon value="home" size="20"></AtIcon>
+                            </View>
+                            <View className="at-col at-col-1 at-col--auto">
+                                官方网站：
+                            </View>
+                            <View className="at-col at-col--wrap">
+                                www.jucreate.com
+                            </View>
+                        </View>
+                    </View>
+                    <View className="contact-list-item">
+                        <View className="at-row at-row__align--center">
+                            <View
+                                className="at-col at-col-1"
+                                style="text-align:center"
+                            >
+                                <AtIcon value="mail" size="20"></AtIcon>
+                            </View>
+                            <View className="at-col at-col-1 at-col--auto">
+                                企业邮箱：
+                            </View>
+                            <View className="at-col at-col--wrap">
+                                hi30058740@aliyun.com
+                            </View>
+                        </View>
+                    </View>
+                    <View className="contact-list-item">
+                        <View className="at-row at-row__align--center">
+                            <View
+                                className="at-col at-col-1"
+                                style="text-align:center"
+                            >
+                                <AtIcon value="map-pin" size="20"></AtIcon>
+                            </View>
+                            <View className="at-col at-col-1 at-col--auto">
+                                联系地址：
+                            </View>
+                            <View className="at-col at-col--wrap">
+                                <Text>
+                                    湖南省长沙市岳麓区文轩路27号麓谷企业广场F1栋504
+                                </Text>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+                <View className="bottom">
+                    <View className="at-row at-row__justify--center at-row__align--center">
+                        <View className="at-col at-col-1">
+                            <View style="background:grey;height:1px;"></View>
+                        </View>
+                        <View className="at-col at-col-1 at-col--auto">
+                            <Text style="margin-left:5px;margin-right:5px">
+                                聚创造网络科技有限公司
+                            </Text>
+                        </View>
+                        <View className="at-col at-col-1">
+                            <View style="background:grey;height:1px;"></View>
+                        </View>
+                    </View>
+                </View>
+            </View>
+        )
+    }
+}

@@ -1,0 +1,39 @@
+.contact-list {
+    /* position: absolute; */
+    /*避免子元素margin 影响外层元素 overflow和position都可以*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    /* flex弹性布局 居中（水平、垂直） */
+    color: grey;
+}
+.contact-list-first-item {
+    width: 100%;
+    border: 1px solid gainsboro;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+.contact-list-item {
+    width: 100%;
+    border-bottom: 1px solid gainsboro;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+.logo-text {
+    font-size: 30px;
+    color: #fe5d25;
+}
+.phone {
+    font-size: 45px;
+    color: #fe5d25;
+}
+.bottom {
+    position: fixed;
+    bottom: 40px;
+    width: 100%;
+    text-align: center;
+    font-size: 25px;
+    color: grey;
+}

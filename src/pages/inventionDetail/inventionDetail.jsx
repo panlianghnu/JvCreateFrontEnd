@@ -21,7 +21,7 @@ export default class extends Component {
             abstractPic:
                 'http://static.tianyancha.com/patent/abstractPic/CN/A/112/733/CN112733143A_HDA0002892595500000011.png',
         }
-        console.log('专利详情，专利ID为：', this.state.inventionId)
+        // console.log('专利详情，专利ID为：', this.state.inventionId)
     }
 
     getStatusColor() {

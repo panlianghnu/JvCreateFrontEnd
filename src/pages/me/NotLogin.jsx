@@ -2,6 +2,7 @@
 /* eslint-disable jsx-quotes */
 import { View, Text } from '@tarojs/components'
 import { AtAvatar, AtButton, AtList, AtListItem } from 'taro-ui'
+import Taro from '@tarojs/taro'
 import login from '../../static/icons/login.png'
 
 function NotLogin(props) {
@@ -33,13 +34,14 @@ function NotLogin(props) {
             <View style="margin-top:40px"></View>
             <AtList>
                 <AtListItem
-                    title="发票抬头"
+                    title="我的收藏"
                     arrow="right"
                     iconInfo={{
                         size: 20,
                         color: '#fe5d25',
-                        value: 'money',
+                        value: 'star',
                     }}
+                    onClick={props.onClick}
                 ></AtListItem>
                 <AtListItem
                     title="意见反馈"
@@ -58,6 +60,9 @@ function NotLogin(props) {
                         color: '#fe5d25',
                         value: 'phone',
                     }}
+                    onClick={() =>
+                        Taro.navigateTo({ url: '/pages/contact/contact' })
+                    }
                 ></AtListItem>
             </AtList>
         </View>
