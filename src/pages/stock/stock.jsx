@@ -29,7 +29,7 @@ export default class Stock extends Component {
     componentDidMount() {
         axios.get('/stock?id=' + this.state.companyId).then(
             response => {
-                console.log('response.data: ', response.data)
+                // console.log('response.data: ', response.data)
                 this.setState({
                     items: response.data,
                 })

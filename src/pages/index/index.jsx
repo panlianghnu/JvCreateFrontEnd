@@ -1,15 +1,16 @@
+/* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable react/jsx-boolean-value */
 /* eslint-disable jsx-quotes */
 import Taro from '@tarojs/taro'
 import { Component } from 'react'
 import { View, Image } from '@tarojs/components'
-import { AtList, AtIcon, AtDivider } from 'taro-ui'
+import { AtIcon, AtAvatar } from 'taro-ui'
 import axios from 'taro-axios'
 import { SearchComponent } from '../../components/searchComponent'
-
-import logo from '../../static/logo/logo.jpg'
-import logo1 from '../../static/logo/logo1.png'
+import { Divider } from '../../components/Divider'
+import logo from '../../static/logo/logo.png'
+// import logo1 from '../../static/logo/logo1.png'
 
 import './index.css'
 
@@ -39,13 +40,13 @@ export default class Index extends Component {
     componentWillMount() {}
 
     componentDidMount() {
-        console.log('Axios')
+        // console.log('Axios')
         // 请求一波数据
         axios
             .get('/home')
             .then(response => {
-                console.log('response:')
-                console.log(response.data)
+                // console.log('response:')
+                // console.log(response.data)
                 this.setState({
                     companies: response.data,
                     loadingHotSearch: false, // 加载时显示圈圈(或不显示)
@@ -65,14 +66,14 @@ export default class Index extends Component {
     componentDidHide() {}
 
     onPullDownRefresh() {
-        console.log('触发下拉')
+        // console.log('触发下拉')
         // 重新载入页面
         this.componentDidMount()
         Taro.stopPullDownRefresh()
     }
 
     onClickSearch() {
-        console.log('搜索：', this.state.searchValue)
+        // console.log('搜索：', this.state.searchValue)
         axios
             .get('/home') // change later
             .then(response => {
@@ -98,13 +99,10 @@ export default class Index extends Component {
     }
 
     logoSize() {
-        var logo_width_height = parseInt(699 / 285)
+        var logo_width_height = parseInt(621 / 248)
         const maxWidth = Taro.getSystemInfoSync().windowWidth
-        var logoWidth = parseInt((60 / 100) * maxWidth)
+        var logoWidth = parseInt((50 / 100) * maxWidth)
         var logoHeight = parseInt(logoWidth / logo_width_height)
-        console.log('屏幕最大 width 为：', maxWidth)
-        console.log('logo width 为：', logoWidth)
-        console.log('logo height 为：', logoHeight)
         return 'width:' + logoWidth + 'px;height:' + logoHeight + 'px;'
     }
 
@@ -113,55 +111,37 @@ export default class Index extends Component {
         const resultList = this.state.companies.map(item => {
             return (
                 <View className="companyList" key={item.id}>
-                    {/* <AtListItem
-                        className='listItem'
-                        key={item.id}
-                        title={item.companyName}
-                        note={
-                            '细分领域：' + item.field + '\n' +
-                            '发明总数：' + item.inventionCount + '\n' + 
-                            '发明评级：' + item.inventionRating + '\n' + 
-                            '融资情况：' + item.financing
-                        }
-                        extraText="详细信息"
-                        arrow="right"
-                        hasBorder='false'
-                        onClick={this.onClickCompany.bind(this, item.id)}>
-                        <View>asdzz</View>
-                    </AtListItem> */}
                     <View
                         className="listItem"
                         onClick={this.onClickCompany.bind(this, item.id)}
+                        hoverClass="hoverList"
                     >
-                        <View className="left">
-                            <View className="companyLogo">
-                                <Image
-                                    src={logo1}
-                                    mode="scaleToFill"
-                                    className="img"
-                                ></Image>
+                        <View className="at-row at-row__align--center">
+                            <View className="at-col at-col__offset-1 at-col-1 at-col--auto">
+                                <AtAvatar
+                                    text={item.companyName}
+                                    size="large"
+                                ></AtAvatar>
+                                <View className="searchCount">66666666</View>
                             </View>
-                            <View className="searchCount">66666666</View>
+                            <View className="at-col at-col__offset-1 at-col-7">
+                                <View className="companyName">
+                                    {item.companyName}
+                                </View>
+                                <View className="note">
+                                    细分领域：区块链、联盟链
+                                </View>
+                                <View className="note">发明总数：26</View>
+                                <View className="note">发明评级：B+</View>
+                                <View
+                                    className="note"
+                                    style="margin-bottom:5px"
+                                >
+                                    融资情况：A轮
+                                </View>
+                            </View>
+                            <AtIcon value="chevron-right" size="20" />
                         </View>
-                        <View className="right">
-                            <View className="companyName">
-                                {item.companyName}
-                            </View>
-                            <View className="note">
-                                细分领域：区块链、联盟链
-                            </View>
-                            <View className="note">发明总数：26</View>
-                            <View className="note">发明评级：B+</View>
-                            <View className="note" style="margin-bottom:5px">
-                                融资情况：A轮
-                            </View>
-                        </View>
-                        <AtIcon
-                            value="chevron-right"
-                            size="20"
-                            style="align-self:center"
-                            className="icon"
-                        />
                     </View>
                 </View>
             )
@@ -182,8 +162,8 @@ export default class Index extends Component {
                     onClick={this.onClickSearch.bind(this)}
                     onChange={this.onChangeSearch.bind(this)}
                 />
-                <AtDivider content={this.state.fengeString} fontSize="32" />
-                {!this.state.loadingHotSearch && <AtList>{resultList}</AtList>}
+                <Divider content={this.state.fengeString}></Divider>
+                {!this.state.loadingHotSearch && <View>{resultList}</View>}
             </View>
         )
     }

@@ -27,7 +27,7 @@ export default class Ivention extends Component {
     }
 
     componentDidMount() {
-        console.log('Invention Axios')
+        // console.log('Invention Axios')
         axios.get('/invention?id=' + this.state.companyId).then(
             response => {
                 this.setState({ iventions: response.data })
@@ -47,7 +47,7 @@ export default class Ivention extends Component {
     }
 
     onClickCard(item) {
-        console.log('跳转到专利详情，item:', item)
+        // console.log('跳转到专利详情，item:', item)
         Taro.navigateTo({
             url: '/pages/inventionDetail/inventionDetail?id=' + item.id,
         })
