@@ -1,27 +1,19 @@
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable jsx-quotes */
 import { Component } from 'react'
-import { View, Text, Image } from '@tarojs/components'
+import { View, Text } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { AtIcon } from 'taro-ui'
-import logo from '../../static/logo/logo.png'
+import { Logo } from '../../components/Logo'
 import './contact.css'
 
 export default class extends Component {
-    logoSize() {
-        var logo_width_height = parseInt(621 / 248)
-        const maxWidth = Taro.getSystemInfoSync().windowWidth
-        var logoWidth = parseInt((40 / 100) * maxWidth)
-        var logoHeight = parseInt(logoWidth / logo_width_height)
-        return 'width:' + logoWidth + 'px;height:' + logoHeight + 'px;'
-    }
-
     render() {
         return (
             <View>
                 <View style="margin-top:40px"></View>
                 <View className="at-row at-row__justify--center">
-                    <Image src={logo} style={this.logoSize()}></Image>
+                    <Logo width={40}></Logo>
                 </View>
                 <View style="margin-top:10px"></View>
                 <View className="at-row at-row__justify--center">
