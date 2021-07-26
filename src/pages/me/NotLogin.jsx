@@ -9,6 +9,7 @@ import {
     AtListItem,
     AtActionSheet,
     AtActionSheetItem,
+    AtMessage,
 } from 'taro-ui'
 import Taro from '@tarojs/taro'
 import login from '../../static/icons/login.png'
@@ -28,21 +29,32 @@ class NotLogin extends Component {
     }
 
     wxLogin() {
-        Taro.login({
-            success: res => {
-                if (res.code) {
-                    // Axios.get
-                    console.log('获取登陆code成功，code：', res.code)
-                } else {
-                    console.log('获取登陆code失败')
-                }
-            },
+        Taro.atMessage({
+            message: '微信登陆成功',
+            type: 'success',
         })
+        this.handleCancel()
+    }
+
+    usernameLogin() {
+        Taro.navigateTo({ url: '/pages/login/login' })
+        this.handleCancel()
+        // Taro.login({
+        //     success: res => {
+        //         if (res.code) {
+        //             // Axios.get
+        //             console.log('获取登陆code成功，code：', res.code)
+        //         } else {
+        //             console.log('获取登陆code失败')
+        //         }
+        //     },
+        // })
     }
 
     render() {
         return (
             <View>
+                <AtMessage />
                 <View style="margin-bottom:50px"></View>
                 <View className="at-row at-row__justify--center">
                     <AtAvatar image={login} circle size="large"></AtAvatar>
@@ -111,7 +123,9 @@ class NotLogin extends Component {
                     <AtActionSheetItem onClick={this.wxLogin.bind(this)}>
                         微信一键登录
                     </AtActionSheetItem>
-                    <AtActionSheetItem>手机号码登陆</AtActionSheetItem>
+                    <AtActionSheetItem onClick={this.usernameLogin.bind(this)}>
+                        手机号码登陆
+                    </AtActionSheetItem>
                 </AtActionSheet>
             </View>
         )
