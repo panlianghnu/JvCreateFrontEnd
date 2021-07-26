@@ -4,13 +4,12 @@
 /* eslint-disable jsx-quotes */
 import Taro from '@tarojs/taro'
 import { Component } from 'react'
-import { View, Image } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import { AtIcon, AtAvatar } from 'taro-ui'
 import axios from 'taro-axios'
 import { SearchComponent } from '../../components/searchComponent'
 import { Divider } from '../../components/Divider'
-import logo from '../../static/logo/logo.png'
-// import logo1 from '../../static/logo/logo1.png'
+import { Logo } from '../../components/Logo'
 
 import './index.css'
 
@@ -29,6 +28,7 @@ export default class Index extends Component {
                     inventionRating: ' ',
                     financing: ' ',
                     searchCount: 0,
+                    companyPic: '',
                 },
             ],
             loadingHotSearch: true,
@@ -98,16 +98,7 @@ export default class Index extends Component {
         })
     }
 
-    logoSize() {
-        var logo_width_height = parseInt(621 / 248)
-        const maxWidth = Taro.getSystemInfoSync().windowWidth
-        var logoWidth = parseInt((50 / 100) * maxWidth)
-        var logoHeight = parseInt(logoWidth / logo_width_height)
-        return 'width:' + logoWidth + 'px;height:' + logoHeight + 'px;'
-    }
-
     render() {
-        this.logoSize()
         const resultList = this.state.companies.map(item => {
             return (
                 <View className="companyList" key={item.id}>
@@ -118,10 +109,18 @@ export default class Index extends Component {
                     >
                         <View className="at-row at-row__align--center">
                             <View className="at-col at-col__offset-1 at-col-1 at-col--auto">
-                                <AtAvatar
-                                    text={item.companyName}
-                                    size="large"
-                                ></AtAvatar>
+                                {!item.companyPic && (
+                                    <AtAvatar
+                                        text={item.companyName}
+                                        size="normal"
+                                    ></AtAvatar>
+                                )}
+                                {item.companyPic && (
+                                    <AtAvatar
+                                        image={item.companyPic}
+                                        size="normal"
+                                    ></AtAvatar>
+                                )}
                                 <View className="searchCount">66666666</View>
                             </View>
                             <View className="at-col at-col__offset-1 at-col-7">
@@ -154,7 +153,7 @@ export default class Index extends Component {
                         className="at-col at-col-12"
                         style="text-align:center"
                     >
-                        <Image src={logo} style={this.logoSize()}></Image>
+                        <Logo width={50}></Logo>
                     </View>
                 </View>
                 <SearchComponent

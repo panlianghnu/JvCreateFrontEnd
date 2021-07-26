@@ -15,11 +15,16 @@ export default class extends Component {
 
     componentDidShow() {
         const userName = getGlobalData('userName')
-        if (userName === '') console.log('未登陆')
-        else console.log('用户名：', userName)
+        if (userName === '') {
+            console.log('未登陆')
+            this.setState({ isLogin: false })
+        } else {
+            console.log('用户名：', userName)
+            this.setState({ isLogin: true })
+        }
     }
 
     render() {
-        if (!this.state.isLogin) return <NotLogin></NotLogin>
+        if (!this.state.isLogin) return <NotLogin onClick=""></NotLogin>
     }
 }
