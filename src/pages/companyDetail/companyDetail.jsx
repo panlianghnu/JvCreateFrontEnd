@@ -67,6 +67,13 @@ export default class CompanyDetail extends Component {
                 })
                 break
             }
+            case 1: {
+                Taro.navigateTo({
+                    url:'/pages/team/team?id=' +
+                    JSON.stringify(this.state.companyId),
+                })
+                break
+            }
             case 2: {
                 Taro.navigateTo({
                     url:
@@ -115,7 +122,7 @@ export default class CompanyDetail extends Component {
                         <View style="margin-top:20px"></View>
                         <View className="at-row" style="text-align:center">
                             <View className="at-col-4">
-                                <Text>细分领域</Text>
+                                <Text>细分行业</Text>
                                 <Text style="color:#fe5d25">
                                     {'\n' + this.state.major}
                                 </Text>
@@ -191,7 +198,7 @@ export default class CompanyDetail extends Component {
                                 {
                                     image:
                                         'https://wx1.sinaimg.cn/orj360/006pJOFhgy1gse3kijbw3j305k05kmx3.jpg',
-                                    value: '细分市场',
+                                    value: '细分行业',
                                 },
                             ]}
                         />

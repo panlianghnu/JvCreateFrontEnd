@@ -7,6 +7,7 @@ export default {
         'pages/invention/invention',
         'pages/inventionDetail/inventionDetail',
         'pages/contact/contact',
+        'pages/team/team'
     ],
     window: {
         backgroundTextStyle: 'light',

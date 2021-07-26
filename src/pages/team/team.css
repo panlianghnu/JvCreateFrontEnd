@@ -1,0 +1,15 @@
+.companyList{
+    /* position: absolute; */
+    /*避免子元素margin 影响外层元素 overflow和position都可以*/   
+     display: flex;
+    justify-content: center;
+	align-items: center;
+    flex-direction: column; 
+    margin-top: 10px;
+    /* flex弹性布局 居中（水平、垂直） */
+}
+
+.searchCount{
+    font-size: small;
+    text-align: center;
+}
