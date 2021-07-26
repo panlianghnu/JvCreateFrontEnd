@@ -8,6 +8,7 @@ export default {
         'pages/inventionDetail/inventionDetail',
         'pages/contact/contact',
         'pages/login/login',
+        'pages/team/team',
     ],
     window: {
         backgroundTextStyle: 'light',
