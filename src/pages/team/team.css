@@ -1,15 +1,39 @@
-.companyList{
-    /* position: absolute; */
-    /*避免子元素margin 影响外层元素 overflow和position都可以*/   
-     display: flex;
+page{
+    background-color: #F2F2F2;
+}
+  
+.teamList{ 
+    display: flex;
     justify-content: center;
 	align-items: center;
     flex-direction: column; 
     margin-top: 10px;
+    background-color:#ffffff;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    
     /* flex弹性布局 居中（水平、垂直） */
 }
 
 .searchCount{
     font-size: small;
     text-align: center;
+}
+.name{
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.intro{
+    color: #6E6E6E;
+    font-size: 25px;
+    font-weight:600;
+    text-align: justify;
+    margin-right: 15px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
 }

@@ -1,9 +1,9 @@
 import { View } from "@tarojs/components";
 import { Current } from "@tarojs/taro";
 import { Component } from "react";
-import { AtAvatar } from 'taro-ui'
-import Taro from "@tarojs/taro"
-import './team.css'
+import { AtAvatar, AtTextarea } from 'taro-ui';
+import Taro from "@tarojs/taro";
+import './team.css';
 
 export default class Team extends Component{
     constructor(props){
@@ -58,28 +58,28 @@ export default class Team extends Component{
         const teams = this.state.team.map(item => {
             return(
                 <View className="teamList" key={item.id}>
-                    <View className="at-row at-row__align--center">
+                    <View className='at-row at-row__align--center'>
                         <View className="at-col at-col__offset-1 at-col-1 at-col--auto">
                             <AtAvatar
                                 text={item.name}
                                 size="large"
                                 image = {item.picture}
                             />
-                            <View className="searchCount">{item.name}</View>
                         </View>
-
-                        <View className="at-row">
-                            {/* <View className='at-col at-col-1 at-col--wrap'>
-                                
-                            </View> */}
-                            {item.introduction}
+                    
+                        <View className="at-col at-col__offset-1">
+                            <View className="name">{item.name}</View>
+                            <View className='intro'>
+                                <View className='at-col--wrap' >{item.introduction}</View>
+                            </View>
+                            
                         </View>
                     </View>
                 </View>
             )
         } )
         return(
-            <View>团队成员：{<View>{teams}</View>}</View>
+            <View>{<View>{teams}</View>}</View>
         )
     }
 }

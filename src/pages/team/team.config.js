@@ -1,3 +1,4 @@
 export default {
-    navigationBarTitleText: '团队成员',
+    navigationBarTitleText: '团队信息',
+    backgroundColor:'#F2F2F2',
 }
