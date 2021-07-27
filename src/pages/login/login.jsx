@@ -18,11 +18,11 @@ export default class extends Component {
         }
     }
     codetimer = () => {
-        this.setState({ loading: true })
         let time = this.state.time
         let siv = setInterval(() => {
             this.setState({
                 time: time--,
+                loading: true,
             })
             if (time <= -1) {
                 clearInterval(siv)
@@ -61,11 +61,13 @@ export default class extends Component {
                                 name="phone"
                                 placeholder="请输入手机号"
                                 value={this.state.phone}
-                                maxlength={11}
+                                maxlength={10}
+                                type="text"
                                 onChange={value => {
+                                    // 手机号最多11位
+                                    // 输入抖动怎么解决呢...
                                     if (value.length > 11) {
-                                        console.log('不要再显示了，不要再set了')
-                                        value = value.slice(0, value.length - 1)
+                                        value = value.slice(0, 11)
                                     }
 
                                     var active = false
@@ -84,22 +86,30 @@ export default class extends Component {
                                 placeholder="请输入验证码"
                                 value={this.state.code}
                                 onChange={value => {
+                                    // 验证码搞个四位吧
+                                    if (value.length > 4) {
+                                        value = value.slice(0, 4)
+                                    }
                                     this.setState({ code: value })
                                     return value
                                 }}
                             >
-                                {this.state.loading ? (
-                                    '还剩' + this.state.time + '秒'
-                                ) : this.state.isGetCodeActive ? (
-                                    <Text
-                                        style="color:#fe865c;"
-                                        onClick={this.handleGetCode.bind(this)}
-                                    >
-                                        获取验证码
-                                    </Text>
-                                ) : (
-                                    <Text style="color:grey">获取验证码</Text>
-                                )}
+                                <View style="color:grey">
+                                    {this.state.loading ? (
+                                        this.state.time + '秒后重试'
+                                    ) : this.state.isGetCodeActive ? (
+                                        <View
+                                            style="color:#fe865c;"
+                                            onClick={this.handleGetCode.bind(
+                                                this
+                                            )}
+                                        >
+                                            获取验证码
+                                        </View>
+                                    ) : (
+                                        '获取验证码'
+                                    )}
+                                </View>
                             </AtInput>
                         </View>
                         <View className="confirm">

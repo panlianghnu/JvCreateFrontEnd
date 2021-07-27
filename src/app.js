@@ -5,7 +5,8 @@ import './custom-theme.scss'
 
 class App extends Component {
     componentDidMount() {
-        axios.defaults.baseURL = 'https://mock.yonyoucloud.com/mock/18112/api'
+        axios.defaults.baseURL =
+            'http://rest.apizza.net/mock/477507dcdbdb6b798efe4b625bc25b59'
     }
 
     componentDidShow() {}
