@@ -91,6 +91,12 @@ class NotLogin extends Component {
                             color: '#fe5d25',
                             value: 'star',
                         }}
+                        onClick={() => {
+                            Taro.atMessage({
+                                message: '请先登陆',
+                                type: 'error',
+                            })
+                        }}
                     ></AtListItem>
                     <AtListItem
                         title="意见反馈"
