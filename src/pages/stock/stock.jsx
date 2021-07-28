@@ -4,7 +4,7 @@ import { Component } from 'react'
 import { View, Text } from '@tarojs/components'
 import axios from 'taro-axios'
 import { getCurrentInstance } from '@tarojs/taro'
-import { AtAccordion } from 'taro-ui'
+import { AtAccordion, AtTimeline } from 'taro-ui'
 
 // 股权&融资页面
 export default class Stock extends Component {
@@ -22,7 +22,8 @@ export default class Stock extends Component {
                     date: '', // 认缴事件
                 },
             ],
-            open1: true,
+            open1: false,
+            open2: true,
         }
     }
 
@@ -91,6 +92,61 @@ export default class Stock extends Component {
                         }}
                     >
                         {stockList}
+                    </AtAccordion>
+                    <AtAccordion
+                        open={this.state.open2}
+                        title="融资情况"
+                        arrow="right"
+                        onClick={value => {
+                            this.setState({ open2: value })
+                        }}
+                    >
+                        <View style="margin-left:30px;margin-top:20px">
+                            <AtTimeline
+                                items={[
+                                    {
+                                        title: '2012-12-11',
+                                        content: [
+                                            '投资者：李宏毅',
+                                            '轮次：天使轮',
+                                            '投资金额：2321万元',
+                                            '融资顾问：长沙中关村湘军创业服务有限公司',
+                                        ],
+                                        icon: 'clock',
+                                    },
+                                    {
+                                        title: '2014-02-24',
+                                        content: [
+                                            '投资者：雷军',
+                                            '轮次：PreA轮',
+                                            '投资金额：200万元',
+                                            '融资顾问：长沙中关村湘军创业服务有限公司',
+                                        ],
+                                        icon: 'clock',
+                                    },
+                                    {
+                                        title: '2014-08-30',
+                                        content: [
+                                            '投资者：红杉资本中国',
+                                            '轮次：A轮',
+                                            '投资金额：30000万元',
+                                            '融资顾问：长沙中关村湘军创业服务有限公司',
+                                        ],
+                                        icon: 'clock',
+                                    },
+                                    {
+                                        title: '2016-07-11',
+                                        content: [
+                                            '投资者：上海清科投资管理有限公司',
+                                            '轮次：A+轮',
+                                            '投资金额：10000万元',
+                                            '融资顾问：长沙中关村湘军创业服务有限公司',
+                                        ],
+                                        icon: 'clock',
+                                    },
+                                ]}
+                            />
+                        </View>
                     </AtAccordion>
                 </View>
             </View>
