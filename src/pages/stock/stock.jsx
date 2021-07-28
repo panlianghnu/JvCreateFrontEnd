@@ -6,7 +6,7 @@ import axios from 'taro-axios'
 import { getCurrentInstance } from '@tarojs/taro'
 import { AtAccordion, AtTimeline } from 'taro-ui'
 
-// 股权&融资页面
+// 工商信息页面，具体描述股权结构和变更记录
 export default class Stock extends Component {
     constructor(props) {
         super(props)

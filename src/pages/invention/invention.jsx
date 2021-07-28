@@ -67,7 +67,7 @@ export default class Ivention extends Component {
                         <View className="at-col">
                             <View className="at-row at-row__align--center">
                                 <View className="index at-col at-col-1 ">
-                                    {index}
+                                    {index + 1}
                                 </View>
                                 <View style="margin-left:10px"></View>
                                 <View className="inventionName at-col at-col--wrap">
@@ -75,7 +75,7 @@ export default class Ivention extends Component {
                                 </View>
                             </View>
                             <View className="at-row at-row__align--center">
-                                <View className="at-col at-col-12">
+                                <View className="at-col at-col__offset-1">
                                     <View className="note">
                                         <Text>
                                             申请日：{item.filingDate + '\n'}

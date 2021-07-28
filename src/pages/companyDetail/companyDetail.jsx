@@ -23,6 +23,7 @@ export default class CompanyDetail extends Component {
             website: '',
             introduction: '',
             inventionNum: 0,
+            invest: '',
         }
     }
 
@@ -43,6 +44,7 @@ export default class CompanyDetail extends Component {
                     website: data.website,
                     introduction: data.introduction,
                     inventionNum: data.inventionNum % 100,
+                    invest: data.invest,
                 })
             },
             err => {
@@ -69,8 +71,9 @@ export default class CompanyDetail extends Component {
             }
             case 1: {
                 Taro.navigateTo({
-                    url:'/pages/team/team?id=' +
-                    JSON.stringify(this.state.companyId),
+                    url:
+                        '/pages/team/team?id=' +
+                        JSON.stringify(this.state.companyId),
                 })
                 break
             }
@@ -78,6 +81,14 @@ export default class CompanyDetail extends Component {
                 Taro.navigateTo({
                     url:
                         '/pages/stock/stock?id=' +
+                        JSON.stringify(this.state.companyId),
+                })
+                break
+            }
+            case 3: {
+                Taro.navigateTo({
+                    url:
+                        '/pages/financing/financing?id=' +
                         JSON.stringify(this.state.companyId),
                 })
                 break
@@ -100,54 +111,70 @@ export default class CompanyDetail extends Component {
                         <View style="margin-top:20px"></View>
                         <View className="at-row" style="text-align:center">
                             <View className="at-col at-col-4">
-                                <Text>
-                                    法定代表人
-                                    {'\n' + this.state.legalPerson}
-                                </Text>
+                                <Text>法定代表人{'\n'}</Text>
+                                <View className="at-article__p">
+                                    {this.state.legalPerson}
+                                </View>
                             </View>
                             <View className="at-col at-col-4">
-                                <Text>
-                                    注册资本
-                                    {'\n' + this.state.companyRegisterMoney}
+                                <Text>注册资本{'\n'}</Text>
+                                <View className="at-article__p">
+                                    {this.state.companyRegisterMoney}
                                     万元
-                                </Text>
+                                </View>
                             </View>
                             <View className="at-col at-col-4">
-                                <Text>
-                                    成立日期
-                                    {'\n' + this.state.companyRegisterDate}
-                                </Text>
+                                <Text>成立日期{'\n'}</Text>
+                                <View className="at-article__p">
+                                    {this.state.companyRegisterDate}
+                                </View>
                             </View>
                         </View>
-                        <View style="margin-top:20px"></View>
+                        <View style="margin-top:15px"></View>
                         <View className="at-row" style="text-align:center">
                             <View className="at-col-4">
-                                <Text>细分行业</Text>
-                                <Text style="color:#fe5d25">
-                                    {'\n' + this.state.major}
-                                </Text>
+                                <Text>细分行业{'\n'}</Text>
+                                <View style="line-height:17px;">
+                                    <Text style="color:#fe5d25;">
+                                        {this.state.major}
+                                    </Text>
+                                </View>
                             </View>
                             <View className="at-col-4">
-                                <Text>
-                                    发明总数{'\n' + this.state.inventionNum}
-                                </Text>
+                                <Text>发明总数{'\n'}</Text>
+                                <View className="at-article__p">
+                                    {this.state.inventionNum}
+                                </View>
                             </View>
                             <View className="at-col-4">
-                                <Text>发明评级</Text>
-                                <Text style="color:#fe5d25">
-                                    {'\n' + this.state.level}
-                                </Text>
+                                <Text>发明评级{'\n'}</Text>
+                                <View
+                                    className="at-article__p"
+                                    style="color:#fe5d25"
+                                >
+                                    {this.state.level}
+                                </View>
                             </View>
                         </View>
-                        <View style="margin-top:20px"></View>
+                        <View style="margin-top:10px"></View>
                         <View className="at-row" style="text-align:center">
-                            <View className="at-col-6">
-                                <Text className="content">
-                                    官网{'\n' + this.state.website}
-                                </Text>
+                            <View className="at-col-4">
+                                <Text>融资情况{'\n'}</Text>
+                                <View className="at-article__p">
+                                    {this.state.invest}
+                                </View>
                             </View>
-                            <View className="at-col-6">
-                                <Text>电话{'\n' + this.state.phone}</Text>
+                            <View className="at-col-4">
+                                <Text>官网{'\n'}</Text>
+                                <View className="at-article__p">
+                                    {this.state.website}
+                                </View>
+                            </View>
+                            <View className="at-col-4">
+                                <Text>电话{'\n'}</Text>
+                                <View className="at-article__p">
+                                    {this.state.phone}
+                                </View>
                             </View>
                         </View>
                         {/* 文章内容 */}
@@ -155,7 +182,7 @@ export default class CompanyDetail extends Component {
                         <View className="at-article__p">
                             公司简介：{this.state.introduction}
                         </View>
-                        <View style="margin-top:20px"></View>
+                        {/* <View style="margin-top:20px"></View> */}
                         {/* 由于本地图片资源引用有问题，暂时使用微博作为图床 */}
                         <AtGrid
                             onClick={this.handleClickGrid.bind(this)}
@@ -172,8 +199,13 @@ export default class CompanyDetail extends Component {
                                 },
                                 {
                                     image:
-                                        'https://wx1.sinaimg.cn/orj360/006pJOFhgy1gse3kj2jb9j305k05k0so.jpg',
-                                    value: '股权&融资',
+                                        'https://wx1.sinaimg.cn/orj360/006pJOFhgy1gsws2dvk1xj305k05k0t0.jpg',
+                                    value: '工商信息',
+                                },
+                                {
+                                    image:
+                                        'https://wx1.sinaimg.cn/orj360/006pJOFhgy1gsws0cui51j305k05kmxl.jpg',
+                                    value: '融资情况',
                                 },
                                 {
                                     image:

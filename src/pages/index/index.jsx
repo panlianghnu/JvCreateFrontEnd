@@ -105,7 +105,8 @@ export default class Index extends Component {
                     <View
                         className="listItem"
                         onClick={this.onClickCompany.bind(this, item.id)}
-                        hoverClass="hoverList">
+                        hoverClass="hoverList"
+                    >
                         <View className="at-row at-row__align--center">
                             <View className="at-col at-col__offset-1 at-col-1 at-col--auto">
                                 {!item.companyPic && (
@@ -120,7 +121,9 @@ export default class Index extends Component {
                                         size="normal"
                                     ></AtAvatar>
                                 )}
-                                <View className="searchCount">6</View>
+                                <View className="searchCount">
+                                    {item.searchCount}
+                                </View>
                             </View>
                             <View className="at-col at-col__offset-1 at-col-7">
                                 <View className="companyName">

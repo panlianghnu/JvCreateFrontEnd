@@ -9,6 +9,7 @@ export default {
         'pages/contact/contact',
         'pages/login/login',
         'pages/team/team',
+        'pages/financing/financing',
     ],
     window: {
         backgroundTextStyle: 'light',
