@@ -168,7 +168,7 @@ export default class CompanyDetail extends Component {
                                 {
                                     image:
                                         'https://wx1.sinaimg.cn/orj360/006pJOFhgy1gse3kjcf3kj305k05kmx5.jpg',
-                                    value: '团队信息',
+                                    value: '核心团队',
                                 },
                                 {
                                     image:
@@ -198,7 +198,7 @@ export default class CompanyDetail extends Component {
                                 {
                                     image:
                                         'https://wx1.sinaimg.cn/orj360/006pJOFhgy1gse3kijbw3j305k05kmx3.jpg',
-                                    value: '细分行业',
+                                    value: '行业背景',
                                 },
                             ]}
                         />

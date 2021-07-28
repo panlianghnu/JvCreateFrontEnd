@@ -105,8 +105,7 @@ export default class Index extends Component {
                     <View
                         className="listItem"
                         onClick={this.onClickCompany.bind(this, item.id)}
-                        hoverClass="hoverList"
-                    >
+                        hoverClass="hoverList">
                         <View className="at-row at-row__align--center">
                             <View className="at-col at-col__offset-1 at-col-1 at-col--auto">
                                 {!item.companyPic && (
@@ -121,14 +120,14 @@ export default class Index extends Component {
                                         size="normal"
                                     ></AtAvatar>
                                 )}
-                                <View className="searchCount">66666666</View>
+                                <View className="searchCount">6</View>
                             </View>
                             <View className="at-col at-col__offset-1 at-col-7">
                                 <View className="companyName">
                                     {item.companyName}
                                 </View>
                                 <View className="note">
-                                    细分领域：区块链、联盟链
+                                    细分行业：区块链，联盟链
                                 </View>
                                 <View className="note">发明总数：26</View>
                                 <View className="note">发明评级：B+</View>
