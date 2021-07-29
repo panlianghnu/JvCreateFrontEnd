@@ -182,7 +182,7 @@ export default class CompanyDetail extends Component {
                         <View className="at-article__p">
                             公司简介：{this.state.introduction}
                         </View>
-                        {/* <View style="margin-top:20px"></View> */}
+                        <View style="margin-top:10px"></View>
                         {/* 由于本地图片资源引用有问题，暂时使用微博作为图床 */}
                         <AtGrid
                             onClick={this.handleClickGrid.bind(this)}
