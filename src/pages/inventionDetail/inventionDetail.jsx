@@ -5,6 +5,7 @@ import { Component } from 'react'
 import { View, Text, Image } from '@tarojs/components'
 import { getCurrentInstance } from '@tarojs/taro'
 import { AtDivider } from 'taro-ui'
+import axios from 'taro-axios'
 
 export default class extends Component {
     constructor(props) {
@@ -22,6 +23,17 @@ export default class extends Component {
                 'http://static.tianyancha.com/patent/abstractPic/CN/A/112/733/CN112733143A_HDA0002892595500000011.png',
         }
         // console.log('专利详情，专利ID为：', this.state.inventionId)
+    }
+
+    componentDidMount() {
+        axios
+            .get('/inventionDetail')
+            .then(({ data }) => {
+                console.log(data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     getStatusColor() {

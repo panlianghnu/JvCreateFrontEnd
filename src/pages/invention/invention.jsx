@@ -30,8 +30,8 @@ export default class Ivention extends Component {
     componentDidMount() {
         // console.log('Invention Axios')
         axios.get('/invention?id=' + this.state.companyId).then(
-            response => {
-                this.setState({ iventions: response.data })
+            ({ data }) => {
+                this.setState({ iventions: data })
             },
             err => {
                 console.log('axios err:', err)

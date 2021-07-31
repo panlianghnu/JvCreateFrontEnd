@@ -1,9 +1,9 @@
+/* eslint-disable jsx-quotes */
+/* eslint-disable react/jsx-indent-props */
 import { View, Text } from '@tarojs/components'
-import { Current } from '@tarojs/taro'
+import Taro, { Current } from '@tarojs/taro'
 import { Component } from 'react'
-import { AtAvatar, AtTextarea } from 'taro-ui'
-import Taro from '@tarojs/taro'
-import { AtModal, AtModalHeader, AtModalContent, AtModalAction } from 'taro-ui'
+import { AtAvatar, AtModal, AtModalHeader, AtModalContent } from 'taro-ui'
 import './team.css'
 
 export default class Team extends Component {
@@ -72,7 +72,7 @@ export default class Team extends Component {
     }
 
     render() {
-        let flag = this.state.flag
+        // let flag = this.state.flag
         //let index = this.state.index
         const teams = this.state.team.map(item => {
             return (

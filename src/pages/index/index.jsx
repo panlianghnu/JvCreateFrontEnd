@@ -44,11 +44,11 @@ export default class Index extends Component {
         // 请求一波数据
         axios
             .get('/home')
-            .then(response => {
+            .then(({ data }) => {
                 // console.log('response:')
                 // console.log(response.data)
                 this.setState({
-                    companies: response.data,
+                    companies: data,
                     loadingHotSearch: false, // 加载时显示圈圈(或不显示)
                     fengeString: '热门搜索',
                     searchValue: '',
@@ -76,9 +76,9 @@ export default class Index extends Component {
         // console.log('搜索：', this.state.searchValue)
         axios
             .get('/home') // change later
-            .then(response => {
+            .then(({ data }) => {
                 this.setState({
-                    companies: response.data,
+                    companies: data,
                     fengeString: '搜索结果',
                 })
             })

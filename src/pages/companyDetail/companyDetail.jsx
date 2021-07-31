@@ -31,8 +31,7 @@ export default class CompanyDetail extends Component {
 
     componentDidMount() {
         axios.get('/companyDetail?id=' + this.state.companyId).then(
-            response => {
-                let data = response.data
+            ({ data }) => {
                 this.setState({
                     companyName: data.companyName,
                     major: data.major,
