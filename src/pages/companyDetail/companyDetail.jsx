@@ -92,6 +92,22 @@ export default class CompanyDetail extends Component {
                 })
                 break
             }
+            case 5: {
+                Taro.navigateTo({
+                    url:
+                        '/pages/customer/customer?id=' +
+                        JSON.stringify(this.state.companyId),
+                })
+                break
+            }
+            case 7: {
+                Taro.navigateTo({
+                    url:
+                        '/pages/legalCase/legalCase?id=' +
+                        JSON.stringify(this.state.companyId),
+                })
+                break
+            }
         }
     }
 

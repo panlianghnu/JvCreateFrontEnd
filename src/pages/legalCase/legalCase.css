@@ -1,0 +1,45 @@
+.legalCaseList {
+    /* position: absolute; */
+    /*避免子元素margin 影响外层元素 overflow和position都可以*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10px;
+    /* flex弹性布局 居中（水平、垂直） */
+}
+.listItem {
+    box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.1);
+    /*transition: 0.3s;*/
+    width: 85%;
+    border-radius: 20px;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.hoverList {
+    background-color: rgb(248, 248, 248);
+}
+.legalCaseName {
+    margin-top: 10px;
+    font-size: 35px;
+    font-weight: bold;
+    /* 不换行而显示省略号 */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /*! autoprefixer: off */
+    -webkit-box-orient: vertical;
+    /* autoprefixer: on */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.note {
+    margin-left: 45px;
+    font-size: 30px;
+}
+.index {
+    background-color: gainsboro;
+    text-align: center;
+}

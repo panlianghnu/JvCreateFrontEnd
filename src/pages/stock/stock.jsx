@@ -24,11 +24,21 @@ export default class Stock extends Component {
             ],
             open1: false,
             open2: true,
+            changes: [
+                {
+                    title: '',
+                    content: [],
+                },
+            ],
         }
     }
 
     componentDidMount() {
-        axios.get('/stock?id=' + this.state.companyId).then(
+        axios.all([this.getStock(), this.getFinancing()])
+    }
+
+    getStock() {
+        return axios.get('/stock?id=' + this.state.companyId).then(
             response => {
                 // console.log('response.data: ', response.data)
                 this.setState({
@@ -49,6 +59,18 @@ export default class Stock extends Component {
         )
     }
 
+    getFinancing() {
+        return axios
+            .get('/financing?id=' + this.state.companyId)
+            .then(({ data }) => {
+                // console.log(data)
+                this.setState({ changes: data })
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
     render() {
         const stockList = this.state.items.map(item => {
             return (
@@ -67,7 +89,10 @@ export default class Stock extends Component {
                         </View>
                         <View className="at-col-4">
                             <View className="at-article__p">
-                                <Text>认缴出资额{'\n' + item.money}万元</Text>
+                                <Text>
+                                    认缴出资额{'\n' + item.money}
+                                    万元
+                                </Text>
                             </View>
                         </View>
                         <View className="at-col-4">
@@ -79,6 +104,17 @@ export default class Stock extends Component {
                     <View className="at-row"></View>
                 </View>
             )
+        })
+        let items = [] // map写在 <AtTimeline>里面有问题
+        this.state.changes.map(item => {
+            let result = {
+                title: '',
+                content: [],
+                icon: 'clock',
+            }
+            result.title = item.title
+            result.content = item.content
+            items.push(result)
         })
         return (
             <View>
@@ -95,57 +131,14 @@ export default class Stock extends Component {
                     </AtAccordion>
                     <AtAccordion
                         open={this.state.open2}
-                        title="融资情况"
+                        title="变更记录"
                         arrow="right"
                         onClick={value => {
                             this.setState({ open2: value })
                         }}
                     >
                         <View style="margin-left:30px;margin-top:20px">
-                            <AtTimeline
-                                items={[
-                                    {
-                                        title: '2012-12-11',
-                                        content: [
-                                            '投资者：李宏毅',
-                                            '轮次：天使轮',
-                                            '投资金额：2321万元',
-                                            '融资顾问：长沙中关村湘军创业服务有限公司',
-                                        ],
-                                        icon: 'clock',
-                                    },
-                                    {
-                                        title: '2014-02-24',
-                                        content: [
-                                            '投资者：雷军',
-                                            '轮次：PreA轮',
-                                            '投资金额：200万元',
-                                            '融资顾问：长沙中关村湘军创业服务有限公司',
-                                        ],
-                                        icon: 'clock',
-                                    },
-                                    {
-                                        title: '2014-08-30',
-                                        content: [
-                                            '投资者：红杉资本中国',
-                                            '轮次：A轮',
-                                            '投资金额：30000万元',
-                                            '融资顾问：长沙中关村湘军创业服务有限公司',
-                                        ],
-                                        icon: 'clock',
-                                    },
-                                    {
-                                        title: '2016-07-11',
-                                        content: [
-                                            '投资者：上海清科投资管理有限公司',
-                                            '轮次：A+轮',
-                                            '投资金额：10000万元',
-                                            '融资顾问：长沙中关村湘军创业服务有限公司',
-                                        ],
-                                        icon: 'clock',
-                                    },
-                                ]}
-                            />
+                            <AtTimeline items={items} />
                         </View>
                     </AtAccordion>
                 </View>

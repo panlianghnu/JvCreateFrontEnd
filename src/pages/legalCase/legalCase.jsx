@@ -5,33 +5,36 @@ import { View, Text } from '@tarojs/components'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
 import axios from 'taro-axios'
 import { AtIcon } from 'taro-ui'
-import './invention.css'
+import './legalCase.css'
 
 // 这是专利页面
-export default class Invention extends Component {
+export default class LegalCase extends Component {
     constructor(props) {
         super(props)
         this.state = {
             companyId: getCurrentInstance().router.params.id,
-            inventions: [
+            legalCases: [
                 {
                     id: '',
-                    name: '',
-                    filingDate: '',
-                    inventionPerson: '',
-                    status: '',
-                    abstract: '',
-                    fullText: '',
+                    judgeDate: '', //裁判日期
+                    caseName: '', //案件名称
+                    caseNumber: '', //案号
+                    publishDate: '', //发布日期
+                    reason: '', //案由
+                    role: '', //案件身份
+                    result: '', //裁判结果
+                    money: '', //案件金额
+                    court: '', //审理法院
                 },
             ],
         }
     }
 
     componentDidMount() {
-        // console.log('Invention Axios')
-        axios.get('/invention?id=' + this.state.companyId).then(
+        // console.log('legalCase Axios')
+        axios.get('/legalCase?id=' + this.state.companyId).then(
             ({ data }) => {
-                this.setState({ inventions: data })
+                this.setState({ legalCases: data })
             },
             err => {
                 console.log('axios err:', err)
@@ -39,23 +42,15 @@ export default class Invention extends Component {
         )
     }
 
-    getStatusColor(item) {
-        const status = item.status
-        if (status == '已授权') return 'color:green'
-        if (status == '实质审查') return 'color:purple'
-        if (status == '公开') return 'color:#fe5d25'
-        return 'color:red'
-    }
-
     onClickCard(item) {
         // console.log('跳转到专利详情，item:', item)
         Taro.navigateTo({
-            url: '/pages/inventionDetail/inventionDetail?id=' + item.id,
+            url: '/pages/legalCaseDetail/legalCaseDetail?id=' + item.id,
         })
     }
 
     render() {
-        const renderList = this.state.inventions.map((item, index) => {
+        const renderList = this.state.legalCases.map((item, index) => {
             return (
                 <View
                     key={item.id}
@@ -70,21 +65,18 @@ export default class Invention extends Component {
                                     {index + 1}
                                 </View>
                                 <View style="margin-left:10px"></View>
-                                <View className="inventionName at-col at-col--wrap">
-                                    {item.name}
+                                <View className="legalCaseName at-col at-col--wrap">
+                                    {item.caseName}
                                 </View>
                             </View>
                             <View className="at-row at-row__align--center">
-                                <View className="at-col at-col__offset-1">
+                                <View className="at-col">
                                     <View className="note">
                                         <Text>
-                                            申请日：{item.filingDate + '\n'}
-                                            发明人：
-                                            {item.inventionPerson + '\n'}
-                                            法律状态：
-                                        </Text>
-                                        <Text style={this.getStatusColor(item)}>
-                                            {item.status + '\n'}
+                                            {`发布日期：${item.publishDate}
+                                              案由：${item.reason}
+                                              案号：${item.caseNumber}
+                                              案件金额：${item.money}`}
                                         </Text>
                                     </View>
                                 </View>
@@ -100,7 +92,7 @@ export default class Invention extends Component {
         return (
             <View>
                 <View style="margin-bottom:10px"></View>
-                <View className="inventionList">{renderList}</View>
+                <View className="legalCaseList">{renderList}</View>
                 <View style="margin-top:10px">{'\0'}</View>
             </View>
         )
