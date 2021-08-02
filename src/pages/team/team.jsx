@@ -15,9 +15,9 @@ export default class Team extends Component{
             team : [
                 {
                     id:0,
-                    name:'asdzz',
-                    picture:'asdzz',
-                    introduction:'asdzz'
+                    name:'',
+                    picture:'',
+                    introduction:''
                 }
             ],
             flag:false,

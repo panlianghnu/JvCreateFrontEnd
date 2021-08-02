@@ -22,6 +22,7 @@ export default class Stock extends Component {
                     date: '', // 认缴事件
                 },
             ],
+            change:[],
             open1: false,
             open2: true,
         }
@@ -42,6 +43,25 @@ export default class Stock extends Component {
                     items[i].percent %= 100
                 }
                 this.setState({ items: items })
+            },
+            err => {
+                console.log('axios err ', err)
+            }
+        );
+
+        axios.get('/change?id=' + this.state.companyId).then(
+            response => {
+                // console.log('response.data: ', response.data)
+                this.setState({
+                    change: response.data,
+                })
+                // 修改一下假数据
+                // var items = this.state.items
+                // for (var i = 0; i < items.length; i++) {
+                //     items[i].money %= 1000000
+                //     items[i].percent %= 100
+                // }
+                // this.setState({ items: items })
             },
             err => {
                 console.log('axios err ', err)
@@ -80,6 +100,44 @@ export default class Stock extends Component {
                 </View>
             )
         })
+        const changeList = [];
+        let temp ;
+        let i = 0;
+        let changeLog ;
+        for(;i < this.state.change.length;i++){
+            changeLog = <View>
+                        <View className='at-row' style="margin-bottom:5px">
+                            <View style="font-weight:bold" className='at-col at-col-1 at-col--auto'>
+                                变更项目：
+                            </View>
+                            <View className='at-col at-col_offset-1'>
+                                {this.state.change[i].changeItem}
+                            </View>
+                        </View>
+                        <View className='at-row' style="margin-bottom:5px">
+                            <View style="font-weight:bold" className='at-col at-col-1 at-col--auto'>
+                                变更前：
+                            </View>
+                            <Text className='at-col at-col_offset-1 at-col--wrap'>
+                                {this.state.change[i].beforeChange}
+                            </Text>
+                        </View>
+                        <View className='at-row'>
+                            <View style="font-weight:bold" className='at-col at-col-1 at-col--auto'>
+                                变更后：
+                            </View>
+                            <Text className='at-col at-col_offset-1 at-col--wrap'>
+                                {this.state.change[i].afterChange}
+                            </Text>
+                        </View>
+                    </View>
+            temp = {
+                title: this.state.change[i].date,
+                content: [ changeLog ],
+                icon: 'clock',
+            };
+            changeList.push(temp);
+        }
         return (
             <View>
                 <View>
@@ -95,57 +153,16 @@ export default class Stock extends Component {
                     </AtAccordion>
                     <AtAccordion
                         open={this.state.open2}
-                        title="融资情况"
+                        title="变更记录"
                         arrow="right"
                         onClick={value => {
                             this.setState({ open2: value })
                         }}
                     >
                         <View style="margin-left:30px;margin-top:20px">
-                            <AtTimeline
-                                items={[
-                                    {
-                                        title: '2012-12-11',
-                                        content: [
-                                            '投资者：李宏毅',
-                                            '轮次：天使轮',
-                                            '投资金额：2321万元',
-                                            '融资顾问：长沙中关村湘军创业服务有限公司',
-                                        ],
-                                        icon: 'clock',
-                                    },
-                                    {
-                                        title: '2014-02-24',
-                                        content: [
-                                            '投资者：雷军',
-                                            '轮次：PreA轮',
-                                            '投资金额：200万元',
-                                            '融资顾问：长沙中关村湘军创业服务有限公司',
-                                        ],
-                                        icon: 'clock',
-                                    },
-                                    {
-                                        title: '2014-08-30',
-                                        content: [
-                                            '投资者：红杉资本中国',
-                                            '轮次：A轮',
-                                            '投资金额：30000万元',
-                                            '融资顾问：长沙中关村湘军创业服务有限公司',
-                                        ],
-                                        icon: 'clock',
-                                    },
-                                    {
-                                        title: '2016-07-11',
-                                        content: [
-                                            '投资者：上海清科投资管理有限公司',
-                                            '轮次：A+轮',
-                                            '投资金额：10000万元',
-                                            '融资顾问：长沙中关村湘军创业服务有限公司',
-                                        ],
-                                        icon: 'clock',
-                                    },
-                                ]}
-                            />
+                            <AtTimeline items = {changeList}>
+                            </AtTimeline>
+                                
                         </View>
                     </AtAccordion>
                 </View>
