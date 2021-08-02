@@ -22,20 +22,14 @@ export default class Stock extends Component {
                     date: '', // 认缴事件
                 },
             ],
-            change:[],
+            change: [],
             open1: false,
             open2: true,
-            changes: [
-                {
-                    title: '',
-                    content: [],
-                },
-            ],
         }
     }
 
     componentDidMount() {
-        axios.all([this.getStock(),this.getChange()])
+        axios.all([this.getStock(), this.getChange()])
     }
 
     getStock() {
@@ -57,10 +51,10 @@ export default class Stock extends Component {
             err => {
                 console.log('axios err ', err)
             }
-        );
+        )
     }
-    getChange(){
-         return axios.get('/change?id=' + this.state.companyId).then(
+    getChange() {
+        return axios.get('/change?id=' + this.state.companyId).then(
             response => {
                 // console.log('response.data: ', response.data)
                 this.setState({
@@ -79,9 +73,6 @@ export default class Stock extends Component {
             }
         )
     }
-        
-    
-
 
     render() {
         const stockList = this.state.items.map(item => {
@@ -117,43 +108,54 @@ export default class Stock extends Component {
                 </View>
             )
         })
-        const changeList = [];
-        let temp ;
-        let i = 0;
-        let changeLog ;
-        for(;i < this.state.change.length;i++){
-            changeLog = <View>
-                        <View className='at-row' style="margin-bottom:5px">
-                            <View style="font-weight:bold" className='at-col at-col-1 at-col--auto'>
-                                变更项目：
-                            </View>
-                            <View className='at-col at-col_offset-1'>
-                                {this.state.change[i].changeItem}
-                            </View>
+        const changeList = []
+        let temp
+        let i = 0
+        let changeLog
+        for (; i < this.state.change.length; i++) {
+            changeLog = (
+                <View>
+                    <View className="at-row" style="margin-bottom:5px">
+                        <View
+                            style="font-weight:bold"
+                            className="at-col at-col-1 at-col--auto"
+                        >
+                            变更项目：
                         </View>
-                        <View className='at-row' style="margin-bottom:5px">
-                            <View style="font-weight:bold" className='at-col at-col-1 at-col--auto'>
-                                变更前：
-                            </View>
-                            <Text className='at-col at-col_offset-1 at-col--wrap'>
-                                {this.state.change[i].beforeChange}
-                            </Text>
-                        </View>
-                        <View className='at-row'>
-                            <View style="font-weight:bold" className='at-col at-col-1 at-col--auto'>
-                                变更后：
-                            </View>
-                            <Text className='at-col at-col_offset-1 at-col--wrap'>
-                                {this.state.change[i].afterChange}
-                            </Text>
+                        <View className="at-col at-col_offset-1">
+                            {this.state.change[i].changeItem}
                         </View>
                     </View>
+                    <View className="at-row" style="margin-bottom:5px">
+                        <View
+                            style="font-weight:bold"
+                            className="at-col at-col-1 at-col--auto"
+                        >
+                            变更前：
+                        </View>
+                        <Text className="at-col at-col_offset-1 at-col--wrap">
+                            {this.state.change[i].beforeChange}
+                        </Text>
+                    </View>
+                    <View className="at-row">
+                        <View
+                            style="font-weight:bold"
+                            className="at-col at-col-1 at-col--auto"
+                        >
+                            变更后：
+                        </View>
+                        <Text className="at-col at-col_offset-1 at-col--wrap">
+                            {this.state.change[i].afterChange}
+                        </Text>
+                    </View>
+                </View>
+            )
             temp = {
                 title: this.state.change[i].date,
-                content: [ changeLog ],
+                content: [changeLog],
                 icon: 'clock',
-            };
-            changeList.push(temp);
+            }
+            changeList.push(temp)
         }
         return (
             <View>
@@ -177,9 +179,7 @@ export default class Stock extends Component {
                         }}
                     >
                         <View style="margin-left:30px;margin-top:20px">
-                            <AtTimeline items = {changeList}>
-                            </AtTimeline>
-                                
+                            <AtTimeline items={changeList}></AtTimeline>
                         </View>
                     </AtAccordion>
                 </View>

@@ -14,11 +14,11 @@ export default class Team extends Component {
         this.state = {
             team: [
                 {
-                    id:0,
-                    name:'',
-                    picture:'',
-                    introduction:''
-                }
+                    id: 0,
+                    name: '',
+                    picture: '',
+                    introduction: '',
+                },
             ],
             flag: false,
             //
