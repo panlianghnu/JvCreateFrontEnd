@@ -10,6 +10,8 @@ export default {
         'pages/login/login',
         'pages/team/team',
         'pages/financing/financing',
+        'pages/customer/customer',
+        'pages/legalCase/legalCase',
     ],
     window: {
         backgroundTextStyle: 'light',

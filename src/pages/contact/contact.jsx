@@ -99,9 +99,7 @@ export default class extends Component {
                                 联系地址：
                             </View>
                             <View className="at-col at-col--wrap">
-                                <Text>
-                                    湖南省长沙市岳麓区文轩路27号麓谷企业广场F1栋504
-                                </Text>
+                                <Text>北京市海淀区上地信息路26号8层0809室</Text>
                             </View>
                         </View>
                     </View>

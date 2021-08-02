@@ -2,26 +2,26 @@
 /* eslint-disable react/jsx-indent-props */
 import { View, Text } from '@tarojs/components'
 import Taro, { Current } from '@tarojs/taro'
+import axios from 'taro-axios'
 import { Component } from 'react'
 import { AtAvatar, AtModal, AtModalHeader, AtModalContent } from 'taro-ui'
-import './team.css'
+import './customer.css'
 
-export default class Team extends Component {
+export default class Customer extends Component {
     constructor(props) {
         super(props)
         this.handleClick1 = this.handleClick1.bind(this)
         this.handleClose = this.handleClose.bind(this)
         this.state = {
-            team: [
+            customers: [
                 {
-                    id:0,
-                    name:'',
-                    picture:'',
-                    introduction:''
-                }
+                    id: 0,
+                    name: '',
+                    picture: '',
+                    introduction: '',
+                },
             ],
             flag: false,
-            //
             index: 0,
         }
     }
@@ -29,22 +29,14 @@ export default class Team extends Component {
 
     componentDidMount() {
         const companyId = Current.router.params.companyId
-        var th = this
-        Taro.request({
-            url:
-                'http://rest.apizza.net/mock/bc6d7ccdfaec23b8fefb9f9dcf322f51/team',
-            data: {
-                companyId: companyId,
-            },
-            header: {
-                'content-type': 'application/json', // 默认值
-            },
-            success: function(res) {
-                th.setState({
-                    team: res.data.team,
-                })
-            },
-        })
+        axios
+            .get(`/customer?id=${companyId}`)
+            .then(({ data }) => {
+                this.setState({ customers: data })
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     componentWillUnmount() {}
@@ -74,12 +66,12 @@ export default class Team extends Component {
     render() {
         // let flag = this.state.flag
         //let index = this.state.index
-        const teams = this.state.team.map(item => {
+        const customers = this.state.customers.map((item, index) => {
             return (
                 <View
                     className="teamList"
                     key={item.id}
-                    onClick={() => this.handleClick1(item.id)}
+                    onClick={() => this.handleClick1(index)}
                 >
                     <View className="at-row at-row__align--center">
                         <View className="at-col at-col__offset-1 at-col-1 at-col--auto">
@@ -92,9 +84,7 @@ export default class Team extends Component {
 
                         <View className="at-col at-col__offset-1">
                             <View className="name">
-                                <Text decode="true">
-                                    {item.name}&emsp;{item.position}
-                                </Text>
+                                <Text decode="true">{item.name}</Text>
                             </View>
                             <View className="intro">
                                 <View className="at-col--wrap">
@@ -113,18 +103,18 @@ export default class Team extends Component {
                 onClose={this.handleClose}
             >
                 <AtModalHeader>
-                    {this.state.team[this.state.index].name}
+                    {this.state.customers[this.state.index].name}
                 </AtModalHeader>
                 <AtModalContent>
                     <View style="text-align: justify;">
-                        {this.state.team[this.state.index].introduction}
+                        {this.state.customers[this.state.index].introduction}
                     </View>
                 </AtModalContent>
             </AtModal>
         )
         return (
             <View>
-                <View>{teams}</View>
+                <View>{customers}</View>
                 {modal}
             </View>
         )

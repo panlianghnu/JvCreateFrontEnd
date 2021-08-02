@@ -57,6 +57,7 @@ export default class extends Component {
                     </View>
                     <View className="m-form">
                         <View style="width:100%;">
+                            <View style="margin-top:10px"></View>
                             <AtInput
                                 name="phone"
                                 placeholder="请输入手机号"
@@ -81,6 +82,7 @@ export default class extends Component {
                                     return value
                                 }}
                             />
+                            <View style="margin-top:5px"></View>
                             <AtInput
                                 name="code"
                                 placeholder="请输入验证码"
@@ -118,6 +120,21 @@ export default class extends Component {
                         <View className="note">
                             注册/登陆即表示同意
                             <Text className="user-agreement">《用户协议》</Text>
+                        </View>
+                    </View>
+                </View>
+                <View className="bottom">
+                    <View className="at-row at-row__justify--center at-row__align--center">
+                        <View className="at-col at-col-1">
+                            <View style="background:grey;height:1px;"></View>
+                        </View>
+                        <View className="at-col at-col-1 at-col--auto">
+                            <Text style="margin-left:5px;margin-right:5px">
+                                聚创造网络科技有限公司
+                            </Text>
+                        </View>
+                        <View className="at-col at-col-1">
+                            <View style="background:grey;height:1px;"></View>
                         </View>
                     </View>
                 </View>

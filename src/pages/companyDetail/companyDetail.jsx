@@ -31,8 +31,7 @@ export default class CompanyDetail extends Component {
 
     componentDidMount() {
         axios.get('/companyDetail?id=' + this.state.companyId).then(
-            response => {
-                let data = response.data
+            ({ data }) => {
                 this.setState({
                     companyName: data.companyName,
                     major: data.major,
@@ -89,6 +88,22 @@ export default class CompanyDetail extends Component {
                 Taro.navigateTo({
                     url:
                         '/pages/financing/financing?id=' +
+                        JSON.stringify(this.state.companyId),
+                })
+                break
+            }
+            case 5: {
+                Taro.navigateTo({
+                    url:
+                        '/pages/customer/customer?id=' +
+                        JSON.stringify(this.state.companyId),
+                })
+                break
+            }
+            case 7: {
+                Taro.navigateTo({
+                    url:
+                        '/pages/legalCase/legalCase?id=' +
                         JSON.stringify(this.state.companyId),
                 })
                 break
@@ -182,7 +197,7 @@ export default class CompanyDetail extends Component {
                         <View className="at-article__p">
                             公司简介：{this.state.introduction}
                         </View>
-                        {/* <View style="margin-top:20px"></View> */}
+                        <View style="margin-top:10px"></View>
                         {/* 由于本地图片资源引用有问题，暂时使用微博作为图床 */}
                         <AtGrid
                             onClick={this.handleClickGrid.bind(this)}

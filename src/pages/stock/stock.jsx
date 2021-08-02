@@ -25,11 +25,21 @@ export default class Stock extends Component {
             change:[],
             open1: false,
             open2: true,
+            changes: [
+                {
+                    title: '',
+                    content: [],
+                },
+            ],
         }
     }
 
     componentDidMount() {
-        axios.get('/stock?id=' + this.state.companyId).then(
+        axios.all([this.getStock(),this.getChange()])
+    }
+
+    getStock() {
+        return axios.get('/stock?id=' + this.state.companyId).then(
             response => {
                 // console.log('response.data: ', response.data)
                 this.setState({
@@ -48,8 +58,9 @@ export default class Stock extends Component {
                 console.log('axios err ', err)
             }
         );
-
-        axios.get('/change?id=' + this.state.companyId).then(
+    }
+    getChange(){
+         return axios.get('/change?id=' + this.state.companyId).then(
             response => {
                 // console.log('response.data: ', response.data)
                 this.setState({
@@ -68,6 +79,9 @@ export default class Stock extends Component {
             }
         )
     }
+        
+    
+
 
     render() {
         const stockList = this.state.items.map(item => {
@@ -87,7 +101,10 @@ export default class Stock extends Component {
                         </View>
                         <View className="at-col-4">
                             <View className="at-article__p">
-                                <Text>认缴出资额{'\n' + item.money}万元</Text>
+                                <Text>
+                                    认缴出资额{'\n' + item.money}
+                                    万元
+                                </Text>
                             </View>
                         </View>
                         <View className="at-col-4">
