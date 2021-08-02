@@ -1,3 +1,3 @@
 export default {
-    navigationBarTitleText: '股权&融资',
+    navigationBarTitleText: '工商信息',
 }
