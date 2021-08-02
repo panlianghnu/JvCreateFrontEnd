@@ -1,0 +1,35 @@
+.title {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-sizing: content-box;
+    font-size: 40px;
+    font-weight: bold;
+    border-width: 0ch;
+    font-family: '宋体';
+    text-align: center;
+}
+
+.at-col-4 .at-article__p {
+    font-size: medium;
+    color: grey;
+    line-height: 15px;
+}
+
+.at-article__section > .at-article__p {
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    /*! autoprefixer: off */
+    -webkit-box-orient: vertical;
+    /* autoprefixer: on */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.case-number {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 35px;
+    width: 100%;
+}

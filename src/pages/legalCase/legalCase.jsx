@@ -45,7 +45,9 @@ export default class LegalCase extends Component {
     onClickCard(item) {
         // console.log('跳转到专利详情，item:', item)
         Taro.navigateTo({
-            url: '/pages/legalCaseDetail/legalCaseDetail?id=' + item.id,
+            url:
+                '/pages/legalCaseDetail/legalCaseDetail?legalCase=' +
+                JSON.stringify(item),
         })
     }
 

@@ -12,6 +12,7 @@ export default {
         'pages/financing/financing',
         'pages/customer/customer',
         'pages/legalCase/legalCase',
+        'pages/legalCaseDetail/legalCaseDetail',
     ],
     window: {
         backgroundTextStyle: 'light',
