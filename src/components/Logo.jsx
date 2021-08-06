@@ -7,7 +7,7 @@ function logoSize(width) {
     if (typeof width != number || width >= 100 || width <= 0) {
         width = 50
     }
-    var logo_width_height = parseInt(303 / 128)
+    var logo_width_height = parseInt(406 / 164)
     const maxWidth = Taro.getSystemInfoSync().windowWidth
     var logoWidth = parseInt((width / 100) * maxWidth)
     var logoHeight = parseInt(logoWidth / logo_width_height)

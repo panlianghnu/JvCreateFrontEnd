@@ -28,6 +28,8 @@ export default class extends Component {
                         onClick={() =>
                             Taro.makePhoneCall({
                                 phoneNumber: '073185570895',
+                            }).catch(() => {
+                                console.log('取消拨打')
                             })
                         }
                     >

@@ -25,6 +25,7 @@ export default class CompanyDetail extends Component {
             inventionNum: 0,
             invest: '',
         }
+        this.handleClickGrid = this.handleClickGrid.bind(this)
     }
 
     componentWillMount() {}
@@ -124,74 +125,122 @@ export default class CompanyDetail extends Component {
                 <View className="at-article__content">
                     <View className="at-article__section">
                         <View style="margin-top:20px"></View>
-                        <View className="at-row" style="text-align:center">
-                            <View className="at-col at-col-4">
-                                <Text>法定代表人{'\n'}</Text>
-                                <View className="at-article__p">
-                                    {this.state.legalPerson}
-                                </View>
-                            </View>
-                            <View className="at-col at-col-4">
-                                <Text>注册资本{'\n'}</Text>
-                                <View className="at-article__p">
-                                    {this.state.companyRegisterMoney}
-                                    万元
-                                </View>
-                            </View>
-                            <View className="at-col at-col-4">
-                                <Text>成立日期{'\n'}</Text>
-                                <View className="at-article__p">
-                                    {this.state.companyRegisterDate}
-                                </View>
-                            </View>
-                        </View>
-                        <View style="margin-top:15px"></View>
-                        <View className="at-row" style="text-align:center">
-                            <View className="at-col-4">
-                                <Text>细分行业{'\n'}</Text>
-                                <View style="line-height:17px;">
-                                    <Text style="color:#fe5d25;">
-                                        {this.state.major}
+                        <View
+                            className="pl-row"
+                            onClick={this.handleClickGrid.bind(this, '', 2)}
+                        >
+                            <View className="pl-col" hoverClass="hover-col">
+                                <View>
+                                    <Text>法定代表人{'\n'}</Text>
+                                    <Text className="at-article__p">
+                                        {this.state.legalPerson}
                                     </Text>
                                 </View>
                             </View>
-                            <View className="at-col-4">
-                                <Text>发明总数{'\n'}</Text>
-                                <View className="at-article__p">
-                                    {this.state.inventionNum}
+                            <View className="pl-col top" hoverClass="hover-col">
+                                <View>
+                                    <Text>注册资本{'\n'}</Text>
+                                    <Text className="at-article__p">
+                                        {this.state.companyRegisterMoney}
+                                        万元
+                                    </Text>
                                 </View>
                             </View>
-                            <View className="at-col-4">
-                                <Text>发明评级{'\n'}</Text>
-                                <View
-                                    className="at-article__p"
-                                    style="color:#fe5d25"
-                                >
-                                    {this.state.level}
-                                </View>
-                            </View>
-                        </View>
-                        <View style="margin-top:10px"></View>
-                        <View className="at-row" style="text-align:center">
-                            <View className="at-col-4">
-                                <Text>融资情况{'\n'}</Text>
-                                <View className="at-article__p">
-                                    {this.state.invest}
-                                </View>
-                            </View>
-                            <View className="at-col-4">
-                                <Text>官网{'\n'}</Text>
-                                <View className="at-article__p">
-                                    {this.state.website}
-                                </View>
-                            </View>
-                            <View className="at-col-4">
-                                <Text>电话{'\n'}</Text>
-                                <View className="at-article__p">
-                                    {this.state.phone}
+                            <View className="pl-col" hoverClass="hover-col">
+                                <View>
+                                    <Text>成立日期{'\n'}</Text>
+                                    <Text className="at-article__p">
+                                        {this.state.companyRegisterDate}
+                                    </Text>
                                 </View>
                             </View>
                         </View>
+                        <View className="pl-row">
+                            <View
+                                className="pl-col-center left"
+                                hoverClass="hover-col"
+                            >
+                                <View>
+                                    <Text>细分行业{'\n'}</Text>
+                                    <View style="line-height:15px;">
+                                        <Text style="color:#fe5d25;font-size:15px">
+                                            {this.state.major}
+                                        </Text>
+                                    </View>
+                                </View>
+                            </View>
+                            <View
+                                className="pl-col-center center"
+                                hoverClass="hover-col"
+                                onClick={this.handleClickGrid.bind(this, '', 0)}
+                            >
+                                <View>
+                                    <Text>发明总数{'\n'}</Text>
+                                    <Text className="at-article__p">
+                                        {this.state.inventionNum}
+                                    </Text>
+                                </View>
+                            </View>
+                            <View
+                                className="pl-col-center right"
+                                hoverClass="hover-col"
+                                onClick={this.handleClickGrid.bind(this, '', 0)}
+                            >
+                                <View>
+                                    <Text>发明评级{'\n'}</Text>
+                                    <Text
+                                        className="at-article__p"
+                                        style="color:#fe5d25"
+                                    >
+                                        {this.state.level}
+                                    </Text>
+                                </View>
+                            </View>
+                        </View>
+                        <View className="pl-row">
+                            <View
+                                className="pl-col"
+                                hoverClass="hover-col"
+                                onClick={this.handleClickGrid.bind(this, '', 3)}
+                            >
+                                <View>
+                                    <Text>融资情况{'\n'}</Text>
+                                    <Text className="at-article__p">
+                                        {this.state.invest}
+                                    </Text>
+                                </View>
+                            </View>
+                            <View
+                                className="pl-col bottom"
+                                hoverClass="hover-col"
+                            >
+                                <View>
+                                    <Text>官网{'\n'}</Text>
+                                    <Text className="at-article__p">
+                                        {this.state.website}
+                                    </Text>
+                                </View>
+                            </View>
+                            <View
+                                className="pl-col"
+                                hoverClass="hover-col"
+                                onClick={() =>
+                                    Taro.makePhoneCall({
+                                        phoneNumber: this.state.phone.toString(),
+                                    }).catch(() => {
+                                        console.log('取消拨打')
+                                    })
+                                }
+                            >
+                                <View>
+                                    <Text>电话{'\n'}</Text>
+                                    <Text className="at-article__p">
+                                        {this.state.phone}
+                                    </Text>
+                                </View>
+                            </View>
+                        </View>
+
                         {/* 文章内容 */}
                         <View style="margin-top:20px"></View>
                         <View className="at-article__p">
@@ -200,7 +249,7 @@ export default class CompanyDetail extends Component {
                         <View style="margin-top:10px"></View>
                         {/* 由于本地图片资源引用有问题，暂时使用微博作为图床 */}
                         <AtGrid
-                            onClick={this.handleClickGrid.bind(this)}
+                            onClick={this.handleClickGrid}
                             data={[
                                 {
                                     image:
