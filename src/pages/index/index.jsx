@@ -42,8 +42,9 @@ export default class Index extends Component {
     componentDidMount() {
         // console.log('Axios')
         // 请求一波数据
+        // get('/home') -> 182.92.114.168:8888/hotSearch
         axios
-            .get('/home')
+            .get('http://182.92.114.168:8888/hotSearch')
             .then(({ data }) => {
                 // console.log('response:')
                 // console.log(response.data)
@@ -125,20 +126,31 @@ export default class Index extends Component {
                                     {item.searchCount}
                                 </View>
                             </View>
-                            <View className="at-col at-col__offset-1 at-col-7">
+                            <View className="at-col at-col__offset-1 at-col-7 at-col--wrap">
                                 <View className="companyName">
                                     {item.companyName}
                                 </View>
                                 <View className="note">
-                                    细分行业：区块链，联盟链
+                                    <View className="at-row">
+                                        <View className="at-col at-col-1 at-col--auto">
+                                            细分行业：
+                                        </View>
+                                        <View className="at-col at-col--wrap">
+                                            {item.secondTag}、{item.thirdTag}
+                                        </View>
+                                    </View>
                                 </View>
-                                <View className="note">发明总数：26</View>
-                                <View className="note">发明评级：B+</View>
+                                <View className="note">
+                                    发明总数：{item.inventionCount}
+                                </View>
+                                <View className="note">
+                                    发明评级：{item.inventionRating}
+                                </View>
                                 <View
                                     className="note"
                                     style="margin-bottom:5px"
                                 >
-                                    融资情况：A轮
+                                    融资情况：{item.financing}
                                 </View>
                             </View>
                             <AtIcon value="chevron-right" size="20" />
