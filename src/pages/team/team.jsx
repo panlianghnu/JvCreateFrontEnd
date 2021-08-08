@@ -1,7 +1,7 @@
 /* eslint-disable jsx-quotes */
 /* eslint-disable react/jsx-indent-props */
 import { View, Text } from '@tarojs/components'
-import Taro, { Current } from '@tarojs/taro'
+import Taro, { getCurrentInstance } from '@tarojs/taro'
 import { Component } from 'react'
 import { AtAvatar, AtModal, AtModalHeader, AtModalContent } from 'taro-ui'
 import './team.css'
@@ -28,7 +28,7 @@ export default class Team extends Component {
     componentWillMount() {}
 
     componentDidMount() {
-        const companyId = Current.router.params.companyId
+        const companyId = getCurrentInstance().router.params.id
         var th = this
         Taro.request({
             url:
@@ -107,20 +107,24 @@ export default class Team extends Component {
             )
         })
         let modal = (
-            <AtModal
+            <View  onClick={this.handleClose}>
+                <AtModal
                 isOpened={this.state.flag}
                 closeOnClickOverlay="true"
-                onClose={this.handleClose}
+                //onClose={this.handleClose}
+                onClick={this.handleClose}
             >
                 <AtModalHeader>
                     {this.state.team[this.state.index].name}
+                    {/* <View onClick={this.handleClose}>x</View> */}
                 </AtModalHeader>
                 <AtModalContent>
                     <View style="text-align: justify;">
                         {this.state.team[this.state.index].introduction}
                     </View>
                 </AtModalContent>
-            </AtModal>
+            </AtModal>  
+            </View>
         )
         return (
             <View>
