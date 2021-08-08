@@ -115,7 +115,7 @@ export default class Customer extends Component {
         return (
             <View>
                 <View>{customers}</View>
-                {modal}
+                <View onClick={this.handleClose}>{modal}</View>
             </View>
         )
     }

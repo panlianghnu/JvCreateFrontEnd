@@ -13,7 +13,8 @@ export default {
         'pages/customer/customer',
         'pages/legalCase/legalCase',
         'pages/legalCaseDetail/legalCaseDetail',
-        'pages/operation/operation'
+        'pages/product/product',
+        'pages/operation/operation',
     ],
     window: {
         backgroundTextStyle: 'light',
