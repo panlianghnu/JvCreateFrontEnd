@@ -11,7 +11,7 @@ export default class Operation extends Component{
         super(props)
         this.getFinance = this.getFinance.bind(this)
         this.getEmploy = this.getEmploy.bind(this)
-        this.getQulification = this.getQulification.bind(this)
+        this.getQualification = this.getQualification.bind(this)
         this.getAdmin = this.getAdmin.bind(this)
         this.state= {
             open1 : false,
@@ -21,14 +21,14 @@ export default class Operation extends Component{
             companyId:getCurrentInstance().router.params.id,
             financeList:[],
             employList:[],
-            qulificationList:[],
+            qualificationList:[],
             adminList:[]
         }
     }
     componentWillMount() {}
 
     componentDidMount() {
-        axios.all([this.getFinance(),this.getEmploy(),this.getQulification(),this.getAdmin()]);
+        axios.all([this.getFinance(),this.getEmploy(),this.getQualification(),this.getAdmin()]);
     }
 
     componentWillUnmount() {}
@@ -66,12 +66,12 @@ export default class Operation extends Component{
         )
     }
 
-    getQulification(){
-        return axios.get('/getQulification?id=' + this.state.companyId).then(
+    getQualification(){
+        return axios.get('/getQualification?id=' + this.state.companyId).then(
             response => {
-                // console.log('response.data: ', response.data)
+                console.log('response.data: ', response.data)
                 this.setState({
-                    qulificationList: response.data,
+                    qualificationList: response.data,
                 })
             },
             err => {
@@ -95,6 +95,7 @@ export default class Operation extends Component{
     }
 
     render(){
+        /* 招聘信息 */
         const employList = this.state.employList.map((item, index) => {
             return (
                 <View
@@ -187,7 +188,8 @@ export default class Operation extends Component{
                 </View>
             )
         })
-
+        
+        /*财务状况*/
         const financeList = []
         let temp
         let i = 0
@@ -227,6 +229,79 @@ export default class Operation extends Component{
             financeList.push(temp)
         }
 
+        /* 资质证书*/
+        const qualificationList = this.state.qualificationList.map((item, index) => {
+            return (
+                <View
+                    key={item.id}
+                    className="listItem"
+                >
+                    <View className="at-row at-row__align--center">
+                        <View className="at-col">
+                            <View className="at-row at-row__align--center">
+                                <View className="index at-col at-col-1 ">
+                                    {index + 1}
+                                </View>
+                                <View style="margin-left:10px"></View>
+                                <View className="position at-col at-col--wrap">
+                                    {item.type}
+                                </View>
+                            </View>
+                            <View className="at-row at-row__align--center">
+                                <View className="at-col at-col__offset-1">
+                                    <View className="note">
+                                        <View className="at-row">
+                                            <View
+                                                className="at-col at-col-1 at-col--auto"
+                                            >
+                                            证书编号：
+                                            </View>
+                                            <View className="at-col at-col_offset-1" style="color: grey;">
+                                                {item.number}
+                                            </View>
+                                        </View>
+
+                                        <View className="at-row">
+                                            <View
+                                                className="at-col at-col-1 at-col--auto"
+                                            >
+                                            产品名称：
+                                            </View>
+                                            <View className="at-col at-col_offset-1 at-col--wrap" style="color: grey;">
+                                                {item.productName}
+                                            </View>
+                                        </View>
+
+                                        <View className="at-row">
+                                            <View
+                                                className="at-col at-col-1 at-col--auto"
+                                            >
+                                            发证日期：
+                                            </View>
+                                            <View className="at-col at-col_offset-1" style="color: grey;">
+                                                {item.startDate}
+                                            </View>
+                                        </View>
+
+                                        <View className="at-row">
+                                            <View
+                                                className="at-col at-col-1 at-col--auto"
+                                            >
+                                            截止日期：
+                                            </View>
+                                            <View className="at-col at-col_offset-1" style="color: grey;">
+                                                {item.endDate}
+                                            </View>
+                                        </View>
+                                    </View>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+            )
+        })
+
         return (
             <View>
                     <AtAccordion
@@ -263,7 +338,9 @@ export default class Operation extends Component{
                             this.setState({ open3: value })
                         }}
                     >
-
+                        <View >
+                            <View className="employList">{qualificationList}</View>
+                        </View>
                     </AtAccordion>
                     
                     <AtAccordion
