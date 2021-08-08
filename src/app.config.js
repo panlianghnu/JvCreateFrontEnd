@@ -14,6 +14,7 @@ export default {
         'pages/legalCase/legalCase',
         'pages/legalCaseDetail/legalCaseDetail',
         'pages/product/product',
+        'pages/operation/operation',
     ],
     window: {
         backgroundTextStyle: 'light',

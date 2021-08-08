@@ -162,7 +162,7 @@ export default class Stock extends Component {
                 <View>
                     <AtAccordion
                         open={this.state.open1}
-                        title="股权信息"
+                        title="股权结构"
                         arrow="right"
                         onClick={value => {
                             this.setState({ open1: value })

@@ -31,6 +31,7 @@ export default class CompanyDetail extends Component {
     componentWillMount() {}
 
     componentDidMount() {
+        console.log(this.state.companyId)
         axios.get('/companyDetail?id=' + this.state.companyId).then(
             ({ data }) => {
                 this.setState({
@@ -105,6 +106,14 @@ export default class CompanyDetail extends Component {
                 Taro.navigateTo({
                     url:
                         '/pages/customer/customer?id=' +
+                        JSON.stringify(this.state.companyId),
+                })
+                break
+            }
+            case 6: {
+                Taro.navigateTo({
+                    url:
+                        '/pages/operation/operation?id=' +
                         JSON.stringify(this.state.companyId),
                 })
                 break
