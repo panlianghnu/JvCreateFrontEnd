@@ -93,6 +93,14 @@ export default class CompanyDetail extends Component {
                 })
                 break
             }
+            case 4: {
+                Taro.navigateTo({
+                    url:
+                        '/pages/product/product?id=' +
+                        JSON.stringify(this.state.companyId),
+                })
+                break
+            }
             case 5: {
                 Taro.navigateTo({
                     url:
@@ -214,7 +222,22 @@ export default class CompanyDetail extends Component {
                                 className="pl-col bottom"
                                 hoverClass="hover-col"
                             >
-                                <View>
+                                <View
+                                    onClick={() =>
+                                        Taro.setClipboardData({
+                                            data: this.state.website,
+                                        }).then(() => {
+                                            Taro.getClipboardData().then(
+                                                res => {
+                                                    console.log(
+                                                        '剪切板内容为:',
+                                                        res.data
+                                                    )
+                                                }
+                                            )
+                                        })
+                                    }
+                                >
                                     <Text>官网{'\n'}</Text>
                                     <Text className="at-article__p">
                                         {this.state.website}
