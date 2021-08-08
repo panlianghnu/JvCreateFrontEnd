@@ -15,6 +15,7 @@ export default {
         'pages/legalCaseDetail/legalCaseDetail',
         'pages/product/product',
         'pages/operation/operation',
+        'pages/adminLicence/adminLicence',
     ],
     window: {
         backgroundTextStyle: 'light',

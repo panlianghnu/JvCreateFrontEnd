@@ -18,6 +18,10 @@
     padding-right: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
+    transition: background-color 0.5s; /*渐变效果*/
+}
+.hoverList {
+    background-color: rgb(240, 240, 240);
 }
 .position {
     margin-top: 10px;

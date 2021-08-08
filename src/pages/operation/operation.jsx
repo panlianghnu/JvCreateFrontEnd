@@ -1,34 +1,40 @@
+/* eslint-disable jsx-quotes */
+/* eslint-disable react/jsx-indent-props */
 import { Component } from 'react'
 import { View, Text } from '@tarojs/components'
 import axios from 'taro-axios'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
-import { AtAccordion, AtTimeline } from 'taro-ui'
+import { AtAccordion, AtTimeline, AtIcon } from 'taro-ui'
 import './operation.css'
 
-
-export default class Operation extends Component{
-    constructor(props){
+export default class Operation extends Component {
+    constructor(props) {
         super(props)
         this.getFinance = this.getFinance.bind(this)
         this.getEmploy = this.getEmploy.bind(this)
         this.getQualification = this.getQualification.bind(this)
         this.getAdmin = this.getAdmin.bind(this)
-        this.state= {
-            open1 : false,
-            open2 : false,
-            open3 : false,
-            open4 : true,  
-            companyId:getCurrentInstance().router.params.id,
-            financeList:[],
-            employList:[],
-            qualificationList:[],
-            adminList:[]
+        this.state = {
+            open1: false,
+            open2: false,
+            open3: false,
+            open4: true,
+            companyId: getCurrentInstance().router.params.id,
+            financeList: [],
+            employList: [],
+            qualificationList: [],
+            adminList: [],
         }
     }
     componentWillMount() {}
 
     componentDidMount() {
-        axios.all([this.getFinance(),this.getEmploy(),this.getQualification(),this.getAdmin()]);
+        axios.all([
+            this.getFinance(),
+            this.getEmploy(),
+            this.getQualification(),
+            this.getAdmin(),
+        ])
     }
 
     componentWillUnmount() {}
@@ -37,8 +43,7 @@ export default class Operation extends Component{
 
     componentDidHide() {}
 
-
-    getFinance(){
+    getFinance() {
         return axios.get('/getFinance?id=' + this.state.companyId).then(
             response => {
                 // console.log('response.data: ', response.data)
@@ -52,7 +57,7 @@ export default class Operation extends Component{
         )
     }
 
-    getEmploy(){
+    getEmploy() {
         return axios.get('/getEmploy?id=' + this.state.companyId).then(
             response => {
                 // console.log('response.data: ', response.data)
@@ -66,7 +71,7 @@ export default class Operation extends Component{
         )
     }
 
-    getQualification(){
+    getQualification() {
         return axios.get('/getQualification?id=' + this.state.companyId).then(
             response => {
                 console.log('response.data: ', response.data)
@@ -80,7 +85,7 @@ export default class Operation extends Component{
         )
     }
 
-    getAdmin(){
+    getAdmin() {
         return axios.get('/getAdmin?id=' + this.state.companyId).then(
             response => {
                 // console.log('response.data: ', response.data)
@@ -94,7 +99,15 @@ export default class Operation extends Component{
         )
     }
 
-    render(){
+    navigateToAdminLicencePage(item) {
+        Taro.navigateTo({
+            url: `/pages/adminLicence/adminLicence?item=${JSON.stringify(
+                item
+            )}`,
+        })
+    }
+
+    render() {
         /* 招聘信息 */
         const employList = this.state.employList.map((item, index) => {
             return (
@@ -119,56 +132,61 @@ export default class Operation extends Component{
                                 <View className="at-col at-col__offset-1">
                                     <View className="note">
                                         <View className="at-row">
-                                            <View
-                                                className="at-col at-col-1 at-col--auto"
-                                            >
-                                            发布日期：
+                                            <View className="at-col at-col-1 at-col--auto">
+                                                发布日期：
                                             </View>
-                                            <View className="at-col at-col_offset-1" style="color: grey;">
+                                            <View
+                                                className="at-col "
+                                                style="color: grey;"
+                                            >
                                                 {item.date}
                                             </View>
                                         </View>
 
                                         <View className="at-row">
-                                            <View
-                                                className="at-col at-col-1 at-col--auto"
-                                            >
-                                            薪资：
+                                            <View className="at-col at-col-1 at-col--auto">
+                                                薪资：
                                             </View>
-                                            <View className="at-col at-col_offset-1" style="color: grey;">
+                                            <View
+                                                className="at-col "
+                                                style="color: grey;"
+                                            >
                                                 {item.salary}
                                             </View>
                                         </View>
 
                                         <View className="at-row">
-                                            <View
-                                                className="at-col at-col-1 at-col--auto"
-                                            >
-                                            学历：
+                                            <View className="at-col at-col-1 at-col--auto">
+                                                学历：
                                             </View>
-                                            <View className="at-col at-col_offset-1" style="color: grey;">
+                                            <View
+                                                className="at-col "
+                                                style="color: grey;"
+                                            >
                                                 {item.education}
                                             </View>
                                         </View>
 
                                         <View className="at-row">
-                                            <View
-                                                className="at-col at-col-1 at-col--auto"
-                                            >
-                                            工作经验：
+                                            <View className="at-col at-col-1 at-col--auto">
+                                                工作经验：
                                             </View>
-                                            <View className="at-col at-col_offset-1" style="color: grey;">
+                                            <View
+                                                className="at-col "
+                                                style="color: grey;"
+                                            >
                                                 {item.workExperience}
                                             </View>
                                         </View>
 
                                         <View className="at-row">
-                                            <View
-                                                className="at-col at-col-1 at-col--auto"
-                                            >
-                                            工作地区：
+                                            <View className="at-col at-col-1 at-col--auto">
+                                                工作地区：
                                             </View>
-                                            <View className="at-col at-col_offset-1" style="color: grey;">
+                                            <View
+                                                className="at-col "
+                                                style="color: grey;"
+                                            >
                                                 {item.region}
                                             </View>
                                         </View>
@@ -188,7 +206,7 @@ export default class Operation extends Component{
                 </View>
             )
         })
-        
+
         /*财务状况*/
         const financeList = []
         let temp
@@ -204,7 +222,7 @@ export default class Operation extends Component{
                         >
                             营业收入：
                         </View>
-                        <View className="at-col at-col_offset-1">
+                        <View className="at-col ">
                             {this.state.financeList[i].turnover}
                         </View>
                     </View>
@@ -215,7 +233,7 @@ export default class Operation extends Component{
                         >
                             净利润：
                         </View>
-                        <Text className="at-col at-col_offset-1 at-col--wrap">
+                        <Text className="at-col  at-col--wrap">
                             {this.state.financeList[i].profits}
                         </Text>
                     </View>
@@ -230,72 +248,145 @@ export default class Operation extends Component{
         }
 
         /* 资质证书*/
-        const qualificationList = this.state.qualificationList.map((item, index) => {
+        const qualificationList = this.state.qualificationList.map(
+            (item, index) => {
+                return (
+                    <View key={item.id} className="listItem">
+                        <View className="at-row at-row__align--center">
+                            <View className="at-col">
+                                <View className="at-row at-row__align--center">
+                                    <View className="index at-col at-col-1 ">
+                                        {index + 1}
+                                    </View>
+                                    <View style="margin-left:10px"></View>
+                                    <View className="position at-col at-col--wrap">
+                                        {item.type}
+                                    </View>
+                                </View>
+                                <View className="at-row at-row__align--center">
+                                    <View className="at-col at-col__offset-1">
+                                        <View className="note">
+                                            <View className="at-row">
+                                                <View className="at-col at-col-1 at-col--auto">
+                                                    证书编号：
+                                                </View>
+                                                <View
+                                                    className="at-col "
+                                                    style="color: grey;"
+                                                >
+                                                    {item.number}
+                                                </View>
+                                            </View>
+
+                                            <View className="at-row">
+                                                <View className="at-col at-col-1 at-col--auto">
+                                                    产品名称：
+                                                </View>
+                                                <View
+                                                    className="at-col  at-col--wrap"
+                                                    style="color: grey;"
+                                                >
+                                                    {item.productName}
+                                                </View>
+                                            </View>
+
+                                            <View className="at-row">
+                                                <View className="at-col at-col-1 at-col--auto">
+                                                    发证日期：
+                                                </View>
+                                                <View
+                                                    className="at-col "
+                                                    style="color: grey;"
+                                                >
+                                                    {item.startDate}
+                                                </View>
+                                            </View>
+
+                                            <View className="at-row">
+                                                <View className="at-col at-col-1 at-col--auto">
+                                                    截止日期：
+                                                </View>
+                                                <View
+                                                    className="at-col "
+                                                    style="color: grey;"
+                                                >
+                                                    {item.endDate}
+                                                </View>
+                                            </View>
+                                        </View>
+                                    </View>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                )
+            }
+        )
+
+        // 行政许可 点击进入详情页面
+        const adminList = this.state.adminList.map((item, index) => {
             return (
                 <View
                     key={item.id}
                     className="listItem"
+                    hoverClass="hoverList"
+                    onClick={this.navigateToAdminLicencePage.bind(this, item)}
                 >
                     <View className="at-row at-row__align--center">
-                        <View className="at-col">
+                        <View className="at-col at-col-11">
                             <View className="at-row at-row__align--center">
                                 <View className="index at-col at-col-1 ">
                                     {index + 1}
                                 </View>
                                 <View style="margin-left:10px"></View>
                                 <View className="position at-col at-col--wrap">
-                                    {item.type}
+                                    {item.fileNumber}
                                 </View>
                             </View>
                             <View className="at-row at-row__align--center">
                                 <View className="at-col at-col__offset-1">
                                     <View className="note">
                                         <View className="at-row">
-                                            <View
-                                                className="at-col at-col-1 at-col--auto"
-                                            >
-                                            证书编号：
+                                            <View className="at-col at-col-1 at-col--auto">
+                                                决定/许可机关：
                                             </View>
-                                            <View className="at-col at-col_offset-1" style="color: grey;">
-                                                {item.number}
+                                            <View
+                                                className="at-col at-col--wrap"
+                                                style="color: grey;"
+                                            >
+                                                {item.department}
                                             </View>
                                         </View>
 
                                         <View className="at-row">
+                                            <View className="at-col at-col-1 at-col--auto">
+                                                许可日期：
+                                            </View>
                                             <View
-                                                className="at-col at-col-1 at-col--auto"
+                                                className="at-col  at-col--wrap"
+                                                style="color: grey;"
                                             >
-                                            产品名称：
-                                            </View>
-                                            <View className="at-col at-col_offset-1 at-col--wrap" style="color: grey;">
-                                                {item.productName}
-                                            </View>
-                                        </View>
-
-                                        <View className="at-row">
-                                            <View
-                                                className="at-col at-col-1 at-col--auto"
-                                            >
-                                            发证日期：
-                                            </View>
-                                            <View className="at-col at-col_offset-1" style="color: grey;">
                                                 {item.startDate}
                                             </View>
                                         </View>
 
                                         <View className="at-row">
-                                            <View
-                                                className="at-col at-col-1 at-col--auto"
-                                            >
-                                            截止日期：
+                                            <View className="at-col at-col-1 at-col--auto">
+                                                截止日期：
                                             </View>
-                                            <View className="at-col at-col_offset-1" style="color: grey;">
+                                            <View
+                                                className="at-col "
+                                                style="color: grey;"
+                                            >
                                                 {item.endDate}
                                             </View>
                                         </View>
                                     </View>
                                 </View>
                             </View>
+                        </View>
+                        <View className="at-row__justify--end at-col at-col-1">
+                            <AtIcon value="chevron-right" size="20" />
                         </View>
                     </View>
                 </View>
@@ -304,55 +395,57 @@ export default class Operation extends Component{
 
         return (
             <View>
-                    <AtAccordion
-                        open={this.state.open1}
-                        title="公司财务"
-                        arrow="right"
-                        onClick={value => {
-                            this.setState({ open1: value })
-                        }}
-                    >
-                        <View style="margin-left:30px;margin-top:20px">
-                            <AtTimeline items={financeList}></AtTimeline>
-                        </View>
-                    </AtAccordion>
+                <AtAccordion
+                    open={this.state.open1}
+                    title="公司财务"
+                    arrow="right"
+                    onClick={value => {
+                        this.setState({ open1: value })
+                    }}
+                >
+                    <View style="margin-left:30px;margin-top:20px">
+                        <AtTimeline items={financeList}></AtTimeline>
+                    </View>
+                </AtAccordion>
 
-                    <AtAccordion
-                        open={this.state.open2}
-                        title="招聘信息"
-                        arrow="right"
-                        onClick={value => {
-                            this.setState({ open2: value })
-                        }}
-                    >
-                        <View >
-                            <View className="employList">{employList}</View>
-                        </View>
-                    </AtAccordion>
+                <AtAccordion
+                    open={this.state.open2}
+                    title="招聘信息"
+                    arrow="right"
+                    onClick={value => {
+                        this.setState({ open2: value })
+                    }}
+                >
+                    <View>
+                        <View className="employList">{employList}</View>
+                    </View>
+                </AtAccordion>
 
-                    <AtAccordion
-                        open={this.state.open3}
-                        title="资质证书"
-                        arrow="right"
-                        onClick={value => {
-                            this.setState({ open3: value })
-                        }}
-                    >
-                        <View >
-                            <View className="employList">{qualificationList}</View>
-                        </View>
-                    </AtAccordion>
-                    
-                    <AtAccordion
-                        open={this.state.open4}
-                        title="行政许可"
-                        arrow="right"
-                        onClick={value => {
-                            this.setState({ open4: value })
-                        }}
-                    >
-                        
-                    </AtAccordion>
+                <AtAccordion
+                    open={this.state.open3}
+                    title="资质证书"
+                    arrow="right"
+                    onClick={value => {
+                        this.setState({ open3: value })
+                    }}
+                >
+                    <View>
+                        <View className="employList">{qualificationList}</View>
+                    </View>
+                </AtAccordion>
+
+                <AtAccordion
+                    open={this.state.open4}
+                    title="行政许可"
+                    arrow="right"
+                    onClick={value => {
+                        this.setState({ open4: value })
+                    }}
+                >
+                    <View>
+                        <View className="employList">{adminList}</View>
+                    </View>
+                </AtAccordion>
             </View>
         )
     }
