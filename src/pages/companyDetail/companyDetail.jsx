@@ -2,7 +2,7 @@
 /* eslint-disable jsx-quotes */
 import { Component } from 'react'
 import { View, Text } from '@tarojs/components'
-import { AtGrid } from 'taro-ui'
+import { AtGrid, AtModal, AtModalHeader, AtModalContent } from 'taro-ui'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
 import axios from 'taro-axios'
 import './companyDetail.css'
@@ -24,8 +24,11 @@ export default class CompanyDetail extends Component {
             introduction: '',
             inventionNum: 0,
             invest: '',
+            flag: false,
         }
         this.handleClickGrid = this.handleClickGrid.bind(this)
+        this.handleOpen = this.handleOpen.bind(this)
+        this.handleClose = this.handleClose.bind(this)
     }
 
     componentWillMount() {}
@@ -129,7 +132,31 @@ export default class CompanyDetail extends Component {
         }
     }
 
+    handleClose() {
+        this.setState({ flag: false })
+    }
+    handleOpen() {
+        this.setState({ flag: true })
+    }
+
     render() {
+        const modal = (
+            <View onClick={this.handleClose}>
+                <AtModal
+                    isOpened={this.state.flag}
+                    closeOnClickOverlay="true"
+                    onClick={this.handleClose}
+                >
+                    <AtModalHeader>简介</AtModalHeader>
+                    <AtModalContent>
+                        <View style="text-align: justify;">
+                            {this.state.introduction}
+                        </View>
+                    </AtModalContent>
+                </AtModal>
+            </View>
+        )
+
         return (
             <View className="at-article">
                 <View className="at-row">
@@ -275,7 +302,10 @@ export default class CompanyDetail extends Component {
 
                         {/* 文章内容 */}
                         <View style="margin-top:20px"></View>
-                        <View className="at-article__p">
+                        <View
+                            className="at-article__p"
+                            onClick={this.handleOpen}
+                        >
                             公司简介：{this.state.introduction}
                         </View>
                         <View style="margin-top:10px"></View>
@@ -332,6 +362,7 @@ export default class CompanyDetail extends Component {
                         />
                     </View>
                 </View>
+                {modal}
             </View>
         )
     }

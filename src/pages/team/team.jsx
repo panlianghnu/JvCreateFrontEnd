@@ -68,6 +68,7 @@ export default class Team extends Component {
     }
 
     handleClose() {
+        console.log('handle close')
         this.setState({ flag: false })
     }
 
@@ -107,23 +108,21 @@ export default class Team extends Component {
             )
         })
         let modal = (
-            <View  onClick={this.handleClose}>
+            <View onClick={this.handleClose}>
                 <AtModal
-                isOpened={this.state.flag}
-                closeOnClickOverlay="true"
-                //onClose={this.handleClose}
-                onClick={this.handleClose}
-            >
-                <AtModalHeader>
-                    {this.state.team[this.state.index].name}
-                    {/* <View onClick={this.handleClose}>x</View> */}
-                </AtModalHeader>
-                <AtModalContent>
-                    <View style="text-align: justify;">
-                        {this.state.team[this.state.index].introduction}
-                    </View>
-                </AtModalContent>
-            </AtModal>  
+                    isOpened={this.state.flag}
+                    closeOnClickOverlay="true"
+                    onClick={this.handleClose}
+                >
+                    <AtModalHeader>
+                        {this.state.team[this.state.index].name}
+                    </AtModalHeader>
+                    <AtModalContent>
+                        <View style="text-align: justify;">
+                            {this.state.team[this.state.index].introduction}
+                        </View>
+                    </AtModalContent>
+                </AtModal>
             </View>
         )
         return (

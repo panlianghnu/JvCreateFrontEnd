@@ -115,7 +115,7 @@ export default class Product extends Component {
         return (
             <View>
                 <View>{products}</View>
-                {modal}
+                <View onClick={this.handleClose}>{modal}</View>
             </View>
         )
     }
