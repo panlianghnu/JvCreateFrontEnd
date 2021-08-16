@@ -19,7 +19,7 @@ export default class Operation extends Component {
             open2: false,
             open3: false,
             open4: true,
-            companyId: getCurrentInstance().router.params.id,
+            companyId: JSON.parse(getCurrentInstance().router.params.id),
             financeList: [],
             employList: [],
             qualificationList: [],

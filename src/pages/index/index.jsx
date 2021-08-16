@@ -44,7 +44,7 @@ export default class Index extends Component {
         // 请求一波数据
         // get('/home') -> 182.92.114.168:8888/hotSearch
         axios
-            .get('http://182.92.114.168:8888/hotSearch')
+            .get('/hotSearch')
             .then(({ data }) => {
                 // console.log('response:')
                 // console.log(response.data)
