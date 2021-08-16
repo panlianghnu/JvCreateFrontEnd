@@ -92,20 +92,24 @@ export default class Index extends Component {
         this.setState({ searchValue: value })
     }
 
-    onClickCompany(id) {
+    onClickCompany(id, index) {
         // 跳转到公司详情页面，需要路由
         Taro.navigateTo({
             url: '/pages/companyDetail/companyDetail?id=' + JSON.stringify(id),
+        }).then(() => {
+            let tempList = this.state.companies
+            tempList[index].searchCount += 1
+            this.setState({ companies: tempList })
         })
     }
 
     render() {
-        const resultList = this.state.companies.map(item => {
+        const resultList = this.state.companies.map((item, index) => {
             return (
                 <View className="companyList" key={item.id}>
                     <View
                         className="listItem"
-                        onClick={this.onClickCompany.bind(this, item.id)}
+                        onClick={this.onClickCompany.bind(this, item.id, index)}
                         hoverClass="hoverList"
                     >
                         <View className="at-row at-row__align--center">

@@ -16,13 +16,13 @@ export default class CompanyDetail extends Component {
             companyName: '',
             major: '',
             companyRegisterDate: '',
-            companyRegisterMoney: 0,
+            companyRegisterMoney: '',
             legalPerson: '',
             phone: '',
             level: '',
             website: '',
             introduction: '',
-            inventionNum: 0,
+            inventionNum: '',
             invest: '',
             flag: false,
         }
@@ -36,18 +36,17 @@ export default class CompanyDetail extends Component {
     componentDidMount() {
         axios.get('/companyDetail?id=' + this.state.companyId).then(
             ({ data }) => {
-                console.log(data)
                 this.setState({
                     companyName: data.companyName,
                     major: data.major,
                     companyRegisterDate: data.companyRegisterDate,
-                    companyRegisterMoney: data.companyRegisterMoney % 10000,
+                    companyRegisterMoney: data.companyRegisterMoney,
                     legalPerson: data.legalPerson,
-                    phone: data.phone % 100000000000,
+                    phone: data.phone,
                     level: data.level,
                     website: data.website,
                     introduction: data.introduction,
-                    inventionNum: data.inventionNum % 100,
+                    inventionNum: data.inventionNum,
                     invest: data.invest,
                 })
             },
@@ -158,21 +157,31 @@ export default class CompanyDetail extends Component {
         )
 
         let website = this.state.website
-        website = website.replace('https://', '')
-        website = website.replace('http://', '')
+        if (website) {
+            website = website.replace('https://', '')
+            website = website.replace('http://', '')
+        }
 
         return (
             <View className="at-article">
                 <View className="at-row">
+<<<<<<< HEAD
                     <View className="at-col" style="text-align:center">
                         <Text className="at-article__h2" style="font-weight: bold">
                             {this.state.companyName}
                         </Text>
+=======
+                    <View
+                        className="at-col at-col-12"
+                        style="text-align:center"
+                    >
+                        <Text className="title">{this.state.companyName}</Text>
+>>>>>>> 3a2db118fb3eabbcfa16d530704d2f76a098d8f3
                     </View>
                 </View>
                 <View className="at-article__content">
                     <View className="at-article__section">
-                        <View style="margin-top:20px"></View>
+                        <View style="margin-top:15px"></View>
                         <View
                             className="pl-row"
                             //onClick={this.handleClickGrid.bind(this, '', 2)}
@@ -180,7 +189,7 @@ export default class CompanyDetail extends Component {
                             <View className="pl-col" hoverClass="hover-col" onClick={this.handleClickGrid.bind(this, '', 1)}>
                                 <View>
                                     <Text>法定代表人{'\n'}</Text>
-                                    <Text className="at-article__p">
+                                    <Text className="content">
                                         {this.state.legalPerson}
                                     </Text>
                                 </View>
@@ -188,16 +197,15 @@ export default class CompanyDetail extends Component {
                             <View className="pl-col top" hoverClass="hover-col" onClick={this.handleClickGrid.bind(this, '', 2)}>
                                 <View>
                                     <Text>注册资本{'\n'}</Text>
-                                    <Text className="at-article__p">
+                                    <Text className="content">
                                         {this.state.companyRegisterMoney}
-                                        万元
                                     </Text>
                                 </View>
                             </View>
                             <View className="pl-col" hoverClass="hover-col" onClick={this.handleClickGrid.bind(this, '', 2)}>
                                 <View>
                                     <Text>成立日期{'\n'}</Text>
-                                    <Text className="at-article__p">
+                                    <Text className="content">
                                         {this.state.companyRegisterDate}
                                     </Text>
                                 </View>
@@ -211,7 +219,7 @@ export default class CompanyDetail extends Component {
                                 <View>
                                     <Text>细分行业{'\n'}</Text>
                                     <View style="line-height:15px;">
-                                        <Text style="color:#fe5d25;font-size:15px">
+                                        <Text style="color:#fe5d25;font-size:13px">
                                             {this.state.major}
                                         </Text>
                                     </View>
@@ -225,7 +233,7 @@ export default class CompanyDetail extends Component {
                                 <View>
                                     <Text>发明总数{'\n'}</Text>
                                     <Text
-                                        className="at-article__p"
+                                        className="content"
                                         style="color:#fe5d25"
                                     >
                                         {this.state.inventionNum}
@@ -240,7 +248,7 @@ export default class CompanyDetail extends Component {
                                 <View>
                                     <Text>发明评级{'\n'}</Text>
                                     <Text
-                                        className="at-article__p"
+                                        className="content"
                                         style="color:#fe5d25"
                                     >
                                         {this.state.level}
@@ -256,7 +264,7 @@ export default class CompanyDetail extends Component {
                             >
                                 <View>
                                     <Text>融资情况{'\n'}</Text>
-                                    <Text className="at-article__p">
+                                    <Text className="content">
                                         {this.state.invest}
                                     </Text>
                                 </View>
@@ -283,9 +291,7 @@ export default class CompanyDetail extends Component {
                                     }
                                 >
                                     <Text>官网{'\n'}</Text>
-                                    <Text className="at-article__p">
-                                        {website}
-                                    </Text>
+                                    <Text className="content">{website}</Text>
                                 </View>
                             </View>
                             <View
@@ -301,7 +307,7 @@ export default class CompanyDetail extends Component {
                             >
                                 <View>
                                     <Text>电话{'\n'}</Text>
-                                    <Text className="at-article__p">
+                                    <Text className="content">
                                         {this.state.phone}
                                     </Text>
                                 </View>

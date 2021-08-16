@@ -5,6 +5,7 @@ import { View, Text } from '@tarojs/components'
 import axios from 'taro-axios'
 import { getCurrentInstance } from '@tarojs/taro'
 import { AtAccordion, AtTimeline } from 'taro-ui'
+import './stock.css'
 
 // 工商信息页面，具体描述股权结构和变更记录
 export default class Stock extends Component {
@@ -62,13 +63,18 @@ export default class Stock extends Component {
                 this.setState({
                     change: response.data,
                 })
-                // 修改一下假数据
-                // var items = this.state.items
-                // for (var i = 0; i < items.length; i++) {
-                //     items[i].money %= 1000000
-                //     items[i].percent %= 100
-                // }
-                // this.setState({ items: items })
+
+                //修改一下换行数据
+                let newState = this.state.change
+                for (let i = 0; i < newState.length; i++) {
+                    let item = newState[i]
+                    item.beforeChange = item.beforeChange.replaceAll(
+                        '\\n',
+                        '\n'
+                    )
+                    item.afterChange = item.afterChange.replaceAll('\\n', '\n')
+                }
+                this.setState({ change: newState })
             },
             err => {
                 console.log('axios err ', err)
@@ -77,36 +83,40 @@ export default class Stock extends Component {
     }
 
     render() {
-        const stockList = this.state.items.map(item => {
+        let stockList = this.state.items.map(item => {
             return (
                 <View key={item.id} style="text-align:center">
-                    <View className="at-row">
-                        <View className="at-article__h1">{item.name}</View>
+                    <View style="margin-bottom:10px"></View>
+                    <View className="stock-title">
+                        <Text>{item.name}</Text>
                     </View>
-                    <View className="at-row">
-                        <View className="at-col-4">
-                            <View className="at-article__p">
+                    <View style="margin-bottom:3px"></View>
+                    <View className="pl-row">
+                        <View className="pl-col">
+                            <View className="stock-content">
                                 <Text>持股比例</Text>
                                 <Text style="color:#fe5d25">
                                     {'\n' + item.percent}%
                                 </Text>
                             </View>
                         </View>
-                        <View className="at-col-4">
-                            <View className="at-article__p">
+                        <View className="pl-col">
+                            <View className="stock-content">
                                 <Text>认缴出资额{'\n' + item.money}</Text>
                             </View>
                         </View>
-                        <View className="at-col-4">
-                            <View className="at-article__p">
+                        <View className="pl-col">
+                            <View className="stock-content">
                                 <Text>认缴时间{'\n' + item.date}</Text>
                             </View>
                         </View>
                     </View>
-                    <View className="at-row"></View>
                 </View>
             )
         })
+        if (this.state.items.length == 0) {
+            stockList = <View style="margin:20px">暂无相关信息</View>
+        }
         const changeList = []
         let temp
         let i = 0

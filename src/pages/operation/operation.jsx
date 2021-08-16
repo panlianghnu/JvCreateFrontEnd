@@ -403,9 +403,13 @@ export default class Operation extends Component {
                         this.setState({ open1: value })
                     }}
                 >
-                    <View style="margin-left:30px;margin-top:20px">
-                        <AtTimeline items={financeList}></AtTimeline>
-                    </View>
+                    {this.state.financeList.length ? (
+                        <View style="margin-left:30px;margin-top:20px">
+                            <AtTimeline items={financeList}></AtTimeline>
+                        </View>
+                    ) : (
+                        <View style="margin:20px">暂无相关信息</View>
+                    )}
                 </AtAccordion>
 
                 <AtAccordion
@@ -416,9 +420,13 @@ export default class Operation extends Component {
                         this.setState({ open2: value })
                     }}
                 >
-                    <View>
-                        <View className="employList">{employList}</View>
-                    </View>
+                    {this.state.employList.length ? (
+                        <View>
+                            <View className="employList">{employList}</View>
+                        </View>
+                    ) : (
+                        <View style="margin:20px">暂无相关信息</View>
+                    )}
                 </AtAccordion>
 
                 <AtAccordion
@@ -429,9 +437,15 @@ export default class Operation extends Component {
                         this.setState({ open3: value })
                     }}
                 >
-                    <View>
-                        <View className="employList">{qualificationList}</View>
-                    </View>
+                    {this.state.qualificationList.length ? (
+                        <View>
+                            <View className="employList">
+                                {qualificationList}
+                            </View>
+                        </View>
+                    ) : (
+                        <View style="margin:20px">暂无相关信息</View>
+                    )}
                 </AtAccordion>
 
                 <AtAccordion
@@ -442,9 +456,13 @@ export default class Operation extends Component {
                         this.setState({ open4: value })
                     }}
                 >
-                    <View>
-                        <View className="employList">{adminList}</View>
-                    </View>
+                    {this.state.adminList.length ? (
+                        <View>
+                            <View className="employList">{adminList}</View>
+                        </View>
+                    ) : (
+                        <View style="margin:20px">暂无相关信息</View>
+                    )}
                 </AtAccordion>
             </View>
         )

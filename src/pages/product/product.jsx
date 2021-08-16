@@ -114,6 +114,8 @@ export default class Product extends Component {
                     </AtModalContent>
                 </AtModal>
             )
+        } else {
+            return <View style="margin:20px">暂无相关信息</View>
         }
 
         return (

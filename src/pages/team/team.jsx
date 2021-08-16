@@ -119,8 +119,7 @@ export default class Team extends Component {
                 </View>
             )
         } else {
-            modal = <View style="margin:20px">暂无</View>
-            teams = <View style="margin:20px">暂无团队信息</View>
+            return <View style="margin:20px">暂无相关信息</View>
         }
         return (
             <View>
