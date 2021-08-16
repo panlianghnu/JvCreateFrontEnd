@@ -83,38 +83,40 @@ export default class Stock extends Component {
     }
 
     render() {
-        const stockList = this.state.items.map(item => {
+        let stockList = this.state.items.map(item => {
             return (
                 <View key={item.id} style="text-align:center">
-                    <View className="at-row">
-                        <View className="stock-title">
-                            <Text>{item.name}</Text>
-                        </View>
+                    <View style="margin-bottom:10px"></View>
+                    <View className="stock-title">
+                        <Text>{item.name}</Text>
                     </View>
-                    <View className="at-row">
-                        <View className="at-col-4">
-                            <View className="at-article__p">
+                    <View style="margin-bottom:3px"></View>
+                    <View className="pl-row">
+                        <View className="pl-col">
+                            <View className="stock-content">
                                 <Text>持股比例</Text>
                                 <Text style="color:#fe5d25">
                                     {'\n' + item.percent}%
                                 </Text>
                             </View>
                         </View>
-                        <View className="at-col-4">
-                            <View className="at-article__p">
+                        <View className="pl-col">
+                            <View className="stock-content">
                                 <Text>认缴出资额{'\n' + item.money}</Text>
                             </View>
                         </View>
-                        <View className="at-col-4">
-                            <View className="at-article__p">
+                        <View className="pl-col">
+                            <View className="stock-content">
                                 <Text>认缴时间{'\n' + item.date}</Text>
                             </View>
                         </View>
                     </View>
-                    <View style="margin-bottom:15px"></View>
                 </View>
             )
         })
+        if (this.state.items.length == 0) {
+            stockList = <View style="margin:20px">暂无相关信息</View>
+        }
         const changeList = []
         let temp
         let i = 0

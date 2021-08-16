@@ -62,6 +62,9 @@ export default class extends Component {
                         <View style="margin-left:30px;margin-top:20px">
                             <AtTimeline items={items} />
                         </View>
+                        {!this.state.financings.length && (
+                            <View style="margin:20px">暂无相关信息</View>
+                        )}
                     </AtAccordion>
                     <AtAccordion
                         open={this.state.open2}
@@ -71,7 +74,7 @@ export default class extends Component {
                             this.setState({ open2: value })
                         }}
                     >
-                        <View style="margin-left:20px">暂无</View>
+                        <View style="margin-left:20px">暂无相关信息</View>
                     </AtAccordion>
                 </View>
             </View>

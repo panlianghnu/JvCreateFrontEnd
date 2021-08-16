@@ -119,7 +119,7 @@ export default class Customer extends Component {
                 </AtModal>
             )
         } else {
-            customers = <View style="margin:20px">暂无主要客户信息</View>
+            return <View style="margin:20px">暂无相关信息</View>
         }
 
         return (

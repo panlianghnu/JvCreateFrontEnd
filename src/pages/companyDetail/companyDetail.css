@@ -2,7 +2,6 @@
     display: block;
     width: 100%;
     margin-top: 20px;
-    margin-bottom: 20px;
     box-sizing: content-box;
     font-size: 40px;
     font-weight: bold;
@@ -11,10 +10,9 @@
     text-align: center;
 }
 
-.at-col-4 .at-article__p {
-    font-size: medium;
+.content {
     color: grey;
-    line-height: 15px;
+    font-size: small;
 }
 
 .at-article__section > .at-article__p {
@@ -56,18 +54,19 @@
 }
 .pl-col {
     width: 100%;
+    padding: 20px;
     padding-top: 15px;
-    padding-bottom: 15px;
     display: flex;
     flex-direction: column;
+    text-align: center;
     align-items: center; /*定义body的元素垂直居中*/
     justify-content: center;
     transition: background-color 0.5s;
 }
 .pl-col-center {
     width: 100%;
+    padding: 20px;
     padding-top: 15px;
-    padding-bottom: 15px;
     display: flex;
     flex-direction: column;
     align-items: center; /*定义body的元素垂直居中*/

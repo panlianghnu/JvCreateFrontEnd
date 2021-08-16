@@ -75,7 +75,7 @@ export default class Invention extends Component {
                                 </View>
                             </View>
                             <View className="at-row at-row__align--center">
-                                <View className="at-col at-col__offset-1">
+                                <View className="at-col at-col-11 at-col__offset-1">
                                     <View className="note">
                                         <Text>
                                             申请日：{item.filingDate + '\n'}
@@ -102,7 +102,7 @@ export default class Invention extends Component {
                 <View style="margin-bottom:10px"></View>
                 <View className="inventionList">{renderList}</View>
                 {!this.state.inventions.length && (
-                    <View style="margin:20px">暂无发明专利信息</View>
+                    <View style="margin:20px">暂无相关信息</View>
                 )}
             </View>
         )
