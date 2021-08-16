@@ -113,7 +113,7 @@ export default class extends Component {
                         </View>
                         <View className="at-col at-col-1 at-col--auto">
                             <Text style="margin-left:5px;margin-right:5px">
-                                聚创造网络科技有限公司
+                                北京聚创造网络科技有限公司
                             </Text>
                         </View>
                         <View className="at-col at-col-1">

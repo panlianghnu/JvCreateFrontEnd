@@ -12,8 +12,8 @@ export default class extends Component {
         super(props)
         this.state = {
             companyId: JSON.parse(getCurrentInstance().router.params.id),
-            open1: true,
-            open2: false,
+            open1: false,
+            open2: true,
             financings: [
                 {
                     title: '',
