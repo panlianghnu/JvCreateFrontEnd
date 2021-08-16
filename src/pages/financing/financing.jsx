@@ -71,7 +71,7 @@ export default class extends Component {
                             this.setState({ open2: value })
                         }}
                     >
-                        <View style="margin-left:20px">暂无</View>
+                        <View style="margin-left:20px">暂无相关信息</View>
                     </AtAccordion>
                 </View>
             </View>

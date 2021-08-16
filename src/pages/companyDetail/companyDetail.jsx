@@ -165,7 +165,7 @@ export default class CompanyDetail extends Component {
             <View className="at-article">
                 <View className="at-row">
                     <View className="at-col" style="text-align:center">
-                        <Text className="at-article__h1">
+                        <Text className="at-article__h2" style="font-weight: bold">
                             {this.state.companyName}
                         </Text>
                     </View>
@@ -175,9 +175,9 @@ export default class CompanyDetail extends Component {
                         <View style="margin-top:20px"></View>
                         <View
                             className="pl-row"
-                            onClick={this.handleClickGrid.bind(this, '', 2)}
+                            //onClick={this.handleClickGrid.bind(this, '', 2)}
                         >
-                            <View className="pl-col" hoverClass="hover-col">
+                            <View className="pl-col" hoverClass="hover-col" onClick={this.handleClickGrid.bind(this, '', 1)}>
                                 <View>
                                     <Text>法定代表人{'\n'}</Text>
                                     <Text className="at-article__p">
@@ -185,7 +185,7 @@ export default class CompanyDetail extends Component {
                                     </Text>
                                 </View>
                             </View>
-                            <View className="pl-col top" hoverClass="hover-col">
+                            <View className="pl-col top" hoverClass="hover-col" onClick={this.handleClickGrid.bind(this, '', 2)}>
                                 <View>
                                     <Text>注册资本{'\n'}</Text>
                                     <Text className="at-article__p">
@@ -194,7 +194,7 @@ export default class CompanyDetail extends Component {
                                     </Text>
                                 </View>
                             </View>
-                            <View className="pl-col" hoverClass="hover-col">
+                            <View className="pl-col" hoverClass="hover-col" onClick={this.handleClickGrid.bind(this, '', 2)}>
                                 <View>
                                     <Text>成立日期{'\n'}</Text>
                                     <Text className="at-article__p">
