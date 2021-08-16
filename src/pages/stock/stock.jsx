@@ -5,6 +5,7 @@ import { View, Text } from '@tarojs/components'
 import axios from 'taro-axios'
 import { getCurrentInstance } from '@tarojs/taro'
 import { AtAccordion, AtTimeline } from 'taro-ui'
+import './stock.css'
 
 // 工商信息页面，具体描述股权结构和变更记录
 export default class Stock extends Component {
@@ -81,7 +82,9 @@ export default class Stock extends Component {
             return (
                 <View key={item.id} style="text-align:center">
                     <View className="at-row">
-                        <View className="at-article__h1">{item.name}</View>
+                        <View className="stock-title">
+                            <Text>{item.name}</Text>
+                        </View>
                     </View>
                     <View className="at-row">
                         <View className="at-col-4">
@@ -103,7 +106,7 @@ export default class Stock extends Component {
                             </View>
                         </View>
                     </View>
-                    <View className="at-row"></View>
+                    <View style="margin-bottom:15px"></View>
                 </View>
             )
         })

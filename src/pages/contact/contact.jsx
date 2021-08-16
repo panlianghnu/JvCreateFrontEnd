@@ -8,6 +8,29 @@ import { Logo } from '../../components/Logo'
 import './contact.css'
 
 export default class extends Component {
+    constructor(props) {
+        super(props)
+    }
+
+    copy(item) {
+        let data = null
+        if (item == 'website') {
+            data = 'www.jucreate.com'
+        } else if (item == 'email') {
+            data = 'hi30058740@aliyun.com'
+        } else {
+            // 地址
+            data = '北京市海淀区上地信息路26号8层0809室'
+        }
+        Taro.setClipboardData({
+            data: data,
+        }).then(() => {
+            Taro.getClipboardData().then(res => {
+                console.log('剪切板内容为:', res.data)
+            })
+        })
+    }
+
     render() {
         return (
             <View>
@@ -57,7 +80,10 @@ export default class extends Component {
                             </View>
                         </View>
                     </View>
-                    <View className="contact-list-item">
+                    <View
+                        className="contact-list-item"
+                        onClick={this.copy.bind(this, 'website')}
+                    >
                         <View className="at-row at-row__align--center">
                             <View
                                 className="at-col at-col-1"
@@ -73,7 +99,10 @@ export default class extends Component {
                             </View>
                         </View>
                     </View>
-                    <View className="contact-list-item">
+                    <View
+                        className="contact-list-item"
+                        onClick={this.copy.bind(this, 'email')}
+                    >
                         <View className="at-row at-row__align--center">
                             <View
                                 className="at-col at-col-1"
@@ -89,7 +118,10 @@ export default class extends Component {
                             </View>
                         </View>
                     </View>
-                    <View className="contact-list-item">
+                    <View
+                        className="contact-list-item"
+                        onClick={this.copy.bind(this, 'position')}
+                    >
                         <View className="at-row at-row__align--center">
                             <View
                                 className="at-col at-col-1"

@@ -24,7 +24,7 @@
 }
 .legalCaseName {
     margin-top: 10px;
-    font-size: 35px;
+    font-size: 30px;
     font-weight: bold;
     /* 不换行而显示省略号 */
     display: -webkit-box;
@@ -37,7 +37,7 @@
 }
 .note {
     margin-left: 45px;
-    font-size: 30px;
+    font-size: 27px;
 }
 .index {
     background-color: gainsboro;
