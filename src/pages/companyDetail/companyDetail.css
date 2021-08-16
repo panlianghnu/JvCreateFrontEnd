@@ -29,16 +29,16 @@
 
 .top,
 .bottom {
-    border-left: 1px solid rgb(241, 246, 249);
-    border-right: 1px solid rgb(241, 246, 249);
+    border-left: 3px solid rgb(241, 246, 249);
+    border-right: 3px solid rgb(241, 246, 249);
 }
 .left,
 .right {
-    border-top: 1px solid rgb(241, 246, 249);
-    border-bottom: 1px solid rgb(241, 246, 249);
+    border-top: 3px solid rgb(241, 246, 249);
+    border-bottom: 3px solid rgb(241, 246, 249);
 }
 .center {
-    border: 1px solid rgb(241, 246, 249);
+    border: 3px solid rgb(241, 246, 249);
 }
 
 .at-article__section > .at-row {
