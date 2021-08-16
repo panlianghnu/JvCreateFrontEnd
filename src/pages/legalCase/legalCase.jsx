@@ -12,7 +12,7 @@ export default class LegalCase extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            companyId: getCurrentInstance().router.params.id,
+            companyId: JSON.parse(getCurrentInstance().router.params.id),
             legalCases: [
                 {
                     id: '',
@@ -95,7 +95,9 @@ export default class LegalCase extends Component {
             <View>
                 <View style="margin-bottom:10px"></View>
                 <View className="legalCaseList">{renderList}</View>
-                <View style="margin-top:10px">{'\0'}</View>
+                {!this.state.legalCases.length && (
+                    <View style="margin:20px">暂无法律事务</View>
+                )}
             </View>
         )
     }

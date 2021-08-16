@@ -11,14 +11,14 @@ export default class Stock extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            companyId: getCurrentInstance().router.params.id,
+            companyId: JSON.parse(getCurrentInstance().router.params.id),
             items: [
                 {
                     isPerson: false,
                     id: 0,
                     name: '',
-                    money: 0, // 认缴出资额
-                    percent: 0, // 持股比例
+                    money: '', // 认缴出资额
+                    percent: '', // 持股比例
                     date: '', // 认缴事件
                 },
             ],
@@ -35,18 +35,20 @@ export default class Stock extends Component {
     getStock() {
         return axios.get('/stock?id=' + this.state.companyId).then(
             response => {
-                // console.log('response.data: ', response.data)
+                console.log('response.data: ', response.data)
+
                 this.setState({
                     items: response.data,
                 })
 
                 // 修改一下假数据
-                var items = this.state.items
-                for (var i = 0; i < items.length; i++) {
-                    items[i].money %= 1000000
-                    items[i].percent %= 100
-                }
-                this.setState({ items: items })
+                // var items = this.state.items
+                // for (var i = 0; i < items.length; i++) {
+                //     items[i].money %= 1000000
+                //     items[i].percent %= 100
+                // }
+                // console.log(items)
+                // this.setState({ items: items })
             },
             err => {
                 console.log('axios err ', err)
@@ -92,10 +94,7 @@ export default class Stock extends Component {
                         </View>
                         <View className="at-col-4">
                             <View className="at-article__p">
-                                <Text>
-                                    认缴出资额{'\n' + item.money}
-                                    万元
-                                </Text>
+                                <Text>认缴出资额{'\n' + item.money}</Text>
                             </View>
                         </View>
                         <View className="at-col-4">
@@ -157,6 +156,16 @@ export default class Stock extends Component {
             }
             changeList.push(temp)
         }
+        var renderChange = null
+        if (this.state.change.length == 0) {
+            renderChange = <View style="margin:20px">暂无变更记录</View>
+        } else {
+            renderChange = (
+                <View style="margin-left:30px;margin-top:20px">
+                    <AtTimeline items={changeList}></AtTimeline>
+                </View>
+            )
+        }
         return (
             <View>
                 <View>
@@ -178,9 +187,7 @@ export default class Stock extends Component {
                             this.setState({ open2: value })
                         }}
                     >
-                        <View style="margin-left:30px;margin-top:20px">
-                            <AtTimeline items={changeList}></AtTimeline>
-                        </View>
+                        {renderChange}
                     </AtAccordion>
                 </View>
             </View>

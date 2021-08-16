@@ -11,7 +11,7 @@ export default class extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            companyId: getCurrentInstance().router.params.id,
+            companyId: JSON.parse(getCurrentInstance().router.params.id),
             open1: false,
             open2: true,
             financings: [

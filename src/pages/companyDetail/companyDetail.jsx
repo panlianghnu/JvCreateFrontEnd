@@ -12,7 +12,7 @@ export default class CompanyDetail extends Component {
         super(props)
         this.state = {
             // 获取路由过来的参数 公司ID
-            companyId: getCurrentInstance().router.params.id,
+            companyId: JSON.parse(getCurrentInstance().router.params.id),
             companyName: '',
             major: '',
             companyRegisterDate: '',
@@ -34,9 +34,9 @@ export default class CompanyDetail extends Component {
     componentWillMount() {}
 
     componentDidMount() {
-        console.log(this.state.companyId)
         axios.get('/companyDetail?id=' + this.state.companyId).then(
             ({ data }) => {
+                console.log(data)
                 this.setState({
                     companyName: data.companyName,
                     major: data.major,
@@ -157,6 +157,10 @@ export default class CompanyDetail extends Component {
             </View>
         )
 
+        let website = this.state.website
+        website = website.replace('https://', '')
+        website = website.replace('http://', '')
+
         return (
             <View className="at-article">
                 <View className="at-row">
@@ -220,7 +224,10 @@ export default class CompanyDetail extends Component {
                             >
                                 <View>
                                     <Text>发明总数{'\n'}</Text>
-                                    <Text className="at-article__p">
+                                    <Text
+                                        className="at-article__p"
+                                        style="color:#fe5d25"
+                                    >
                                         {this.state.inventionNum}
                                     </Text>
                                 </View>
@@ -257,6 +264,7 @@ export default class CompanyDetail extends Component {
                             <View
                                 className="pl-col bottom"
                                 hoverClass="hover-col"
+                                style="text-align:center"
                             >
                                 <View
                                     onClick={() =>
@@ -276,7 +284,7 @@ export default class CompanyDetail extends Component {
                                 >
                                     <Text>官网{'\n'}</Text>
                                     <Text className="at-article__p">
-                                        {this.state.website}
+                                        {website}
                                     </Text>
                                 </View>
                             </View>

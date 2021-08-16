@@ -2,6 +2,7 @@
 /* eslint-disable react/jsx-indent-props */
 import { View, Text } from '@tarojs/components'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
+import axios from 'taro-axios'
 import { Component } from 'react'
 import { AtAvatar, AtModal, AtModalHeader, AtModalContent } from 'taro-ui'
 import './team.css'
@@ -25,26 +26,17 @@ export default class Team extends Component {
             index: 0,
         }
     }
-    componentWillMount() {}
 
     componentDidMount() {
-        const companyId = getCurrentInstance().router.params.id
-        var th = this
-        Taro.request({
-            url:
-                'http://rest.apizza.net/mock/bc6d7ccdfaec23b8fefb9f9dcf322f51/team',
-            data: {
-                companyId: companyId,
-            },
-            header: {
-                'content-type': 'application/json', // 默认值
-            },
-            success: function(res) {
-                th.setState({
-                    team: res.data.team,
-                })
-            },
-        })
+        const companyId = JSON.parse(getCurrentInstance().router.params.id)
+        axios
+            .get(`/team?id=${companyId}`)
+            .then(({ data }) => {
+                this.setState({ team: data })
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     componentWillUnmount() {}
@@ -68,19 +60,18 @@ export default class Team extends Component {
     }
 
     handleClose() {
-        console.log('handle close')
         this.setState({ flag: false })
     }
 
     render() {
         // let flag = this.state.flag
         //let index = this.state.index
-        const teams = this.state.team.map(item => {
+        let teams = this.state.team.map((item, index) => {
             return (
                 <View
                     className="teamList"
                     key={item.id}
-                    onClick={() => this.handleClick1(item.id)}
+                    onClick={() => this.handleClick1(index)}
                 >
                     <View className="at-row at-row__align--center">
                         <View className="at-col at-col__offset-1 at-col-1 at-col--auto">
@@ -107,24 +98,30 @@ export default class Team extends Component {
                 </View>
             )
         })
-        let modal = (
-            <View onClick={this.handleClose}>
-                <AtModal
-                    isOpened={this.state.flag}
-                    closeOnClickOverlay="true"
-                    onClick={this.handleClose}
-                >
-                    <AtModalHeader>
-                        {this.state.team[this.state.index].name}
-                    </AtModalHeader>
-                    <AtModalContent>
-                        <View style="text-align: justify;">
-                            {this.state.team[this.state.index].introduction}
-                        </View>
-                    </AtModalContent>
-                </AtModal>
-            </View>
-        )
+        var modal = null
+        if (this.state.team.length > 0) {
+            modal = (
+                <View onClick={this.handleClose}>
+                    <AtModal
+                        isOpened={this.state.flag}
+                        closeOnClickOverlay="true"
+                        onClick={this.handleClose}
+                    >
+                        <AtModalHeader>
+                            {this.state.team[this.state.index].name}
+                        </AtModalHeader>
+                        <AtModalContent>
+                            <View style="text-align: justify;">
+                                {this.state.team[this.state.index].introduction}
+                            </View>
+                        </AtModalContent>
+                    </AtModal>
+                </View>
+            )
+        } else {
+            modal = <View style="margin:20px">暂无</View>
+            teams = <View style="margin:20px">暂无团队信息</View>
+        }
         return (
             <View>
                 <View>{teams}</View>

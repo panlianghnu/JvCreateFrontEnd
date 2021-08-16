@@ -12,7 +12,7 @@ export default class Invention extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            companyId: getCurrentInstance().router.params.id,
+            companyId: JSON.parse(getCurrentInstance().router.params.id),
             inventions: [
                 {
                     id: '',
@@ -101,7 +101,9 @@ export default class Invention extends Component {
             <View>
                 <View style="margin-bottom:10px"></View>
                 <View className="inventionList">{renderList}</View>
-                <View style="margin-top:10px">{'\0'}</View>
+                {!this.state.inventions.length && (
+                    <View style="margin:20px">暂无发明专利信息</View>
+                )}
             </View>
         )
     }

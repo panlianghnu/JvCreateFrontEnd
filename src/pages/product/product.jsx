@@ -28,7 +28,7 @@ export default class Product extends Component {
     componentWillMount() {}
 
     componentDidMount() {
-        const companyId = Current.router.params.companyId
+        const companyId = JSON.parse(Current.router.params.id)
         axios
             .get(`/product?id=${companyId}`)
             .then(({ data }) => {
@@ -96,26 +96,31 @@ export default class Product extends Component {
                 </View>
             )
         })
-        let modal = (
-            <AtModal
-                isOpened={this.state.flag}
-                closeOnClickOverlay="true"
-                onClose={this.handleClose}
-            >
-                <AtModalHeader>
-                    {this.state.products[this.state.index].name}
-                </AtModalHeader>
-                <AtModalContent>
-                    <View style="text-align: justify;">
-                        {this.state.products[this.state.index].introduction}
-                    </View>
-                </AtModalContent>
-            </AtModal>
-        )
+        let modal = null
+        if (this.state.products.length > 0) {
+            modal = (
+                <AtModal
+                    isOpened={this.state.flag}
+                    closeOnClickOverlay="true"
+                    onClose={this.handleClose}
+                >
+                    <AtModalHeader>
+                        {this.state.products[this.state.index].name}
+                    </AtModalHeader>
+                    <AtModalContent>
+                        <View style="text-align: justify;">
+                            {this.state.products[this.state.index].introduction}
+                        </View>
+                    </AtModalContent>
+                </AtModal>
+            )
+        }
+
         return (
             <View>
                 <View>{products}</View>
                 <View onClick={this.handleClose}>{modal}</View>
+                {!modal && <View style="margin:20px">暂无产品服务信息</View>}
             </View>
         )
     }

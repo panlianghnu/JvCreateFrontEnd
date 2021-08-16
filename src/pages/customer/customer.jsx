@@ -28,10 +28,11 @@ export default class Customer extends Component {
     componentWillMount() {}
 
     componentDidMount() {
-        const companyId = Current.router.params.companyId
+        const companyId = JSON.parse(Current.router.params.id)
         axios
             .get(`/customer?id=${companyId}`)
             .then(({ data }) => {
+                console.log('customer:', data)
                 this.setState({ customers: data })
             })
             .catch(err => {
@@ -66,7 +67,7 @@ export default class Customer extends Component {
     render() {
         // let flag = this.state.flag
         //let index = this.state.index
-        const customers = this.state.customers.map((item, index) => {
+        let customers = this.state.customers.map((item, index) => {
             return (
                 <View
                     className="teamList"
@@ -96,22 +97,31 @@ export default class Customer extends Component {
                 </View>
             )
         })
-        let modal = (
-            <AtModal
-                isOpened={this.state.flag}
-                closeOnClickOverlay="true"
-                onClose={this.handleClose}
-            >
-                <AtModalHeader>
-                    {this.state.customers[this.state.index].name}
-                </AtModalHeader>
-                <AtModalContent>
-                    <View style="text-align: justify;">
-                        {this.state.customers[this.state.index].introduction}
-                    </View>
-                </AtModalContent>
-            </AtModal>
-        )
+        var modal = <View></View>
+        if (this.state.customers.length > 0) {
+            modal = (
+                <AtModal
+                    isOpened={this.state.flag}
+                    closeOnClickOverlay="true"
+                    onClose={this.handleClose}
+                >
+                    <AtModalHeader>
+                        {this.state.customers[this.state.index].name}
+                    </AtModalHeader>
+                    <AtModalContent>
+                        <View style="text-align: justify;">
+                            {
+                                this.state.customers[this.state.index]
+                                    .introduction
+                            }
+                        </View>
+                    </AtModalContent>
+                </AtModal>
+            )
+        } else {
+            customers = <View style="margin:20px">暂无主要客户信息</View>
+        }
+
         return (
             <View>
                 <View>{customers}</View>

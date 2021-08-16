@@ -119,6 +119,18 @@ class NotLogin extends Component {
                             Taro.navigateTo({ url: '/pages/contact/contact' })
                         }
                     ></AtListItem>
+                    <AtListItem
+                        title="关于我们"
+                        arrow="right"
+                        iconInfo={{
+                            size: 20,
+                            color: '#fe5d25',
+                            value: 'external-link',
+                        }}
+                        onClick={() =>
+                            Taro.navigateTo({ url: '/pages/contact/contact' })
+                        }
+                    ></AtListItem>
                 </AtList>
                 <AtActionSheet
                     isOpened={this.state.isOpened}
