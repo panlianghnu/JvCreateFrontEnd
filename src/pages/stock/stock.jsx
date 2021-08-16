@@ -63,13 +63,18 @@ export default class Stock extends Component {
                 this.setState({
                     change: response.data,
                 })
-                // 修改一下假数据
-                // var items = this.state.items
-                // for (var i = 0; i < items.length; i++) {
-                //     items[i].money %= 1000000
-                //     items[i].percent %= 100
-                // }
-                // this.setState({ items: items })
+
+                //修改一下换行数据
+                let newState = this.state.change
+                for (let i = 0; i < newState.length; i++) {
+                    let item = newState[i]
+                    item.beforeChange = item.beforeChange.replaceAll(
+                        '\\n',
+                        '\n'
+                    )
+                    item.afterChange = item.afterChange.replaceAll('\\n', '\n')
+                }
+                this.setState({ change: newState })
             },
             err => {
                 console.log('axios err ', err)
