@@ -40,3 +40,11 @@
     text-overflow: ellipsis;
     white-space: normal;
 }
+.font-break{
+    margin-left: 40px;
+    margin-right: 35px;
+    color: grey;
+    font-size: 30px;
+    word-break:break-all;
+    text-align: justify;
+}

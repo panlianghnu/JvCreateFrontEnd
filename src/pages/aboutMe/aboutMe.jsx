@@ -1,6 +1,6 @@
 import { View,Text} from "@tarojs/components";
 import { Component } from "react";
-import { AtDrawer } from "taro-ui";
+import { AtDrawer, AtList,AtListItem } from "taro-ui";
 import { Logo } from '../../components/Logo';
 import { AtAvatar, AtModal, AtModalHeader, AtModalContent } from 'taro-ui';
 import { AtAccordion, AtTimeline } from 'taro-ui';
@@ -65,7 +65,7 @@ export default class extends Component{
             open1:false,
             open2:false,
             open3:false,
-            open4:false,
+            open4:true,
             history:[
                 {
                     "date":"2021-04",
@@ -155,7 +155,7 @@ export default class extends Component{
     }
     render(){
 
-        var team = this.state.team.map((item, index) => {
+        let team = this.state.team.map((item, index) => {
             return (
                 <View
                     className="teamList"
@@ -246,7 +246,7 @@ export default class extends Component{
                                 className="at-col at-col-12"
                                 style="text-align:center"
                             >
-                            <Logo width={50}></Logo>
+                            <Logo width={50} style="padding-top:15px"></Logo>
                             </View>
                         </View>
                         <View className="companyIntro">
@@ -278,6 +278,129 @@ export default class extends Component{
                     <View style="margin-left:30px;margin-top:20px">
                             <AtTimeline items={changeList} />
                         </View>
+                </AtAccordion>
+                <AtAccordion
+                    open={this.state.open4}
+                    title="广纳贤才"
+                    arrow="right"
+                    onClick={value => {
+                        this.setState({ open4: value })
+                    }}
+                >
+                    <View>
+                        <View className='companyIntro'>
+                        <Text>
+                        北京聚创造网络科技有限公司，是国家高新技术企业，是致力通过大数据、人工智能技术改造提升创业投资行业的技术创新型公司。{'\n'}{'\n'}公司目前的创始团队由风险投资业内资深投资人领衔，核心团队成员包括一位复旦大学金融学硕士、一位美国华盛顿大学（西雅图）材料学博士、一位美国哥伦比亚大学化学与生物分子工程学博士后、一位美国俄亥俄州立大学环境工程博士、一位美国德克萨斯农工大学生物医学博士、一位美国康涅狄格大学化学工程博士和一位美国俄亥俄州立大学电气与计算机工程博士。{'\n'}{'\n'}我们求贤若渴，我们奉行共享！公司现诚聘以下职位，欢迎广大志同道合的英才加盟，与聚创造共同把握历史机遇，共同创造时代辉煌！
+                        </Text>
+                        </View>
+                        
+                        <View className='at-article__h2'>
+                        1、职位：投资总监 （北京1名、上海1名、深圳1名、长沙1名）
+                        </View>
+
+                        <View className='at-article__h3'>
+                        工作职责：
+                        </View>
+                        
+                        <View className='font-break'>1）带领团队发掘、筛选优质项目；{'\n'}</View>
+                        <View className='font-break'>2）全程负责项目的融资事宜；{'\n'}</View>
+                        <View className='font-break'>3）负责已投项目的投后管理，为其提供增值服务；{'\n'}</View>
+                        <View className='font-break'>4）根据项目发展情况，负责项目退出事宜。</View>
+                        
+                        <View className='at-article__h3'>
+                        任职要求：
+                        </View>
+                        
+                        <View className='font-break'>1）985高校毕业，理工科、IT、金融相关专业，硕士及以上学历；{'\n'}</View>
+                        <View className='font-break'>2）具有3年及以上创业投资工作经验；{'\n'}</View>
+                        <View className='font-break'>3）工作认真负责，做事严谨踏实，学习能力强，善于思考，积极进取，为人坦诚；{'\n'}</View>
+                        <View className='font-break'>4）有项目资源者优先，海归优先。</View>
+                        
+                        <View className='at-article__h3'>
+                        待遇：
+                        </View>
+                        <View className='font-break'>1）工资1.5-2.5万元/月；{'\n'}</View>
+                        <View className='font-break'>2）项目成功融资、成功退出，公司均对项目团队实施奖励；{'\n'}</View>
+                        <View className='font-break'>3）公司对正式员工实施股权激励；{'\n'}</View>
+                        <View className='font-break'>4）公司向正式员工开放所有项目的跟投机会。</View>   
+                       
+                        <View className='at-article__h2'>
+                        2、职位：投资副总监（北京1名）
+                        </View>
+                        <View className='at-article__h3'>
+                        工作职责：
+                        </View>
+
+                        <View className='font-break'>1）带领团队发掘、筛选优质项目；{'\n'}</View>
+                        <View className='font-break'>2）全程负责项目的融资事宜；{'\n'}</View>
+                        <View className='font-break'>3）负责已投项目的投后管理，为其提供增值服务；{'\n'}</View>
+                        <View className='font-break'>4）根据项目发展情况，负责项目退出事宜。</View>
+                        
+                        <View className='at-article__h3'>
+                        任职要求：
+                        </View>
+
+                        <View className='font-break'>1）985高校毕业，理工科、IT、金融相关专业，硕士及以上学历；{'\n'}</View>
+                        <View className='font-break'>2）具有2年及以上创业投资工作经验；{'\n'}</View>
+                        <View className='font-break'>3）工作认真负责，做事严谨踏实，学习能力强，善于思考，积极进取，为人坦诚；{'\n'}</View>
+                        <View className='font-break'>4）有项目资源者优先，海归优先。</View>
+                        
+
+                        <View className='at-article__h3'>
+                        待遇：
+                        </View>
+
+                        <View className='font-break'>1）工资1.2-1.5万元/月；{'\n'}</View>
+                        <View className='font-break'>2）项目成功融资、成功退出，公司均对项目团队实施奖励；{'\n'}</View>
+                        <View className='font-break'>3）公司对正式员工实施股权激励；{'\n'}</View>
+                        <View className='font-break'>4）公司向正式员工开放所有项目的跟投机会。</View>
+                        
+                        
+                        <View className='at-article__h2'>
+                        3、职位：高级投资经理（北京1名、上海1名、深圳1名）
+                        </View>
+                        <View className='at-article__h3'>
+                        工作职责：
+                        </View>
+
+                        <View className='font-break'>1）发掘、筛选优质项目；{'\n'}</View>
+                        <View className='font-break'>2）全程负责项目的融资事宜；{'\n'}</View>
+                        <View className='font-break'>3）参与已投项目的投后管理，为其提供增值服务；{'\n'}</View>
+                        <View className='font-break'>4）根据项目发展情况，负责项目退出事宜。</View>
+                        
+                        <View className='at-article__h3'>
+                        任职要求：
+                        </View>
+
+                        <View className='font-break'>1）985高校毕业，理工科、IT、金融相关专业，硕士及以上学历；{'\n'}</View>
+                        <View className='font-break'>2）具有1年及以上创业投资工作经验；{'\n'}</View>
+                        <View className='font-break'>3）工作认真负责，做事严谨踏实，学习能力强，善于思考，积极进取，为人坦诚；{'\n'}</View>
+                        <View className='font-break'>4）有项目资源者优先，海归优先。</View>
+
+                        <View className='at-article__h3'>
+                        待遇：
+                        </View>
+
+                        <View className='font-break'>1）工资1-1.2万元/月；{'\n'}</View>
+                        <View className='font-break'>2）项目成功融资、成功退出，公司均对项目团队实施奖励；{'\n'}</View>
+                        <View className='font-break'>3）公司对正式员工实施股权激励；{'\n'}</View>
+                        <View className='font-break'>4）公司向正式员工开放所有项目的跟投机会。</View>
+
+                        <View className='at-article__h3'>
+                        简历投递
+                        </View>
+                        <View className='font-break'>
+                            <Text>邮箱：</Text>
+                            <Text style="color:#fe5d25">1735335832@qq.com</Text>
+                        </View>
+
+                        <View className='at-article__h3'>
+                        补充说明
+                        </View>
+                        <View className='font-break'>
+                        希望2021年7月31日前能到岗。
+                        </View>
+                    </View>
                 </AtAccordion>
             </View>
 
