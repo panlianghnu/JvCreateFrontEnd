@@ -8,7 +8,7 @@ class App extends Component {
         // axios.defaults.baseURL =
         //     'http://rest.apizza.net/mock/477507dcdbdb6b798efe4b625bc25b59'
         // axios.defaults.baseURL = 'http://localhost:5000'
-        axios.defaults.baseURL = 'http://182.92.114.168:8888'
+        axios.defaults.baseURL = 'https://www.jucreate.com:8888'
     }
 
     componentDidShow() {}
