@@ -165,18 +165,11 @@ export default class CompanyDetail extends Component {
         return (
             <View className="at-article">
                 <View className="at-row">
-<<<<<<< HEAD
-                    <View className="at-col" style="text-align:center">
-                        <Text className="at-article__h2" style="font-weight: bold">
-                            {this.state.companyName}
-                        </Text>
-=======
                     <View
                         className="at-col at-col-12"
                         style="text-align:center"
                     >
                         <Text className="title">{this.state.companyName}</Text>
->>>>>>> 3a2db118fb3eabbcfa16d530704d2f76a098d8f3
                     </View>
                 </View>
                 <View className="at-article__content">
@@ -186,7 +179,11 @@ export default class CompanyDetail extends Component {
                             className="pl-row"
                             //onClick={this.handleClickGrid.bind(this, '', 2)}
                         >
-                            <View className="pl-col" hoverClass="hover-col" onClick={this.handleClickGrid.bind(this, '', 1)}>
+                            <View
+                                className="pl-col"
+                                hoverClass="hover-col"
+                                onClick={this.handleClickGrid.bind(this, '', 1)}
+                            >
                                 <View>
                                     <Text>法定代表人{'\n'}</Text>
                                     <Text className="content">
@@ -194,7 +191,11 @@ export default class CompanyDetail extends Component {
                                     </Text>
                                 </View>
                             </View>
-                            <View className="pl-col top" hoverClass="hover-col" onClick={this.handleClickGrid.bind(this, '', 2)}>
+                            <View
+                                className="pl-col top"
+                                hoverClass="hover-col"
+                                onClick={this.handleClickGrid.bind(this, '', 2)}
+                            >
                                 <View>
                                     <Text>注册资本{'\n'}</Text>
                                     <Text className="content">
@@ -202,7 +203,11 @@ export default class CompanyDetail extends Component {
                                     </Text>
                                 </View>
                             </View>
-                            <View className="pl-col" hoverClass="hover-col" onClick={this.handleClickGrid.bind(this, '', 2)}>
+                            <View
+                                className="pl-col"
+                                hoverClass="hover-col"
+                                onClick={this.handleClickGrid.bind(this, '', 2)}
+                            >
                                 <View>
                                     <Text>成立日期{'\n'}</Text>
                                     <Text className="content">
