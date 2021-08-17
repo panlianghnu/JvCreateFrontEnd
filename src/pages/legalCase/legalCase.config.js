@@ -1,3 +1,3 @@
 export default {
-    navigationBarTitleText: '法律诉讼',
+    navigationBarTitleText: '法律事务',
 }

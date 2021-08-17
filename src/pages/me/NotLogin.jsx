@@ -128,7 +128,7 @@ class NotLogin extends Component {
                             value: 'external-link',
                         }}
                         onClick={() =>
-                            Taro.navigateTo({ url: '/pages/contact/contact' })
+                            Taro.navigateTo({ url: '/pages/aboutMe/aboutMe' })
                         }
                     ></AtListItem>
                 </AtList>
