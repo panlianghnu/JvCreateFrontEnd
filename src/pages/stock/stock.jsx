@@ -117,7 +117,7 @@ export default class Stock extends Component {
         if (this.state.items.length == 0) {
             stockList = <View style="margin:20px">暂无相关信息</View>
         }
-        const changeList = []
+        let changeList = []
         let temp
         let i = 0
         let changeLog
