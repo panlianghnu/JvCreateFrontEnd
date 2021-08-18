@@ -50,7 +50,9 @@ export default class Invention extends Component {
     onClickCard(item) {
         // console.log('跳转到专利详情，item:', item)
         Taro.navigateTo({
-            url: '/pages/inventionDetail/inventionDetail?id=' + item.id,
+            url:
+                '/pages/inventionDetail/inventionDetail?id=' +
+                JSON.stringify(item.id),
         })
     }
 

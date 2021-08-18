@@ -3,21 +3,22 @@
 /* eslint-disable jsx-quotes */
 import { Component } from 'react'
 import { View, Text } from '@tarojs/components'
-import { getCurrentInstance } from '@tarojs/taro'
-import { AtDivider } from 'taro-ui'
+import Taro, { getCurrentInstance } from '@tarojs/taro'
+import { AtDivider, AtLoadMore } from 'taro-ui'
 import axios from 'taro-axios'
 
 export default class extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            inventionId: getCurrentInstance().router.params.id,
+            inventionId: JSON.parse(getCurrentInstance().router.params.id),
             name: '',
             filingDate: '',
             inventionPerson: '',
             status: '',
             abstract: '',
             fullText: '',
+            loadingPDF: 'more',
         }
         // console.log('专利详情，专利ID为：', this.state.inventionId)
     }
@@ -47,6 +48,31 @@ export default class extends Component {
         if (status == '实质审查') return 'color:purple'
         if (status == '公开') return 'color:#fe5d25'
         return 'color:red'
+    }
+
+    handleClickGetPDF() {
+        this.setState({ loadingPDF: 'loading' })
+        let that = this
+        Taro.downloadFile({
+            url: `https://www.jucreate.com:8888/invention_pdf?id=${this.state.inventionId}`,
+            success: function(res) {
+                var filePath = res.tempFilePath
+                // Taro.openDocument 新开页面打开文档，支持格式"doc" | "docx" | "xls" | "xlsx" | "ppt" | "pptx" | "pdf" ,支持端weapp
+                Taro.openDocument({
+                    filePath: filePath,
+                    success: function() {
+                        console.log('打开文档成功')
+                        that.setState({ loadingPDF: 'more' })
+                    },
+                    fail: function(err) {
+                        that.setState({ loadingPDF: 'noMore' })
+                        console.log('err1:', err)
+                    },
+                }).catch(err => {
+                    console.log('err2：进入了这里\n', err)
+                })
+            },
+        })
     }
 
     render() {
@@ -97,6 +123,13 @@ export default class extends Component {
                         </View>
                     </View>
                 </View>
+                <AtLoadMore
+                    status={this.state.loadingPDF}
+                    onClick={this.handleClickGetPDF.bind(this)}
+                    moreText="点击查看专利全文"
+                    loadingText="正在加载专利全文"
+                    noMoreText="暂无该专利全文的相关信息"
+                />
             </View>
         )
     }
