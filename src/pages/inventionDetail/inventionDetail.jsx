@@ -76,6 +76,8 @@ export default class extends Component {
     }
 
     render() {
+        let moreBtnStyle =
+            'width:80%;color:white;height:30px;background-color:rgb(235,104,58);border:0;display:flex;justify-content:center;align-items:center;'
         return (
             <View className="at-article">
                 <View className="at-article-content">
@@ -129,6 +131,7 @@ export default class extends Component {
                     moreText="点击查看专利全文"
                     loadingText="正在加载专利全文"
                     noMoreText="暂无该专利全文的相关信息"
+                    moreBtnStyle={moreBtnStyle}
                 />
             </View>
         )

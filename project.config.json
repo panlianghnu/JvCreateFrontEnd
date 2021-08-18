@@ -4,7 +4,7 @@
   "description": "聚创造企业战略态势感知平台",
   "appid": "wx9b920bb75dbff842",
   "setting": {
-    "urlCheck": false,
+    "urlCheck": true,
     "es6": false,
     "enhance": false,
     "postcss": false,
