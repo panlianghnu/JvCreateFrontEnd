@@ -179,7 +179,11 @@ export default class CompanyDetail extends Component {
                             className="pl-row"
                             //onClick={this.handleClickGrid.bind(this, '', 2)}
                         >
-                            <View className="pl-col" hoverClass="hover-col" onClick={this.handleClickGrid.bind(this, '', 1)}>
+                            <View
+                                className="pl-col"
+                                hoverClass="hover-col"
+                                onClick={this.handleClickGrid.bind(this, '', 1)}
+                            >
                                 <View>
                                     <Text>法定代表人{'\n'}</Text>
                                     <Text className="content">
@@ -187,7 +191,11 @@ export default class CompanyDetail extends Component {
                                     </Text>
                                 </View>
                             </View>
-                            <View className="pl-col top" hoverClass="hover-col" onClick={this.handleClickGrid.bind(this, '', 2)}>
+                            <View
+                                className="pl-col top"
+                                hoverClass="hover-col"
+                                onClick={this.handleClickGrid.bind(this, '', 2)}
+                            >
                                 <View>
                                     <Text>注册资本{'\n'}</Text>
                                     <Text className="content">
@@ -195,7 +203,11 @@ export default class CompanyDetail extends Component {
                                     </Text>
                                 </View>
                             </View>
-                            <View className="pl-col" hoverClass="hover-col" onClick={this.handleClickGrid.bind(this, '', 2)}>
+                            <View
+                                className="pl-col"
+                                hoverClass="hover-col"
+                                onClick={this.handleClickGrid.bind(this, '', 2)}
+                            >
                                 <View>
                                     <Text>成立日期{'\n'}</Text>
                                     <Text className="content">

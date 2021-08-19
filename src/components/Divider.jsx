@@ -7,7 +7,7 @@ function Divider(props) {
     return (
         <View
             className="at-row at-row__justify--around at-row__align--center"
-            style="text-align:center;margin-top:20px;margin-bottom:20px"
+            style="text-align:center;margin-top:10px;margin-bottom:10px"
         >
             <View className="at-col at-col-4">
                 <View style="background:linear-gradient(to right,#FFFFFF,#fe5d25);height:1px;"></View>

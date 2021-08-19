@@ -5,7 +5,7 @@
 import Taro from '@tarojs/taro'
 import { Component } from 'react'
 import { View } from '@tarojs/components'
-import { AtIcon, AtAvatar } from 'taro-ui'
+import { AtIcon, AtAvatar, AtActivityIndicator } from 'taro-ui'
 import axios from 'taro-axios'
 import { SearchComponent } from '../../components/searchComponent'
 import { Divider } from '../../components/Divider'
@@ -31,7 +31,7 @@ export default class Index extends Component {
                     companyPic: '',
                 },
             ],
-            loadingHotSearch: true,
+            loadingSearch: true,
             searchValue: '',
             fengeString: '',
         }
@@ -43,6 +43,7 @@ export default class Index extends Component {
         // console.log('Axios')
         // 请求一波数据
         // get('/home') -> 182.92.114.168:8888/hotSearch
+        this.setState({ loadingSearch: true })
         axios
             .get('/hotSearch')
             .then(({ data }) => {
@@ -50,7 +51,7 @@ export default class Index extends Component {
                 // console.log(response.data)
                 this.setState({
                     companies: data,
-                    loadingHotSearch: false, // 加载时显示圈圈(或不显示)
+                    loadingSearch: false, // 加载时显示圈圈(或不显示)
                     fengeString: '热门搜索',
                     searchValue: '',
                 })
@@ -75,12 +76,16 @@ export default class Index extends Component {
 
     onClickSearch() {
         // console.log('搜索：', this.state.searchValue)
+        // show loading
+        this.setState({ loadingSearch: true })
         axios
-            .get('/home') // change later
+            .get(`/search?searchValue=${this.state.searchValue}`) // change later
             .then(({ data }) => {
+                // hide loading
                 this.setState({
                     companies: data,
                     fengeString: '搜索结果',
+                    loadingSearch: false,
                 })
             })
             .catch(err => {
@@ -104,65 +109,73 @@ export default class Index extends Component {
     }
 
     render() {
-        const resultList = this.state.companies.map((item, index) => {
-            return (
-                <View className="companyList" key={item.id}>
-                    <View
-                        className="listItem"
-                        onClick={this.onClickCompany.bind(this, item.id, index)}
-                        hoverClass="hoverList"
-                    >
-                        <View className="at-row at-row__align--center">
-                            <View className="at-col at-col__offset-1 at-col-1 at-col--auto">
-                                {!item.companyPic && (
-                                    <AtAvatar
-                                        text={item.companyName}
-                                        size="normal"
-                                    ></AtAvatar>
-                                )}
-                                {item.companyPic && (
-                                    <AtAvatar
-                                        image={item.companyPic}
-                                        size="normal"
-                                    ></AtAvatar>
-                                )}
-                                <View className="searchCount">
-                                    {item.searchCount}
-                                </View>
-                            </View>
-                            <View className="at-col at-col__offset-1 at-col-7 at-col--wrap">
-                                <View className="companyName">
-                                    {item.companyName}
-                                </View>
-                                <View className="note">
-                                    <View className="at-row">
-                                        <View className="at-col at-col-1 at-col--auto">
-                                            细分行业：
-                                        </View>
-                                        <View className="at-col at-col--wrap">
-                                            {item.secondTag}、{item.thirdTag}
-                                        </View>
+        let resultList = <View style="text-align:center">暂无相关信息</View>
+        if (this.state.companies.length) {
+            resultList = this.state.companies.map((item, index) => {
+                return (
+                    <View className="companyList" key={item.id}>
+                        <View
+                            className="listItem"
+                            onClick={this.onClickCompany.bind(
+                                this,
+                                item.id,
+                                index
+                            )}
+                            hoverClass="hoverList"
+                        >
+                            <View className="at-row at-row__align--center">
+                                <View className="at-col at-col__offset-1 at-col-1 at-col--auto">
+                                    {!item.companyPic && (
+                                        <AtAvatar
+                                            text={item.companyName}
+                                            size="normal"
+                                        ></AtAvatar>
+                                    )}
+                                    {item.companyPic && (
+                                        <AtAvatar
+                                            image={item.companyPic}
+                                            size="normal"
+                                        ></AtAvatar>
+                                    )}
+                                    <View className="searchCount">
+                                        {item.searchCount}
                                     </View>
                                 </View>
-                                <View className="note">
-                                    发明总数：{item.inventionCount}
+                                <View className="at-col at-col__offset-1 at-col-7 at-col--wrap">
+                                    <View className="companyName">
+                                        {item.companyName}
+                                    </View>
+                                    <View className="note">
+                                        <View className="at-row">
+                                            <View className="at-col at-col-1 at-col--auto">
+                                                细分行业：
+                                            </View>
+                                            <View className="at-col at-col--wrap">
+                                                {item.secondTag}、
+                                                {item.thirdTag}
+                                            </View>
+                                        </View>
+                                    </View>
+                                    <View className="note">
+                                        发明总数：{item.inventionCount}
+                                    </View>
+                                    <View className="note">
+                                        发明评级：{item.inventionRating}
+                                    </View>
+                                    <View
+                                        className="note"
+                                        style="margin-bottom:5px"
+                                    >
+                                        融资情况：{item.financing}
+                                    </View>
                                 </View>
-                                <View className="note">
-                                    发明评级：{item.inventionRating}
-                                </View>
-                                <View
-                                    className="note"
-                                    style="margin-bottom:5px"
-                                >
-                                    融资情况：{item.financing}
-                                </View>
+                                <AtIcon value="chevron-right" size="20" />
                             </View>
-                            <AtIcon value="chevron-right" size="20" />
                         </View>
                     </View>
-                </View>
-            )
-        })
+                )
+            })
+        }
 
         return (
             <View>
@@ -180,7 +193,12 @@ export default class Index extends Component {
                     onChange={this.onChangeSearch.bind(this)}
                 />
                 <Divider content={this.state.fengeString}></Divider>
-                {!this.state.loadingHotSearch && <View>{resultList}</View>}
+                {!this.state.loadingSearch && <View>{resultList}</View>}
+                <AtActivityIndicator
+                    mode="center"
+                    isOpened={this.state.loadingSearch}
+                    content="正在加载..."
+                />
             </View>
         )
     }

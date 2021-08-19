@@ -3,21 +3,22 @@
 /* eslint-disable jsx-quotes */
 import { Component } from 'react'
 import { View, Text } from '@tarojs/components'
-import { getCurrentInstance } from '@tarojs/taro'
-import { AtDivider } from 'taro-ui'
+import Taro, { getCurrentInstance } from '@tarojs/taro'
+import { AtDivider, AtLoadMore } from 'taro-ui'
 import axios from 'taro-axios'
 
 export default class extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            inventionId: getCurrentInstance().router.params.id,
+            inventionId: JSON.parse(getCurrentInstance().router.params.id),
             name: '',
             filingDate: '',
             inventionPerson: '',
             status: '',
             abstract: '',
             fullText: '',
+            loadingPDF: 'more',
         }
         // console.log('专利详情，专利ID为：', this.state.inventionId)
     }
@@ -26,7 +27,6 @@ export default class extends Component {
         axios
             .get(`/inventionDetail?id=${this.state.inventionId}`)
             .then(({ data }) => {
-                console.log(data)
                 this.setState({
                     name: data.name,
                     filingDate: data.filingDate,
@@ -49,7 +49,41 @@ export default class extends Component {
         return 'color:red'
     }
 
+    handleClickGetPDF() {
+        this.setState({ loadingPDF: 'loading' })
+        let that = this
+        Taro.downloadFile({
+            url: `https://www.jucreate.com:8888/invention_pdf?id=${this.state.inventionId}`,
+            success: function(res) {
+                if (res.statusCode != 200) {
+                    // console.log('http状态码：', res.statusCode)
+                    // console.log('文件不存在')
+                    that.setState({ loadingPDF: 'noMore' })
+                    return
+                }
+                var filePath = res.tempFilePath
+                // Taro.openDocument 新开页面打开文档，支持格式"doc" | "docx" | "xls" | "xlsx" | "ppt" | "pptx" | "pdf" ,支持端weapp
+                Taro.openDocument({
+                    filePath: filePath,
+                    fileType: 'pdf',
+                    success: function() {
+                        // console.log('打开文档成功')
+                        that.setState({ loadingPDF: 'more' })
+                    },
+                    fail: function(err) {
+                        that.setState({ loadingPDF: 'noMore' })
+                        console.log('err1:', err)
+                    },
+                }).catch(err => {
+                    console.log('err2：进入了这里\n', err)
+                })
+            },
+        })
+    }
+
     render() {
+        let moreBtnStyle =
+            'width:80%;color:white;height:40px;background-color:rgb(235,104,58);border:0;display:flex;justify-content:center;align-items:center;'
         return (
             <View className="at-article">
                 <View className="at-article-content">
@@ -97,6 +131,14 @@ export default class extends Component {
                         </View>
                     </View>
                 </View>
+                <AtLoadMore
+                    status={this.state.loadingPDF}
+                    onClick={this.handleClickGetPDF.bind(this)}
+                    moreText="点击查看专利全文"
+                    loadingText="正在加载专利全文"
+                    noMoreText="暂无该专利全文的相关信息"
+                    moreBtnStyle={moreBtnStyle}
+                />
             </View>
         )
     }

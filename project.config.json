@@ -30,11 +30,12 @@
       "disablePlugins": [],
       "outputPath": ""
     },
+    "enableEngineNative": false,
     "useIsolateContext": true,
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": false,
+    "minifyWXSS": true,
     "showES6CompileOption": false
   },
   "compileType": "miniprogram",
