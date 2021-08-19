@@ -27,7 +27,6 @@ export default class extends Component {
         axios
             .get(`/inventionDetail?id=${this.state.inventionId}`)
             .then(({ data }) => {
-                console.log(data)
                 this.setState({
                     name: data.name,
                     filingDate: data.filingDate,
@@ -56,12 +55,19 @@ export default class extends Component {
         Taro.downloadFile({
             url: `https://www.jucreate.com:8888/invention_pdf?id=${this.state.inventionId}`,
             success: function(res) {
+                if (res.statusCode != 200) {
+                    // console.log('http状态码：', res.statusCode)
+                    // console.log('文件不存在')
+                    that.setState({ loadingPDF: 'noMore' })
+                    return
+                }
                 var filePath = res.tempFilePath
                 // Taro.openDocument 新开页面打开文档，支持格式"doc" | "docx" | "xls" | "xlsx" | "ppt" | "pptx" | "pdf" ,支持端weapp
                 Taro.openDocument({
                     filePath: filePath,
+                    fileType: 'pdf',
                     success: function() {
-                        console.log('打开文档成功')
+                        // console.log('打开文档成功')
                         that.setState({ loadingPDF: 'more' })
                     },
                     fail: function(err) {
@@ -77,7 +83,7 @@ export default class extends Component {
 
     render() {
         let moreBtnStyle =
-            'width:80%;color:white;height:30px;background-color:rgb(235,104,58);border:0;display:flex;justify-content:center;align-items:center;'
+            'width:80%;color:white;height:40px;background-color:rgb(235,104,58);border:0;display:flex;justify-content:center;align-items:center;'
         return (
             <View className="at-article">
                 <View className="at-article-content">
