@@ -17,6 +17,7 @@ export default {
         'pages/operation/operation',
         'pages/adminLicence/adminLicence',
         'pages/aboutMe/aboutMe',
+        'pages/collect/collect'
     ],
     window: {
         backgroundTextStyle: 'light',
