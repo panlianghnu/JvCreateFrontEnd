@@ -2,17 +2,17 @@ import { Component } from 'react'
 import axios from 'taro-axios'
 import Taro from '@tarojs/taro'
 import './custom-theme.scss'
-import { getGlobalData, setGlobalData, setLoginState } from './global'
+import { getGlobalData, setGlobalData } from './global'
 // import './app.css'
 
 class App extends Component {
     componentDidMount() {
         Taro.checkSession({
             success: () => {
-                setLoginState(true)
+                setGlobalData('isLogin', true)
             },
             fail: () => {
-                setLoginState(false)
+                setGlobalData('isLogin', false)
                 setGlobalData('token', '')
             },
         })
@@ -22,9 +22,9 @@ class App extends Component {
         //axios.defaults.baseURL = 'https://www.jucreate.com:8888'
         axios.interceptors.request.use(
             config => {
-                console.log('进入request拦截器')
                 let token = getGlobalData('token')
                 config.headers.Authrization = token
+                return config
             },
             error => {
                 return Promise.reject(error)

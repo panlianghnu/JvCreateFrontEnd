@@ -15,18 +15,13 @@ import axios from 'taro-axios'
 import Taro from '@tarojs/taro'
 import './me.css'
 import login from '../../static/icons/login.png'
-import {
-    getGlobalData,
-    setLoginState,
-    getLoginState,
-    setGlobalData,
-} from '../../global'
+import { setGlobalData, getGlobalData } from '../../global'
 
 export default class extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isLogin: getLoginState(),
+            isLogin: getGlobalData('isLogin'),
             isOpened: false,
             nickName: '未登录',
             userAvatar: '',
@@ -52,16 +47,16 @@ export default class extends Component {
                             .then(({ data }) => {
                                 console.log(data)
                                 setGlobalData('token', data)
-                                setLoginState(true)
+                                setGlobalData('isLogin', true)
                                 resolve()
                             })
                             .catch(err => {
                                 console.log('Axios err:', err)
-                                setLoginState(false)
+                                setGlobalData('isLogin', false)
                             })
                     } else {
                         console.log('登陆失败！' + res.errMsg)
-                        setLoginState(false)
+                        setGlobalData('isLogin', false)
                     }
                 },
             }).catch(() => {
@@ -92,7 +87,7 @@ export default class extends Component {
         }
         await this.login()
         this.setState({
-            isLogin: getLoginState(),
+            isLogin: getGlobalData('isLogin'),
         })
     }
 
