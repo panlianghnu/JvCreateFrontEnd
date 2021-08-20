@@ -149,12 +149,11 @@ export default class extends Component {
                                 color: '#fe5d25',
                                 value: 'star',
                             }}
-                            // onClick={() => {
-                            //     Taro.atMessage({
-                            //         message: '请先登陆',
-                            //         type: 'error',
-                            //     })
-                            // }}
+                            onClick={() => {
+                                Taro.navigateTo({
+                                    url:'pages/collect/collect'
+                                })
+                            }}
                         ></AtListItem>
                         <AtListItem
                             title="意见反馈"

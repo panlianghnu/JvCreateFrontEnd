@@ -1,0 +1,75 @@
+.hotSearch {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    box-sizing: content-box;
+    font-size: 40px;
+    font-weight: bold;
+    /*border-width: 0ch;*/
+    font-family: '宋体';
+    text-align: center;
+}
+.companyList {
+    /* position: absolute; */
+    /*避免子元素margin 影响外层元素 overflow和position都可以*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10px;
+    /* flex弹性布局 居中（水平、垂直） */
+}
+
+.listItem {
+    box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.1);
+    /*transition: 0.3s;*/
+    width: 90%;
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.5s; /*渐变效果*/
+}
+.hoverList {
+    background-color: rgb(240, 240, 240);
+}
+.companyName {
+    margin-top: 10px;
+    font-size: 28px;
+    font-weight: bold;
+}
+.left {
+    float: left;
+    width: 25%;
+    /*display: table-cell;
+    text-align:center;
+    vertical-align: middle;*/
+}
+.searchCount {
+    font-size: 20px;
+    color: grey;
+    margin-top: 10px;
+}
+.img {
+    width: 140px;
+    height: 140px;
+    margin-left: 13px;
+    margin-top: 10px;
+    font-size: 25px;
+    font-weight: bold;
+}
+.note {
+    font-size: 23px;
+}
+
+.icon {
+    float: right;
+}
+
+.logo-text {
+    font-family: 'Microsoft YaHei', 微软雅黑, 'Microsoft JhengHei', 华文细黑,
+        STHeiti, MingLiu;
+    text-align: center;
+}
