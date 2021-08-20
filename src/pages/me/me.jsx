@@ -28,6 +28,14 @@ export default class extends Component {
         }
     }
 
+    componentDidMount() {
+        let avatar = Taro.getStorageSync('userAvatar')
+        let nickName = Taro.getStorageSync('nickName')
+        if (avatar && nickName) {
+            this.setState({ nickName: nickName, userAvatar: avatar })
+        }
+    }
+
     handleActionSheet() {
         this.setState({ isOpened: true })
     }
@@ -45,8 +53,7 @@ export default class extends Component {
                         axios
                             .get('/wxLogin?code=' + res.code)
                             .then(({ data }) => {
-                                console.log(data)
-                                setGlobalData('token', data)
+                                Taro.setStorage({ key: 'token', data: data })
                                 setGlobalData('isLogin', true)
                                 resolve()
                             })
@@ -72,6 +79,14 @@ export default class extends Component {
                 this.setState({
                     nickName: res.userInfo.nickName,
                     userAvatar: res.userInfo.avatarUrl,
+                })
+                Taro.setStorage({
+                    key: 'nickName',
+                    data: res.userInfo.nickName,
+                })
+                Taro.setStorage({
+                    key: 'userAvatar',
+                    data: res.userInfo.avatarUrl,
                 })
                 Taro.atMessage({
                     message: '微信登陆成功',

@@ -1,7 +1,4 @@
 const globalData = {
-    userName: '',
-    userAvatar: '',
-    token: '',
     isLogin: false,
 }
 
