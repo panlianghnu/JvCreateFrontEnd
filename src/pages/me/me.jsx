@@ -31,6 +31,7 @@ export default class extends Component {
     componentDidMount() {
         let avatar = Taro.getStorageSync('userAvatar')
         let nickName = Taro.getStorageSync('nickName')
+        console.log('token: ', Taro.getStorageSync('token'))
         if (avatar && nickName) {
             this.setState({ nickName: nickName, userAvatar: avatar })
         }
@@ -53,6 +54,7 @@ export default class extends Component {
                         axios
                             .get('/wxLogin?code=' + res.code)
                             .then(({ data }) => {
+                                console.log('token data：', data)
                                 Taro.setStorage({ key: 'token', data: data })
                                 setGlobalData('isLogin', true)
                                 resolve()
@@ -151,7 +153,7 @@ export default class extends Component {
                             }}
                             onClick={() => {
                                 Taro.navigateTo({
-                                    url:'pages/collect/collect'
+                                    url: '/pages/collect/collect',
                                 })
                             }}
                         ></AtListItem>

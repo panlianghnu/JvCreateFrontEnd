@@ -15,14 +15,17 @@ class App extends Component {
                 setGlobalData('isLogin', false)
                 Taro.setStorage({ key: 'token', data: '' })
             },
+        }).catch(err => {
+            console.log('check session fail: ', err)
         })
         axios.defaults.baseURL = 'http://localhost:5000'
         //axios.defaults.baseURL = 'https://www.jucreate.com:8888'
         axios.interceptors.request.use(
             config => {
                 let token = Taro.getStorageSync('token')
+                console.log('进入axios拦截器，token为：', token)
                 if (token) {
-                    config.headers.Authrization = token
+                    config.headers.Authorization = token
                 }
                 return config
             },

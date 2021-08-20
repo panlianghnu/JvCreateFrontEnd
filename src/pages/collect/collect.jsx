@@ -8,7 +8,6 @@ import { View } from '@tarojs/components'
 import { AtIcon, AtAvatar, AtActivityIndicator } from 'taro-ui'
 import axios from 'taro-axios'
 
-
 import './collect.css'
 
 export default class Index extends Component {
@@ -29,6 +28,7 @@ export default class Index extends Component {
                     companyPic: '',
                 },
             ],
+            loading: true,
         }
     }
 
@@ -40,9 +40,11 @@ export default class Index extends Component {
             .then(({ data }) => {
                 this.setState({
                     companies: data,
+                    loading: false,
                 })
             })
             .catch(err => {
+                this.setState({ loading: false })
                 console.log('Axios err:', err)
             })
     }
@@ -67,7 +69,20 @@ export default class Index extends Component {
     }
 
     render() {
-        let resultList = <View style="text-align:center">您还没有收藏公司</View>
+        if (this.state.loading) {
+            return (
+                <AtActivityIndicator
+                    mode="center"
+                    isOpened={this.state.loading}
+                    content="正在加载..."
+                />
+            )
+        }
+        if (this.state.companies.length == 0) {
+            return <View style="text-align:center">您还未收藏公司</View>
+        }
+
+        let resultList = null
         if (this.state.companies.length) {
             resultList = this.state.companies.map((item, index) => {
                 return (
