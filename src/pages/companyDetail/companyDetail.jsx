@@ -2,10 +2,20 @@
 /* eslint-disable jsx-quotes */
 import { Component } from 'react'
 import { View, Text } from '@tarojs/components'
-import { AtGrid, AtModal, AtModalHeader, AtModalContent } from 'taro-ui'
+import {
+    AtGrid,
+    AtModal,
+    AtModalHeader,
+    AtModalContent,
+    AtAvatar,
+    AtButton,
+    AtMessage,
+    AtActivityIndicator,
+} from 'taro-ui'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
 import axios from 'taro-axios'
 import './companyDetail.css'
+import { getGlobalData } from '../../global'
 
 export default class CompanyDetail extends Component {
     constructor(props) {
@@ -13,6 +23,7 @@ export default class CompanyDetail extends Component {
         this.state = {
             // 获取路由过来的参数 公司ID
             companyId: JSON.parse(getCurrentInstance().router.params.id),
+            isLogin: getGlobalData('isLogin'),
             companyName: '',
             major: '',
             companyRegisterDate: '',
@@ -25,6 +36,10 @@ export default class CompanyDetail extends Component {
             inventionNum: '',
             invest: '',
             flag: false,
+            isFollow: false,
+            logo: '',
+            showUnFollow: false,
+            loading: true,
         }
         this.handleClickGrid = this.handleClickGrid.bind(this)
         this.handleOpen = this.handleOpen.bind(this)
@@ -37,6 +52,7 @@ export default class CompanyDetail extends Component {
         axios.get('/companyDetail?id=' + this.state.companyId).then(
             ({ data }) => {
                 this.setState({
+                    logo: data.logo,
                     companyName: data.companyName,
                     major: data.major,
                     companyRegisterDate: data.companyRegisterDate,
@@ -48,19 +64,73 @@ export default class CompanyDetail extends Component {
                     introduction: data.introduction,
                     inventionNum: data.inventionNum,
                     invest: data.invest,
+                    isFollow: data.isFollow,
+                    loading: false,
                 })
             },
             err => {
+                this.setState({ loading: false })
                 console.log('axios err:', err)
             }
         )
     }
 
-    componentWillUnmount() {}
-
-    componentDidShow() {}
-
-    componentDidHide() {}
+    handleFollow() {
+        if (!this.state.isLogin) {
+            // 未登陆则提示登陆
+            Taro.atMessage({
+                message: '请先登陆',
+                type: 'error',
+            })
+            return
+        }
+        // 关注按钮触发事件
+        if (this.state.isFollow) return
+        axios
+            .get(`/collect?id=${this.state.companyId}`)
+            .then(res => {
+                if (res.status == 200) {
+                    // console.log('收藏成功')
+                    this.setState({ isFollow: true })
+                    Taro.atMessage({
+                        message: '收藏成功',
+                        type: 'success',
+                    })
+                }
+            })
+            .catch(() => {
+                console.log('收藏失败，请查看是否已经收藏过了')
+                this.setState({ isFollow: true })
+            })
+    }
+    handleUnFollow() {
+        if (!this.state.isLogin) {
+            // 未登陆则提示登陆
+            Taro.atMessage({
+                message: '请先登陆',
+                type: 'error',
+            })
+            return
+        }
+        // 取关按钮触发事件
+        if (!this.state.isFollow) return
+        axios
+            .get(`/cancelCollect?id=${this.state.companyId}`)
+            .then(res => {
+                if (res.status == 200) {
+                    // console.log('取消收藏成功')
+                    this.setState({ isFollow: false })
+                    Taro.atMessage({
+                        message: '取消收藏成功',
+                        type: 'success',
+                    })
+                }
+            })
+            .catch(() => {
+                console.log('取消收藏失败，请查看还未关注')
+                this.setState({ isFollow: false })
+            })
+    }
 
     handleClickGrid(item, index) {
         switch (index) {
@@ -128,6 +198,12 @@ export default class CompanyDetail extends Component {
                 })
                 break
             }
+            case 8: {
+                Taro.navigateTo({
+                    url: '/pages/fieldBackground/fieldBackground',
+                })
+                break
+            }
         }
     }
 
@@ -139,6 +215,15 @@ export default class CompanyDetail extends Component {
     }
 
     render() {
+        if (this.state.loading) {
+            return (
+                <AtActivityIndicator
+                    mode="center"
+                    isOpened={this.state.loading}
+                    content="正在加载..."
+                />
+            )
+        }
         const modal = (
             <View onClick={this.handleClose}>
                 <AtModal
@@ -162,15 +247,64 @@ export default class CompanyDetail extends Component {
             website = website.replace('http://', '')
         }
 
+        let button = null
+        if (this.state.isFollow) {
+            button = (
+                <AtButton
+                    className="unfollow"
+                    type="primary"
+                    onClick={() => this.setState({ showUnFollow: true })}
+                >
+                    已收藏
+                </AtButton>
+            )
+        } else {
+            button = (
+                <AtButton
+                    className="follow"
+                    type="primary"
+                    onClick={this.handleFollow.bind(this)}
+                >
+                    收藏
+                </AtButton>
+            )
+        }
+        let modal_unfollow = (
+            <AtModal
+                isOpened={this.state.showUnFollow}
+                title="提示"
+                cancelText="取消"
+                confirmText="确认"
+                onClose={() => {
+                    this.setState({ showUnFollow: false })
+                }}
+                onCancel={() => {
+                    this.setState({ showUnFollow: false })
+                }}
+                onConfirm={() => {
+                    this.handleUnFollow()
+                    this.setState({ showUnFollow: false })
+                }}
+                content="是否取消收藏？"
+            />
+        )
+
         return (
+            // 显示取关
             <View className="at-article">
-                <View className="at-row">
-                    <View
-                        className="at-col at-col-12"
-                        style="text-align:center"
-                    >
+                <AtMessage />
+                <View className="top-bar">
+                    <View className="logo">
+                        <AtAvatar
+                            text={this.state.companyName}
+                            size="normal"
+                            image={this.state.logo}
+                        />
+                    </View>
+                    <View style="margin-left:auto;margin-right:auto">
                         <Text className="title">{this.state.companyName}</Text>
                     </View>
+                    {button}
                 </View>
                 <View className="at-article__content">
                     <View className="at-article__section">
@@ -382,6 +516,7 @@ export default class CompanyDetail extends Component {
                     </View>
                 </View>
                 {modal}
+                {modal_unfollow}
             </View>
         )
     }
