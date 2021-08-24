@@ -7,27 +7,29 @@
     display: flex;
     flex-direction: column;
 }
-.button-item {
+.button-list button {
     display: flex;
     flex-direction: row;
     align-items: center;
     background-color: white;
+    color: rgb(51, 51, 51);
     transition: background-color 0.5s;
     width: 100%;
-    height: 80px;
-    border-top: 1px solid rgb(209, 209, 209);
+    height: 100px;
+    box-sizing: border-box;
+    border-top: 1px solid rgb(230, 237, 243);
+    font-size: medium;
 }
-.button-item:hover {
+.button-list button:hover {
     background-color: rgb(240, 240, 240);
 }
-View button {
-    margin-left: 50px;
-    margin-right: auto;
-    background-color: white;
-    box-sizing: border-box;
-    border: 1px solid transparent;
-    height: 80px;
+.button-list button::after {
+    border: none;
 }
-View AtIcon {
-    margin-right: 50px;
+.button-last {
+    border-bottom: 1px solid rgb(230, 237, 243);
+}
+button View {
+    margin-left: 20px;
+    margin-right: auto;
 }

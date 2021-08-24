@@ -4,14 +4,12 @@ import { Component } from 'react'
 import {
     AtAvatar,
     AtButton,
-    AtList,
-    AtListItem,
     AtActionSheet,
     AtActionSheetItem,
     AtMessage,
     AtIcon,
 } from 'taro-ui'
-import { View, Text } from '@tarojs/components'
+import { View, Text, Button } from '@tarojs/components'
 import axios from 'taro-axios'
 import Taro from '@tarojs/taro'
 import './me.css'
@@ -139,81 +137,68 @@ export default class extends Component {
                             </Text>
                         </View>
                     </View>
-                    <View style="margin-top:20px"></View>
-                    <View style="margin-top:40px"></View>
-                    <AtList>
-                        <AtListItem
-                            title="我的收藏"
-                            arrow="right"
-                            iconInfo={{
-                                size: 20,
-                                color: '#fe5d25',
-                                value: 'star',
-                            }}
+                    <View style="margin-top:60px"></View>
+                    <View className="button-list">
+                        <Button
                             onClick={() => {
                                 Taro.navigateTo({
                                     url: '/pages/collect/collect',
                                 })
                             }}
-                        ></AtListItem>
-                        {/* <AtListItem
-                            title="意见反馈"
-                            arrow="right"
-                            iconInfo={{
-                                size: 20,
-                                color: '#fe5d25',
-                                value: 'mail',
-                            }}
-                        ></AtListItem> */}
-                        <AtListItem
-                            title="联系我们"
-                            arrow="right"
-                            iconInfo={{
-                                size: 20,
-                                color: '#fe5d25',
-                                value: 'phone',
-                            }}
+                        >
+                            <AtIcon value="star" color="#fe5d25" size="20" />
+                            <View>我的收藏</View>
+                            <AtIcon
+                                value="chevron-right"
+                                size="20"
+                                color="rgb(210,210,210)"
+                            />
+                        </Button>
+                        <Button openType="feedback">
+                            <AtIcon value="mail" color="#fe5d25" size="20" />
+                            <View>意见反馈</View>
+                            <AtIcon
+                                value="chevron-right"
+                                size="20"
+                                color="rgb(210,210,210)"
+                            />
+                        </Button>
+                        <Button
                             onClick={() =>
                                 Taro.navigateTo({
                                     url: '/pages/contact/contact',
                                 })
                             }
-                        ></AtListItem>
-                        <AtListItem
-                            title="关于我们"
-                            arrow="right"
-                            iconInfo={{
-                                size: 20,
-                                color: '#fe5d25',
-                                value: 'external-link',
-                            }}
+                        >
+                            <AtIcon value="phone" color="#fe5d25" size="20" />
+                            <View>联系我们</View>
+                            <AtIcon
+                                value="chevron-right"
+                                size="20"
+                                color="rgb(210,210,210)"
+                            />
+                        </Button>
+                        <Button
+                            className="button-last"
                             onClick={() =>
                                 Taro.navigateTo({
                                     url: '/pages/aboutMe/aboutMe',
                                 })
                             }
-                        ></AtListItem>
-                    </AtList>
-                    <View style="margin-top:20px"></View>
-                    <View className="button-list">
-                        <View className="button-item">
-                            <button>我的收藏</button>
-                            <AtIcon value="chevron-right" size="20" />
-                        </View>
-                        <View className="button-item">
-                            <button>我的收藏</button>
-                            <AtIcon value="chevron-right" size="20" />
-                        </View>
-                        <View className="button-item">
-                            <button>我的收藏</button>
-                            <AtIcon value="chevron-right" size="20" />
-                        </View>
-                        <View className="button-item">
-                            <button>我的收藏</button>
-                            <AtIcon value="chevron-right" size="20" />
-                        </View>
+                        >
+                            <AtIcon
+                                value="external-link"
+                                color="#fe5d25"
+                                size="20"
+                            />
+                            <View>关于我们</View>
+                            <AtIcon
+                                value="chevron-right"
+                                size="20"
+                                color="rgb(210,210,210)"
+                            />
+                        </Button>
                     </View>
-
                 </View>
             )
         } else
@@ -246,61 +231,70 @@ export default class extends Component {
                             </AtButton>
                         </View>
                     </View>
-                    <View style="margin-top:40px"></View>
-                    <AtList>
-                        <AtListItem
-                            title="我的收藏"
-                            arrow="right"
-                            iconInfo={{
-                                size: 20,
-                                color: '#fe5d25',
-                                value: 'star',
-                            }}
+                    <View style="margin-top:60px"></View>
+                    <View className="button-list">
+                        <Button
                             onClick={() => {
                                 Taro.atMessage({
                                     message: '请先登陆',
                                     type: 'error',
                                 })
                             }}
-                        ></AtListItem>
-                        <AtListItem
-                            title="意见反馈"
-                            arrow="right"
-                            iconInfo={{
-                                size: 20,
-                                color: '#fe5d25',
-                                value: 'mail',
-                            }}
-                        ></AtListItem>
-                        <AtListItem
-                            title="联系我们"
-                            arrow="right"
-                            iconInfo={{
-                                size: 20,
-                                color: '#fe5d25',
-                                value: 'phone',
-                            }}
+                        >
+                            <AtIcon value="star" color="#fe5d25" size="20" />
+                            <View>我的收藏</View>
+                            <AtIcon
+                                value="chevron-right"
+                                size="20"
+                                color="rgb(210,210,210)"
+                            />
+                        </Button>
+                        <Button openType="feedback">
+                            <AtIcon value="mail" color="#fe5d25" size="20" />
+                            <View>意见反馈</View>
+                            <AtIcon
+                                value="chevron-right"
+                                size="20"
+                                color="rgb(210,210,210)"
+                            />
+                        </Button>
+                        <Button
                             onClick={() =>
                                 Taro.navigateTo({
                                     url: '/pages/contact/contact',
                                 })
                             }
-                        ></AtListItem>
-                        <AtListItem
-                            title="关于我们"
-                            arrow="right"
-                            iconInfo={{
-                                size: 20,
-                                color: '#fe5d25',
-                                value: 'external-link',
-                            }}
+                        >
+                            <AtIcon value="phone" color="#fe5d25" size="20" />
+                            <View>联系我们</View>
+                            <AtIcon
+                                value="chevron-right"
+                                size="20"
+                                color="rgb(210,210,210)"
+                            />
+                        </Button>
+                        <Button
+                            className="button-last"
                             onClick={() =>
                                 Taro.navigateTo({
                                     url: '/pages/aboutMe/aboutMe',
                                 })
                             }
-                        ></AtListItem>
-                    </AtList>
+                        >
+                            <AtIcon
+                                value="external-link"
+                                color="#fe5d25"
+                                size="20"
+                            />
+                            <View>关于我们</View>
+                            <AtIcon
+                                value="chevron-right"
+                                size="20"
+                                color="rgb(210,210,210)"
+                            />
+                        </Button>
+                    </View>
+
                     <AtActionSheet
                         isOpened={this.state.isOpened}
                         cancelText="取消"
