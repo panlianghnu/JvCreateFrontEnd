@@ -20,7 +20,7 @@
     border-top: 1px solid rgb(230, 237, 243);
     font-size: medium;
 }
-.button-list button:hover {
+.button-list button:active {
     background-color: rgb(240, 240, 240);
 }
 .button-list button::after {

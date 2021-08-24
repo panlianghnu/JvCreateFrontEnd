@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable react/jsx-boolean-value */
 /* eslint-disable jsx-quotes */
-import Taro from '@tarojs/taro'
+import Taro, { getCurrentInstance } from '@tarojs/taro'
 import { Component } from 'react'
 import { View } from '@tarojs/components'
 import { AtIcon, AtAvatar, AtActivityIndicator } from 'taro-ui'
@@ -11,9 +11,9 @@ import { SearchComponent } from '../../components/searchComponent'
 import { Divider } from '../../components/Divider'
 import { Logo } from '../../components/Logo'
 
-import './index.css'
+import './searchResult.css'
 
-export default class Index extends Component {
+export default class searchResult extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -32,8 +32,9 @@ export default class Index extends Component {
                 },
             ],
             loadingSearch: true,
-            searchValue: '',
-            fengeString: '',
+            searchValue: JSON.parse(
+                getCurrentInstance().router.params.searchValue
+            ),
         }
     }
 
@@ -45,15 +46,12 @@ export default class Index extends Component {
         // get('/home') -> 182.92.114.168:8888/hotSearch
         this.setState({ loadingSearch: true })
         axios
-            .get('/hotSearch')
+            .get(`/search?searchValue=${this.state.searchValue}`) // change later
             .then(({ data }) => {
-                // console.log('response:')
-                // console.log(response.data)
+                // hide loading
                 this.setState({
                     companies: data,
-                    loadingSearch: false, // 加载时显示圈圈(或不显示)
-                    fengeString: '热门搜索',
-                    searchValue: '',
+                    loadingSearch: false,
                 })
             })
             .catch(err => {
@@ -75,13 +73,21 @@ export default class Index extends Component {
     }
 
     onClickSearch() {
-        Taro.navigateTo({
-            url:
-                '/pages/searchResult/searchResult?searchValue=' +
-                JSON.stringify(this.state.searchValue),
-        })
         // console.log('搜索：', this.state.searchValue)
         // show loading
+        this.setState({ loadingSearch: true })
+        axios
+            .get(`/search?searchValue=${this.state.searchValue}`) // change later
+            .then(({ data }) => {
+                // hide loading
+                this.setState({
+                    companies: data,
+                    loadingSearch: false,
+                })
+            })
+            .catch(err => {
+                console.log('Axios err:', err)
+            })
     }
 
     onChangeSearch(value) {
@@ -100,7 +106,9 @@ export default class Index extends Component {
     }
 
     render() {
-        let resultList = <View style="text-align:center">暂无相关信息</View>
+        let resultList = (
+            <View style="text-align:center;color:grey">暂无相关信息</View>
+        )
         if (this.state.companies.length) {
             resultList = this.state.companies.map((item, index) => {
                 return (
@@ -148,16 +156,19 @@ export default class Index extends Component {
                                         </View>
                                     </View>
                                     <View className="note">
-                                        发明总数：{item.inventionCount}
+                                        发明总数：
+                                        {item.inventionCount}
                                     </View>
                                     <View className="note">
-                                        发明评级：{item.inventionRating}
+                                        发明评级：
+                                        {item.inventionRating}
                                     </View>
                                     <View
                                         className="note"
                                         style="margin-bottom:5px"
                                     >
-                                        融资情况：{item.financing}
+                                        融资情况：
+                                        {item.financing}
                                     </View>
                                 </View>
                                 <AtIcon value="chevron-right" size="20" />
@@ -183,7 +194,8 @@ export default class Index extends Component {
                     onClick={this.onClickSearch.bind(this)}
                     onChange={this.onChangeSearch.bind(this)}
                 />
-                <Divider content={this.state.fengeString}></Divider>
+                <Divider content="搜索结果"></Divider>
+                <View style="margin:20px"></View>
                 {!this.state.loadingSearch && <View>{resultList}</View>}
                 <AtActivityIndicator
                     mode="center"

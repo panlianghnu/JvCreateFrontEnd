@@ -19,6 +19,7 @@ export default {
         'pages/aboutMe/aboutMe',
         'pages/collect/collect',
         'pages/fieldBackground/fieldBackground',
+        'pages/searchResult/searchResult',
     ],
     window: {
         backgroundTextStyle: 'light',
