@@ -398,7 +398,7 @@ export default class extends Component{
                         补充说明
                         </View>
                         <View className='font-break'>
-                        希望2021年7月31日前能到岗。
+                        希望2021年12月31日前能到岗。
                         </View>
                     </View>
                 </AtAccordion>

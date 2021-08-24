@@ -17,7 +17,7 @@ export default class extends Component {
         if (item == 'website') {
             data = 'www.jucreate.com'
         } else if (item == 'email') {
-            data = 'hi30058740@aliyun.com'
+           data = 'kkoyii_liao@163.com'
         } else {
             // 地址
             data = '北京市海淀区上地信息路26号8层0809室'
@@ -114,7 +114,7 @@ export default class extends Component {
                                 企业邮箱：
                             </View>
                             <View className="at-col at-col--wrap">
-                                hi30058740@aliyun.com
+                                kkoyii_liao@163.com
                             </View>
                         </View>
                     </View>

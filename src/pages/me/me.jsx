@@ -9,6 +9,7 @@ import {
     AtActionSheet,
     AtActionSheetItem,
     AtMessage,
+    AtIcon,
 } from 'taro-ui'
 import { View, Text } from '@tarojs/components'
 import axios from 'taro-axios'
@@ -155,7 +156,7 @@ export default class extends Component {
                                 })
                             }}
                         ></AtListItem>
-                        <AtListItem
+                        {/* <AtListItem
                             title="意见反馈"
                             arrow="right"
                             iconInfo={{
@@ -163,7 +164,7 @@ export default class extends Component {
                                 color: '#fe5d25',
                                 value: 'mail',
                             }}
-                        ></AtListItem>
+                        ></AtListItem> */}
                         <AtListItem
                             title="联系我们"
                             arrow="right"
@@ -193,6 +194,26 @@ export default class extends Component {
                             }
                         ></AtListItem>
                     </AtList>
+                    <View style="margin-top:20px"></View>
+                    <View className="button-list">
+                        <View className="button-item">
+                            <button>我的收藏</button>
+                            <AtIcon value="chevron-right" size="20" />
+                        </View>
+                        <View className="button-item">
+                            <button>我的收藏</button>
+                            <AtIcon value="chevron-right" size="20" />
+                        </View>
+                        <View className="button-item">
+                            <button>我的收藏</button>
+                            <AtIcon value="chevron-right" size="20" />
+                        </View>
+                        <View className="button-item">
+                            <button>我的收藏</button>
+                            <AtIcon value="chevron-right" size="20" />
+                        </View>
+                    </View>
+
                 </View>
             )
         } else

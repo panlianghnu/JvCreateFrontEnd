@@ -2,3 +2,32 @@
     font-size: small;
     color: grey;
 }
+
+.button-list {
+    display: flex;
+    flex-direction: column;
+}
+.button-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: white;
+    transition: background-color 0.5s;
+    width: 100%;
+    height: 80px;
+    border-top: 1px solid rgb(209, 209, 209);
+}
+.button-item:hover {
+    background-color: rgb(240, 240, 240);
+}
+View button {
+    margin-left: 50px;
+    margin-right: auto;
+    background-color: white;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    height: 80px;
+}
+View AtIcon {
+    margin-right: 50px;
+}
