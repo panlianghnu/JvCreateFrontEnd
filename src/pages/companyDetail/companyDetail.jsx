@@ -354,8 +354,9 @@ export default class CompanyDetail extends Component {
                             <View
                                 className="pl-col-center left"
                                 hoverClass="hover-col"
+                                onClick={this.handleClickGrid.bind(this, '', 8)}
                             >
-                                <View>
+                                <View >
                                     <Text>细分行业{'\n'}</Text>
                                     <View style="line-height:15px;">
                                         <Text style="color:#fe5d25;font-size:13px">

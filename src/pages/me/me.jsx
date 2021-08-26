@@ -8,13 +8,15 @@ import {
     AtActionSheetItem,
     AtMessage,
     AtIcon,
+    AtModal
 } from 'taro-ui'
 import { View, Text, Button } from '@tarojs/components'
 import axios from 'taro-axios'
-import Taro from '@tarojs/taro'
+import Taro, { showModal } from '@tarojs/taro'
 import './me.css'
 import login from '../../static/icons/login.png'
 import { setGlobalData, getGlobalData } from '../../global'
+import { get } from 'lodash'
 
 export default class extends Component {
     constructor(props) {
@@ -22,8 +24,9 @@ export default class extends Component {
         this.state = {
             isLogin: getGlobalData('isLogin'),
             isOpened: false,
-            nickName: '未登录',
+            nickName: '',
             userAvatar: '',
+            showModal:false
         }
     }
 
@@ -33,8 +36,14 @@ export default class extends Component {
         if (avatar && nickName) {
             this.setState({ nickName: nickName, userAvatar: avatar })
         }
-    }
 
+        
+    }
+    componentDidShow(){
+        this.setState({
+            isLogin:getGlobalData('isLogin')
+        })
+    }
     handleActionSheet() {
         this.setState({ isOpened: true })
     }
@@ -110,10 +119,45 @@ export default class extends Component {
         this.handleCancel()
         // 手机号登陆逻辑
     }
+    exit(){
+        setGlobalData('isLogin',false)
+        this.setState({
+            isLogin:getGlobalData('isLogin'),
+            showModal:false
+        })
+        Taro.setStorageSync({
+            'key':'token',
+            'data':''
+        })
+        Taro.atMessage({
+            message: '您已退出登录',
+            type: 'success',
+        })
+    }
+    handleClose(){
+        this.setState({
+            showModal:false
+        })
+    }
+    handleShow(){
+        this.setState({
+            showModal:true
+        })
+    }
 
     render() {
         const isLogin = this.state.isLogin
         let page
+        let modal = (<AtModal
+                        isOpened = {this.state.showModal}
+                        title='提示'
+                        cancelText='取消'
+                        confirmText='确认'
+                        onClose={ this.handleClose.bind(this) }
+                        onCancel={ this.handleClose.bind(this)}
+                        onConfirm={ this.exit.bind(this) }
+                        content='您确定要退出登录吗？'
+                    />)
         if (isLogin) {
             page = (
                 <View>
@@ -121,7 +165,7 @@ export default class extends Component {
                     <View style="margin-bottom:50px"></View>
                     <View className="at-row at-row__justify--center">
                         <AtAvatar
-                            image={this.state.userAvatar}
+                            image={this.state.userAvatar == '' ? (login):(this.state.userAvatar)}
                             circle
                             size="large"
                         ></AtAvatar>
@@ -179,7 +223,6 @@ export default class extends Component {
                             />
                         </Button>
                         <Button
-                            className="button-last"
                             onClick={() =>
                                 Taro.navigateTo({
                                     url: '/pages/aboutMe/aboutMe',
@@ -187,7 +230,7 @@ export default class extends Component {
                             }
                         >
                             <AtIcon
-                                value="external-link"
+                                value="tag"
                                 color="#fe5d25"
                                 size="20"
                             />
@@ -198,7 +241,24 @@ export default class extends Component {
                                 color="rgb(210,210,210)"
                             />
                         </Button>
+                        <Button
+                            className="button-last"
+                            onClick={this.handleShow.bind(this)}
+                        >
+                            <AtIcon
+                                value="external-link"
+                                color="#fe5d25"
+                                size="20"
+                            />
+                            <View>退出登录</View>
+                            <AtIcon
+                                value="chevron-right"
+                                size="20"
+                                color="rgb(210,210,210)"
+                            />
+                        </Button>
                     </View>
+                    {modal}
                 </View>
             )
         } else
@@ -282,7 +342,7 @@ export default class extends Component {
                             }
                         >
                             <AtIcon
-                                value="external-link"
+                                value="tag"
                                 color="#fe5d25"
                                 size="20"
                             />
