@@ -8,15 +8,14 @@ import {
     AtActionSheetItem,
     AtMessage,
     AtIcon,
-    AtModal
+    AtModal,
 } from 'taro-ui'
 import { View, Text, Button } from '@tarojs/components'
 import axios from 'taro-axios'
-import Taro, { showModal } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
 import './me.css'
 import login from '../../static/icons/login.png'
 import { setGlobalData, getGlobalData } from '../../global'
-import { get } from 'lodash'
 
 export default class extends Component {
     constructor(props) {
@@ -26,7 +25,7 @@ export default class extends Component {
             isOpened: false,
             nickName: '',
             userAvatar: '',
-            showModal:false
+            showModal: false,
         }
     }
 
@@ -36,12 +35,11 @@ export default class extends Component {
         if (avatar && nickName) {
             this.setState({ nickName: nickName, userAvatar: avatar })
         }
-
-        
     }
-    componentDidShow(){
+
+    componentDidShow() {
         this.setState({
-            isLogin:getGlobalData('isLogin')
+            isLogin: getGlobalData('isLogin'),
         })
     }
     handleActionSheet() {
@@ -119,45 +117,47 @@ export default class extends Component {
         this.handleCancel()
         // 手机号登陆逻辑
     }
-    exit(){
-        setGlobalData('isLogin',false)
+    exit() {
+        setGlobalData('isLogin', false)
         this.setState({
-            isLogin:getGlobalData('isLogin'),
-            showModal:false
+            isLogin: getGlobalData('isLogin'),
+            showModal: false,
         })
         Taro.setStorageSync({
-            'key':'token',
-            'data':''
+            key: 'token',
+            data: '',
         })
         Taro.atMessage({
             message: '您已退出登录',
             type: 'success',
         })
     }
-    handleClose(){
+    handleClose() {
         this.setState({
-            showModal:false
+            showModal: false,
         })
     }
-    handleShow(){
+    handleShow() {
         this.setState({
-            showModal:true
+            showModal: true,
         })
     }
 
     render() {
         const isLogin = this.state.isLogin
         let page
-        let modal = (<AtModal
-                        isOpened = {this.state.showModal}
-                        title='提示'
-                        cancelText='取消'
-                        confirmText='确认'
-                        onClose={ this.handleClose.bind(this) }
-                        onCancel={ this.handleClose.bind(this)}
-                        onConfirm={ this.exit.bind(this) }
-                        content='您确定要退出登录吗？'
-                    />)
+        let modal = (
+            <AtModal
+                isOpened={this.state.showModal}
+                title="提示"
+                cancelText="取消"
+                confirmText="确认"
+                onClose={this.handleClose.bind(this)}
+                onCancel={this.handleClose.bind(this)}
+                onConfirm={this.exit.bind(this)}
+                content="您确定要退出登录吗？"
+            />
+        )
         if (isLogin) {
             page = (
                 <View>
@@ -165,7 +165,11 @@ export default class extends Component {
                     <View style="margin-bottom:50px"></View>
                     <View className="at-row at-row__justify--center">
                         <AtAvatar
-                            image={this.state.userAvatar == '' ? (login):(this.state.userAvatar)}
+                            image={
+                                this.state.userAvatar == ''
+                                    ? login
+                                    : this.state.userAvatar
+                            }
                             circle
                             size="large"
                         ></AtAvatar>
@@ -229,11 +233,7 @@ export default class extends Component {
                                 })
                             }
                         >
-                            <AtIcon
-                                value="tag"
-                                color="#fe5d25"
-                                size="20"
-                            />
+                            <AtIcon value="tag" color="#fe5d25" size="20" />
                             <View>关于我们</View>
                             <AtIcon
                                 value="chevron-right"
@@ -341,11 +341,7 @@ export default class extends Component {
                                 })
                             }
                         >
-                            <AtIcon
-                                value="tag"
-                                color="#fe5d25"
-                                size="20"
-                            />
+                            <AtIcon value="tag" color="#fe5d25" size="20" />
                             <View>关于我们</View>
                             <AtIcon
                                 value="chevron-right"
