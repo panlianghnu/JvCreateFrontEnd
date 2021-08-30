@@ -4,7 +4,7 @@ import { Component } from 'react'
 import { View, Text } from '@tarojs/components'
 import axios from 'taro-axios'
 import { getCurrentInstance } from '@tarojs/taro'
-import { AtAccordion, AtTimeline } from 'taro-ui'
+import { AtAccordion, AtTimeline,AtActivityIndicator} from 'taro-ui'
 import './stock.css'
 
 // 工商信息页面，具体描述股权结构和变更记录
@@ -28,7 +28,7 @@ export default class Stock extends Component {
             open0:false,
             open1: false,
             open2: true,
-            status:'加载中......'
+            isLoding:true
         }
     }
 
@@ -56,7 +56,7 @@ export default class Stock extends Component {
                 // console.log('response.data: ', response.data)
                 this.setState({
                     change: response.data,
-                    status:"暂无相关信息"
+                    isLoding:false
                 })
 
                 //修改一下换行数据
@@ -72,6 +72,9 @@ export default class Stock extends Component {
                 this.setState({ change: newState })
             },
             err => {
+                this.setState({
+                    isLoding:false
+                })
                 console.log('axios err ', err)
             }
         )
@@ -112,6 +115,18 @@ export default class Stock extends Component {
         if (this.state.items.length == 0) {
             stockList = <View style="margin:20px">暂无相关信息</View>
         }
+        var renderChange = null
+        if(this.state.isLoding)
+        {
+           //renderChange = <AtActivityIndicator mode="center" isOpened={this.state.isLoding} content="加载中......"/>
+           return (
+            <AtActivityIndicator
+                mode="center"
+                isOpened={this.state.loading}
+                content="正在加载..."
+            />
+            )
+        }
         let changeList = []
         let temp
         let i = 0
@@ -137,7 +152,7 @@ export default class Stock extends Component {
                         >
                             变更前：
                         </View>
-                        <Text className="at-col at-col_offset-1 at-col--wrap">
+                        <Text className="at-col at-col_offset-1 at-col--wrap" style="margin-right:10px">
                             {this.state.change[i].beforeChange}
                         </Text>
                     </View>
@@ -148,7 +163,7 @@ export default class Stock extends Component {
                         >
                             变更后：
                         </View>
-                        <Text className="at-col at-col_offset-1 at-col--wrap">
+                        <Text className="at-col at-col_offset-1 at-col--wrap" style="margin-right:10px">
                             {this.state.change[i].afterChange}
                         </Text>
                     </View>
@@ -161,9 +176,10 @@ export default class Stock extends Component {
             }
             changeList.push(temp)
         }
-        var renderChange = null
-        if (this.state.change.length == 0) {
-            renderChange = <View style="margin:20px">{this.state.status}</View>
+        
+        
+        if (this.state.change.length == 0 && !this.state.isLoding) {
+            renderChange = <View style="margin:20px">暂无相关信息</View>
         } else {
             renderChange = (
                 <View style="margin-left:30px;margin-top:20px">
