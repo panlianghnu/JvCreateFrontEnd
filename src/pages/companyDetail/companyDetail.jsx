@@ -51,6 +51,7 @@ export default class CompanyDetail extends Component {
     componentDidMount() {
         axios.get('/companyDetail?id=' + this.state.companyId).then(
             ({ data }) => {
+                console.log(data)
                 this.setState({
                     logo: data.logo,
                     companyName: data.companyName,
@@ -64,6 +65,7 @@ export default class CompanyDetail extends Component {
                     introduction: data.introduction,
                     inventionNum: data.inventionNum,
                     invest: data.invest,
+                    address:data.address,
                     isFollow: data.isFollow,
                     loading: false,
                 })
@@ -154,7 +156,7 @@ export default class CompanyDetail extends Component {
                 Taro.navigateTo({
                     url:
                         '/pages/stock/stock?id=' +
-                        JSON.stringify(this.state.companyId),
+                        JSON.stringify(this.state.companyId) + '&address=' + JSON.stringify(this.state.address),
                 })
                 break
             }
@@ -162,7 +164,7 @@ export default class CompanyDetail extends Component {
                 Taro.navigateTo({
                     url:
                         '/pages/financing/financing?id=' +
-                        JSON.stringify(this.state.companyId),
+                        JSON.stringify(this.state.companyId) + '&invest=' + JSON.stringify(this.state.invest),
                 })
                 break
             }
@@ -302,7 +304,7 @@ export default class CompanyDetail extends Component {
                         />
                     </View>
                     <View style="margin-left:auto;margin-right:auto">
-                        <Text className="title">{this.state.companyName}</Text>
+                        <Text className="title" user-select={true}>{this.state.companyName}</Text>
                     </View>
                     {button}
                 </View>
@@ -376,7 +378,7 @@ export default class CompanyDetail extends Component {
                                         className="content"
                                         style="color:#fe5d25"
                                     >
-                                        {this.state.inventionNum}
+                                        {this.state.inventionNum==null?"无":this.state.inventionNum}
                                     </Text>
                                 </View>
                             </View>
@@ -391,7 +393,7 @@ export default class CompanyDetail extends Component {
                                         className="content"
                                         style="color:#fe5d25"
                                     >
-                                        {this.state.level}
+                                        {this.state.level==null?"无":this.state.level}
                                     </Text>
                                 </View>
                             </View>
@@ -405,7 +407,7 @@ export default class CompanyDetail extends Component {
                                 <View>
                                     <Text>融资情况{'\n'}</Text>
                                     <Text className="content">
-                                        {this.state.invest}
+                                        {this.state.invest == null? "无":this.state.invest}
                                     </Text>
                                 </View>
                             </View>
@@ -431,7 +433,7 @@ export default class CompanyDetail extends Component {
                                     }
                                 >
                                     <Text>官网{'\n'}</Text>
-                                    <Text className="content">{website}</Text>
+                                    <Text className="content">{website == null ? '无': website }</Text>
                                 </View>
                             </View>
                             <View
@@ -448,7 +450,7 @@ export default class CompanyDetail extends Component {
                                 <View>
                                     <Text>电话{'\n'}</Text>
                                     <Text className="content">
-                                        {this.state.phone}
+                                        {this.state.phone == null?'无':this.state.phone}
                                     </Text>
                                 </View>
                             </View>

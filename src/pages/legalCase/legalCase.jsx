@@ -96,7 +96,7 @@ export default class LegalCase extends Component {
                 <View style="margin-bottom:10px"></View>
                 <View className="legalCaseList">{renderList}</View>
                 {!this.state.legalCases.length && (
-                    <View style="margin:20px">暂无法律事务</View>
+                    <View style="margin:20px">暂无相关信息</View>
                 )}
             </View>
         )

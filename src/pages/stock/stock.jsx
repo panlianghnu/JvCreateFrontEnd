@@ -13,6 +13,7 @@ export default class Stock extends Component {
         super(props)
         this.state = {
             companyId: JSON.parse(getCurrentInstance().router.params.id),
+            address:JSON.parse(getCurrentInstance().router.params.address),
             items: [
                 {
                     isPerson: false,
@@ -24,8 +25,10 @@ export default class Stock extends Component {
                 },
             ],
             change: [],
+            open0:false,
             open1: false,
             open2: true,
+            status:'加载中......'
         }
     }
 
@@ -41,15 +44,6 @@ export default class Stock extends Component {
                 this.setState({
                     items: response.data,
                 })
-
-                // 修改一下假数据
-                // var items = this.state.items
-                // for (var i = 0; i < items.length; i++) {
-                //     items[i].money %= 1000000
-                //     items[i].percent %= 100
-                // }
-                // console.log(items)
-                // this.setState({ items: items })
             },
             err => {
                 console.log('axios err ', err)
@@ -62,6 +56,7 @@ export default class Stock extends Component {
                 // console.log('response.data: ', response.data)
                 this.setState({
                     change: response.data,
+                    status:"暂无相关信息"
                 })
 
                 //修改一下换行数据
@@ -168,7 +163,7 @@ export default class Stock extends Component {
         }
         var renderChange = null
         if (this.state.change.length == 0) {
-            renderChange = <View style="margin:20px">暂无变更记录</View>
+            renderChange = <View style="margin:20px">{this.state.status}</View>
         } else {
             renderChange = (
                 <View style="margin-left:30px;margin-top:20px">
@@ -179,6 +174,19 @@ export default class Stock extends Component {
         return (
             <View>
                 <View>
+                    <AtAccordion
+                        open={this.state.open0}
+                        title="公司住所"
+                        arrow="right"
+                        onClick={value => {
+                            this.setState({ open0: value })
+                        }}
+                    >
+                        <View className="address" >
+                            <Text>{this.state.address}</Text>
+                        </View>
+                    </AtAccordion>
+
                     <AtAccordion
                         open={this.state.open1}
                         title="股权结构"

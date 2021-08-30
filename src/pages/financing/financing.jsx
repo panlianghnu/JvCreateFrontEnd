@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable jsx-quotes */
 import { Component } from 'react'
-import { View } from '@tarojs/components'
+import { View ,Text} from '@tarojs/components'
 import axios from 'taro-axios'
 import { getCurrentInstance } from '@tarojs/taro'
 import { AtAccordion, AtTimeline } from 'taro-ui'
@@ -12,6 +12,7 @@ export default class extends Component {
         super(props)
         this.state = {
             companyId: JSON.parse(getCurrentInstance().router.params.id),
+            invest:JSON.parse(getCurrentInstance().router.params.invest),
             open1: false,
             open2: true,
             financings: [
@@ -59,12 +60,15 @@ export default class extends Component {
                             this.setState({ open1: value })
                         }}
                     >
-                        <View style="margin-left:30px;margin-top:20px">
+                        <View style="margin-left:20px;margin-top:10px">
+                            <View className="invest">
+                                <Text>{this.state.invest == null?"暂无相关信息":this.state.invest}</Text>
+                            </View>
                             <AtTimeline items={items} />
                         </View>
-                        {!this.state.financings.length && (
+                        {/* {!this.state.financings.length && (
                             <View style="margin:20px">暂无相关信息</View>
-                        )}
+                        )} */}
                     </AtAccordion>
                     <AtAccordion
                         open={this.state.open2}

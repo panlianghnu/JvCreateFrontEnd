@@ -150,8 +150,9 @@ export default class searchResult extends Component {
                                                 细分行业：
                                             </View>
                                             <View className="at-col at-col--wrap">
-                                                {item.secondTag}、
-                                                {item.thirdTag}
+                                                {/* {item.secondTag}、
+                                                {item.thirdTag} */}
+                                                {item.field}
                                             </View>
                                         </View>
                                     </View>

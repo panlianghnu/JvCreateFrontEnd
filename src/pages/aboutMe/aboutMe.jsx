@@ -391,7 +391,7 @@ export default class extends Component{
                         </View>
                         <View className='font-break'>
                             <Text>邮箱：</Text>
-                            <Text style="color:#fe5d25">1735335832@qq.com</Text>
+                            <Text style="color:#fe5d25">kkoyii_liao@163.com</Text>
                         </View>
 
                         <View className='at-article__h3'>

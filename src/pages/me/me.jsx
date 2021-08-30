@@ -185,7 +185,7 @@ export default class extends Component {
                             </Text>
                         </View>
                     </View>
-                    <View style="margin-top:60px"></View>
+                    <View style="margin-top:40px"></View>
                     <View className="button-list">
                         <Button
                             onClick={() => {
@@ -291,7 +291,7 @@ export default class extends Component {
                             </AtButton>
                         </View>
                     </View>
-                    <View style="margin-top:60px"></View>
+                    <View style="margin-top:40px"></View>
                     <View className="button-list">
                         <Button
                             onClick={() => {
