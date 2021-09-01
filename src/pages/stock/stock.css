@@ -20,7 +20,16 @@
 .address{
     text-align: left;
     margin-left: 20px;
-    font-size: 33px;
+    font-size: 30px;
     margin-top: 15px;
     margin-right: 20px;
+    font-weight: normal;
+    padding-bottom: 10px;
+}
+.Accordion{
+    font-size: 40px;
+    font-weight: bold;
+}
+.border{
+    border-bottom :3px solid #F2F2F2;
 }

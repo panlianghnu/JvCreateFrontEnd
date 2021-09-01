@@ -6,6 +6,7 @@ import axios from 'taro-axios'
 import { getCurrentInstance } from '@tarojs/taro'
 import { AtAccordion, AtTimeline,AtActivityIndicator} from 'taro-ui'
 import './stock.css'
+import { findLastKey } from 'lodash'
 
 // 工商信息页面，具体描述股权结构和变更记录
 export default class Stock extends Component {
@@ -83,7 +84,7 @@ export default class Stock extends Component {
     render() {
         let stockList = this.state.items.map(item => {
             return (
-                <View key={item.id} style="text-align:center">
+                <View key={item.id} style="text-align:center;font-weight:normal">
                     <View style="margin-bottom:10px"></View>
                     <View className="stock-title">
                         <Text>{item.name}</Text>
@@ -113,7 +114,7 @@ export default class Stock extends Component {
             )
         })
         if (this.state.items.length == 0) {
-            stockList = <View style="margin:20px">暂无相关信息</View>
+            stockList = <View style="margin:20px;font-weight:normal">暂无相关信息</View>
         }
         var renderChange = null
         if(this.state.isLoding)
@@ -179,10 +180,10 @@ export default class Stock extends Component {
         
         
         if (this.state.change.length == 0 && !this.state.isLoding) {
-            renderChange = <View style="margin:20px">暂无相关信息</View>
+            renderChange = <View style="margin:20px;font-weight:normal">暂无相关信息</View>
         } else {
             renderChange = (
-                <View style="margin-left:30px;margin-top:20px">
+                <View style="margin-left:30px;margin-top:5px">
                     <AtTimeline items={changeList}></AtTimeline>
                 </View>
             )
@@ -190,10 +191,11 @@ export default class Stock extends Component {
         return (
             <View>
                 <View>
-                    <AtAccordion
+                    <AtAccordion className="Accordion"
                         open={this.state.open0}
                         title="公司住所"
                         arrow="right"
+                        hasBorder={false}
                         onClick={value => {
                             this.setState({ open0: value })
                         }}
@@ -202,27 +204,38 @@ export default class Stock extends Component {
                             <Text>{this.state.address}</Text>
                         </View>
                     </AtAccordion>
-
-                    <AtAccordion
+                    
+                    <View className="border"></View>
+                    <AtAccordion className="Accordion"
                         open={this.state.open1}
                         title="股权结构"
                         arrow="right"
+                        hasBorder={false}
                         onClick={value => {
                             this.setState({ open1: value })
                         }}
                     >
                         {stockList}
                     </AtAccordion>
-                    <AtAccordion
+
+                    <View className="border"></View>
+                    <AtAccordion className="Accordion"
                         open={this.state.open2}
                         title="变更记录"
                         arrow="right"
+                        hasBorder={false}
                         onClick={value => {
                             this.setState({ open2: value })
                         }}
                     >
-                        {renderChange}
+                        <View style="font-weight:normal">
+                            {renderChange}
+                        </View>
                     </AtAccordion>
+                    <View>
+                        {!this.state.open2 && <View className="border"></View>} 
+                    </View>
+                    
                 </View>
             </View>
         )

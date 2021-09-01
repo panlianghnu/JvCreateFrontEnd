@@ -395,75 +395,83 @@ export default class Operation extends Component {
 
         return (
             <View>
-                <AtAccordion
+                <AtAccordion className="Accordion"
                     open={this.state.open1}
                     title="公司财务"
                     arrow="right"
+                    hasBorder={false}
                     onClick={value => {
                         this.setState({ open1: value })
                     }}
                 >
                     {this.state.financeList.length ? (
-                        <View style="margin-left:30px;margin-top:20px">
+                        <View style="margin-left:30px;margin-top:5px;font-weight:normal">
                             <AtTimeline items={financeList}></AtTimeline>
                         </View>
                     ) : (
-                        <View style="margin:20px">暂无相关信息</View>
+                        <View style="margin:20px;font-weight:normal;font-size:medium">暂无相关信息</View>
                     )}
                 </AtAccordion>
-
-                <AtAccordion
+                <View className="border"></View>
+                <AtAccordion className="Accordion"
                     open={this.state.open2}
                     title="招聘信息"
                     arrow="right"
+                    hasBorder={false}
                     onClick={value => {
                         this.setState({ open2: value })
                     }}
                 >
                     {this.state.employList.length ? (
-                        <View>
+                        <View style="font-weight:normal">
                             <View className="employList">{employList}</View>
                         </View>
                     ) : (
-                        <View style="margin:20px">暂无相关信息</View>
+                        <View style="margin:20px;font-weight:normal;font-size:medium">暂无相关信息</View>
                     )}
                 </AtAccordion>
-
-                <AtAccordion
+                <View className="border"></View>
+                <AtAccordion className="Accordion"
                     open={this.state.open3}
                     title="资质证书"
                     arrow="right"
+                    hasBorder={false}
                     onClick={value => {
                         this.setState({ open3: value })
                     }}
                 >
                     {this.state.qualificationList.length ? (
-                        <View>
+                        <View style="font-weight:normal">
                             <View className="employList">
                                 {qualificationList}
                             </View>
                         </View>
                     ) : (
-                        <View style="margin:20px">暂无相关信息</View>
+                        <View style="margin:20px;font-weight:normal;font-size:medium">暂无相关信息</View>
                     )}
                 </AtAccordion>
-
-                <AtAccordion
+                <View className="border"></View>
+                <AtAccordion className="Accordion"
                     open={this.state.open4}
                     title="行政许可"
                     arrow="right"
+                    hasBorder={false}
                     onClick={value => {
                         this.setState({ open4: value })
                     }}
                 >
                     {this.state.adminList.length ? (
-                        <View>
+                        <View style="font-weight:normal">
                             <View className="employList">{adminList}</View>
                         </View>
                     ) : (
-                        <View style="margin:20px">暂无相关信息</View>
+                        <View style="margin:20px;font-weight:normal;font-size:medium">暂无相关信息</View>
                     )}
                 </AtAccordion>
+                <View>
+                    {!this.state.open4 &&<View className="border"></View>}    
+                </View>
+                
             </View>
         )
     }

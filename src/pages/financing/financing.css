@@ -3,3 +3,10 @@
     font-size: 33px;
     margin-bottom: 15px;
 }
+.Accordion{
+    font-size: 40px;
+    font-weight: bold;
+}
+.border{
+    border-bottom :3px solid #EDF3F8;
+}

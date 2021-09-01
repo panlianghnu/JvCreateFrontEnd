@@ -42,3 +42,10 @@
     color: grey;
     line-height: 15px;
 }
+.Accordion{
+    font-size: 40px;
+    font-weight: bold;
+}
+.border{
+    border-bottom :3px solid #EDF3F8;
+}

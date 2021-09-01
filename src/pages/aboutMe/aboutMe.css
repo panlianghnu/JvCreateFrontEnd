@@ -48,3 +48,10 @@
     word-break:break-all;
     text-align: justify;
 }
+.Accordion{
+    font-size: 40px;
+    font-weight: bold;
+}
+.border{
+    border-bottom :3px solid #F2F2F2;
+}

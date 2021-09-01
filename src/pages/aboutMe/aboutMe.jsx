@@ -232,15 +232,16 @@ export default class extends Component{
         }
         return(
             <View>
-                <AtAccordion
+                <AtAccordion className="Accordion"
                     open={this.state.open1}
                     title="公司介绍"
                     arrow="right"
+                    hasBorder={false}
                     onClick={value => {
                         this.setState({ open1: value })
                         }}
                 >
-                    <View>
+                    <View style="font-weight:normal;font-size:medium">
                         <View className="at-row">
                             <View
                                 className="at-col at-col-12"
@@ -254,40 +255,46 @@ export default class extends Component{
                         </View>  
                     </View> 
                 </AtAccordion>
-                <AtAccordion
+                <View className="border"></View>
+                <AtAccordion className="Accordion"
                     open={this.state.open2}
                     title="核心团队"
                     arrow="right"
+                    hasBorder={false}
                     onClick={value => {
                         this.setState({ open2: value })
                     }}
                 >
-                    <View>
+                    <View style="font-weight:normal">
                         <View>{team}</View>
                         {modal}
                     </View>
                 </AtAccordion>
-                <AtAccordion
+                <View className="border"></View>
+                <AtAccordion className="Accordion"
                     open={this.state.open3}
                     title="发展历程"
                     arrow="right"
+                    hasBorder={false}
                     onClick={value => {
                         this.setState({ open3: value })
                     }}
                 >
-                    <View style="margin-left:30px;margin-top:20px">
+                    <View style="margin-left:30px;margin-top:20px;font-weight:normal">
                             <AtTimeline items={changeList} />
                         </View>
                 </AtAccordion>
-                <AtAccordion
+                <View className="border"></View>
+                <AtAccordion className="Accordion"
                     open={this.state.open4}
                     title="广纳贤才"
                     arrow="right"
+                    hasBorder={false}
                     onClick={value => {
                         this.setState({ open4: value })
                     }}
                 >
-                    <View>
+                    <View style="font-weight:normal;font-size:medium">
                         <View className='companyIntro'>
                         <Text>
                         北京聚创造网络科技有限公司，是国家高新技术企业，是致力通过大数据、人工智能技术改造提升创业投资行业的技术创新型公司。{'\n'}{'\n'}公司目前的创始团队由风险投资业内资深投资人领衔，核心团队成员包括一位复旦大学金融学硕士、一位美国华盛顿大学（西雅图）材料学博士、一位美国哥伦比亚大学化学与生物分子工程学博士后、一位美国俄亥俄州立大学环境工程博士、一位美国德克萨斯农工大学生物医学博士、一位美国康涅狄格大学化学工程博士和一位美国俄亥俄州立大学电气与计算机工程博士。{'\n'}{'\n'}我们求贤若渴，我们奉行共享！公司现诚聘以下职位，欢迎广大志同道合的英才加盟，与聚创造共同把握历史机遇，共同创造时代辉煌！
@@ -402,6 +409,9 @@ export default class extends Component{
                         </View>
                     </View>
                 </AtAccordion>
+                <View>
+                    {!this.state.open4 && <View className="border"></View>}    
+                </View>
             </View>
 
         )

@@ -5,6 +5,7 @@ import { View ,Text} from '@tarojs/components'
 import axios from 'taro-axios'
 import { getCurrentInstance } from '@tarojs/taro'
 import { AtAccordion, AtTimeline } from 'taro-ui'
+import './financing.css'
 
 // 融资情况页面，具体描述融资情况， ?(news)
 export default class extends Component {
@@ -52,15 +53,16 @@ export default class extends Component {
         return (
             <View>
                 <View>
-                    <AtAccordion
+                    <AtAccordion className="Accordion"
                         open={this.state.open1}
                         title="融资情况"
                         arrow="right"
+                        hasBorder={false}
                         onClick={value => {
                             this.setState({ open1: value })
                         }}
                     >
-                        <View style="margin-left:20px;margin-top:10px">
+                        <View style="margin-left:20px;margin-top:5px;font-weight:normal">
                             <View className="invest">
                                 <Text>{this.state.invest == null?"暂无相关信息":this.state.invest}</Text>
                             </View>
@@ -70,16 +72,24 @@ export default class extends Component {
                             <View style="margin:20px">暂无相关信息</View>
                         )} */}
                     </AtAccordion>
-                    <AtAccordion
+
+                    <View className="border"></View>
+
+                    <AtAccordion className="Accordion"
                         open={this.state.open2}
                         title="新闻报道"
                         arrow="right"
+                        hasBorder={false}
                         onClick={value => {
                             this.setState({ open2: value })
                         }}
                     >
-                        <View style="margin-left:20px">暂无相关信息</View>
+                        <View style="margin-left:20px;font-weight:normal;font-size:medium">暂无相关信息</View>
                     </AtAccordion>
+
+                    <View>
+                        {!this.state.open2 && <View className="border"></View>}    
+                    </View>
                 </View>
             </View>
         )
